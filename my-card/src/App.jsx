@@ -34,8 +34,8 @@ function App() {
       <div className="relative z-20 flex flex-col items-center justify-center w-full min-w-4xl px-4">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 max-w-md w-full border border-white/20">
           <div className="text-center mb-8">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 animate-fadeIn">
-              Welcome!
+            <h1 className="font-face-gm text-5xl md:text-6xl font-bold text-white mb-4 animate-fadeIn">
+            *+
             </h1>
             <p className="text-xl text-white/90 mb-2">{formattedTime}</p>
             <p className="text-lg text-white/80">{formattedDate}</p>

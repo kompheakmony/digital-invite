@@ -1,12 +1,40 @@
 /* App.css */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Moul&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Moulpali&display=swap");
 
+html,
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Moul", serif;
+  color: #efbf04;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+body::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.moulpali-regular {
+  font-family: "Moulpali", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-face-gm {
+  font-family: "Tacteng";
+  color: #efbf04;
+}
+
+.text-flip {
+  transform: scaleX(-1);
 }
 
 .pattern-bg {
-  --s: 110px; /* tile size */
+  --s: 100px; /* tile size */
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -15,14 +43,27 @@ body {
 .pattern-bg::before {
   content: "";
   position: absolute;
-  inset: -50%; /* expand so corners don’t cut off */
-  background-image: url("/pkar-chan.svg");
+  inset: -50%;
+  background-image: url("/romdoul.png");
   background-repeat: repeat;
   background-size: var(--s) var(--s);
-  opacity: 0.4;
+  opacity: 0.1;
   mix-blend-mode: overlay;
-  transform: rotate(45deg); /* make tiles diamonds */
+  transform: rotate(45deg);
   transform-origin: center;
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 /* Animation keyframes */

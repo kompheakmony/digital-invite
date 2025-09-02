@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: "Tacteng";
+    src: local("Tacteng"),
+     url("./assets/fonts/tacteng.ttf") format("truetype");
+    font-weight: bold;
+   }
+   

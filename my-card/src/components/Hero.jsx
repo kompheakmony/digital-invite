@@ -12,18 +12,23 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
     }),
   };
 
-  // Gold shimmer style (reusable)
   const shimmerStyle = {
-    backgroundImage:
-      "linear-gradient(90deg, #FFD700, #FFB700, #FFF5CC, #FFD700)",
+    backgroundImage: `linear-gradient(
+      90deg,
+      #dda20c,
+      #ffd700,
+      #fffacd,
+      #ffdf00,
+      #dda20c
+    )`,
     backgroundSize: "200% auto",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
+    textShadow: "0 2px 4px rgba(0,0,0,0.25)",
   };
 
   return (
-    <div className="flex flex-col items-center text-center overflow-hidden">
-      {/* Frame with animation */}
+    <div className="flex flex-col items-center text-center">
       <motion.div
         className="relative mt-32"
         initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
@@ -31,7 +36,7 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
         transition={{ duration: 1, type: "spring" }}
       >
         <img src={FrameName} alt="Frame Name" />
-        <div className="absolute inset-0 flex items-center justify-center gap-6">
+        <div className="absolute inset-0 flex items-center justify-center gap-6 moulpali-regular text-gold">
           {["ក", "វ"].map((char, i) => (
             <motion.span
               key={i}
@@ -47,7 +52,6 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
         </div>
       </motion.div>
 
-      {/* Title with shimmering gold */}
       <motion.div
         className="mt-8 mb-4"
         initial="hidden"
@@ -55,7 +59,7 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
         variants={fadeUp}
       >
         <motion.h1
-          className="text-5xl md:text-4xl mb-4 font-bold inline-block"
+          className="text-5xl md:text-4xl mb-4 inline-block"
           style={{
             ...shimmerStyle,
             paddingTop: "0.3em",
@@ -74,7 +78,7 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
         </motion.h1>
 
         <motion.h3
-          className="text-3xl md:text-2xl mb-4"
+          className="text-3xl md:text-2xl mb-4 text-gold"
           variants={fadeUp}
           custom={2}
         >
@@ -82,7 +86,7 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
         </motion.h3>
 
         <motion.h4
-          className="text-2xl md:text-xl mb-4"
+          className="text-2xl md:text-xl mb-4 text-gold"
           variants={fadeUp}
           custom={3}
         >
@@ -98,13 +102,9 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
         transition={{ duration: 1, type: "spring" }}
       >
         <img src={GuestName} alt="Guest Name Frame" />
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center"
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        >
+        <div className="absolute inset-0 flex items-center justify-center">
           <motion.span
-            className="text-xl md:text-2xl font-bold"
+            className="text-xl md:text-2xl"
             style={{
               ...shimmerStyle,
               paddingTop: "0.2em",
@@ -118,29 +118,20 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
           >
             {guestName}
           </motion.span>
-        </motion.div>
+        </div>
       </motion.div>
 
-      {/* Date & Location */}
-      <motion.h4
-        className="text-2xl md:text-xl mb-4"
+      <motion.div
+        className="text-2xl md:text-xl space-y-6 text-gold"
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
         custom={4}
       >
-        ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦​ វេលាម៉ោង៖ ៣ៈ០០ រសៀល
-      </motion.h4>
+        <h4>ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦​ វេលាម៉ោង៖ ៣ៈ០០ រសៀល</h4>
 
-      <motion.h4
-        className="text-2xl md:text-xl mb-4"
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        custom={5}
-      >
-        នៅគេហដ្ឋានខាងស្រី
-      </motion.h4>
+        <h4>នៅគេហដ្ឋានខាងស្រី</h4>
+      </motion.div>
     </div>
   );
 }

@@ -10,48 +10,36 @@ export default function Details() {
     }),
   };
 
-  const shimmerStyle = {
-    backgroundImage:
-      "linear-gradient(90deg, #FFD700, #FFB700, #FFF5CC, #FFD700)",
-    backgroundSize: "200% auto",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    display: "inline-block",
-    paddingTop: "0.2em",
-    paddingBottom: "0.2em",
-    lineHeight: 1.3,
-  };
-
   return (
-    <div className="flex flex-col items-center text-center px-6 py-12 mb-20">
-      {/* Decorative Symbols */}
+    <div className="flex flex-col items-center text-center px-6 mb-20">
       <motion.div
-        className="flex items-center justify-center gap-2 mb-10"
+        className="flex items-center justify-center gap-2 my-10"
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, type: "spring" }}
       >
-        <h1 className="font-face-gm text-7xl md:text-8xl">Ó</h1>
-        <h1 className="font-face-gm text-7xl md:text-8xl text-flip">Ó</h1>
+        <h1 className="font-face-gm text-7xl md:text-8xl combined-gold">Ó</h1>
+        <h1 className="font-face-gm text-7xl md:text-8xl combined-gold text-flip">
+          Ó
+        </h1>
       </motion.div>
 
-      {/* Parents Section */}
       <motion.div
         className="mb-12 space-y-6 leading-relaxed"
         initial="hidden"
         whileInView="visible"
       >
         <motion.div
-          className="grid grid-cols-2 gap-12 text-lg md:text-xl"
+          className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8 text-gold md:text-xl"
           variants={fadeUp}
           custom={1}
         >
-          <div className="text-center">
-            <p style={shimmerStyle}>លោក យ៉ង់ វីរៈ</p>
+          <div className="text-center space-y-3">
+            <p>លោក យ៉ង់ វីរៈ</p>
             <p>លោកស្រី ហួត សុមន</p>
           </div>
-          <div className="text-center">
-            <p style={shimmerStyle}>លោក ខួន ពិនុច</p>
+          <div className="text-center space-y-3">
+            <p>លោក ខួន ពិនុច</p>
             <p>លោកស្រី គីម ណេត</p>
           </div>
         </motion.div>
@@ -65,7 +53,7 @@ export default function Details() {
 
         {/* Invitation Text */}
         <motion.h4
-          className="text-2xl md:text-xl mb-4 font-semibold"
+          className="text-2xl md:text-3xl mb-4 text-gold"
           variants={fadeUp}
           custom={3}
         >
@@ -73,7 +61,7 @@ export default function Details() {
         </motion.h4>
 
         <motion.p
-          className="text-center text-lg md:text-base max-w-2xl mx-auto"
+          className="text-center text-gold md:text-base max-w-2xl mx-auto"
           variants={fadeUp}
           custom={4}
         >
@@ -83,17 +71,17 @@ export default function Details() {
 
         {/* Bride & Groom */}
         <motion.div
-          className="grid grid-cols-2 gap-12 mt-8 text-lg md:text-xl"
+          className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8 text-gold md:text-xl"
           variants={fadeUp}
           custom={5}
         >
-          <div className="text-center">
+          <div className="text-center space-y-3">
             <p>កូនប្រុសនាម</p>
-            <p style={shimmerStyle}>ហួត សុមន</p>
+            <p>ហួត សុមន</p>
           </div>
-          <div className="text-center">
+          <div className="text-center space-y-3">
             <p>កូនស្រីនាម</p>
-            <p style={shimmerStyle}>គីម ណេត</p>
+            <p>គីម ណេត</p>
           </div>
         </motion.div>
       </motion.div>

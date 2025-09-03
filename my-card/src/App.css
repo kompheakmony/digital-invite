@@ -18,6 +18,39 @@ body::-webkit-scrollbar {
   background: transparent;
 }
 
+.text-gold {
+  background-image: radial-gradient(
+    circle at center,
+    #dda20c,
+    #ffd700,
+    #fffacd,
+    #ffdf00,
+    #dda20c
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  line-height: 1.3;
+}
+
+.combined-gold {
+  background: linear-gradient(
+    90deg,
+    #dda20c,
+    #ffd700,
+    #fffacd,
+    #ffdf00,
+    #dda20c
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
 .moulpali-regular {
   font-family: "Moulpali", sans-serif;
   font-weight: 400;
@@ -30,7 +63,8 @@ body::-webkit-scrollbar {
 }
 
 .text-flip {
-  transform: scaleX(-1);
+  display: inline-block;
+  transform: rotateY(180deg);
 }
 
 .pattern-bg {

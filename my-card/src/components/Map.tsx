@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import RouteSvg from "../assets/route.svg";
+import RoadMap from "./RoadMap";
 
 export default function Map() {
   return (
@@ -10,11 +10,7 @@ export default function Map() {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, type: "spring" }}
       >
-        <img
-          src={RouteSvg}
-          alt="Route Map"
-          className="w-full h-auto text-gold"
-        />
+        <RoadMap />
       </motion.div>
     </div>
   );

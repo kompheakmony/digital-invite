@@ -42,8 +42,8 @@ export default function Details() {
     }),
   };
 
-  const kmSpring1 = useSpring(0, { stiffness: 20, damping: 20 });
-  const kmSpring2 = useSpring(0, { stiffness: 20, damping: 20 });
+  const kmSpring1 = useSpring(0, { stiffness: 10, damping: 20 });
+  const kmSpring2 = useSpring(0, { stiffness: 10, damping: 20 });
 
   const km1 = useTransform(kmSpring1, latest => `${Math.round(latest)} គ.ម`);
   const km2 = useTransform(kmSpring2, latest => `${Math.round(latest)} គ.ម`);
@@ -56,11 +56,9 @@ export default function Details() {
   const textVariants = {
     hidden: {
       opacity: 0,
-      y: 30,
     },
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
         delay: 0,
         duration: 0.8,
@@ -151,7 +149,7 @@ export default function Details() {
           variants={fadeUp}
           custom={6}
         >
-          <motion.svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 800 800">
+          <svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 800 800">
             <g id="Mask group">
               <mask id="mask0_28_64" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="800">
                 <g id="box" filter="url(#goldShadow)">
@@ -289,7 +287,24 @@ export default function Details() {
                 <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodColor="rgba(0,0,0,0.35)" />
               </filter>
             </defs>
-          </motion.svg>
+          </svg>
+
+        </motion.div>
+
+        <motion.div
+          className="text-center text-gold md:text-base max-w-2xl mx-auto"
+          variants={fadeUp}
+          custom={6}
+        >
+          <motion.button
+            className="mt-8 px-6 py-3 rounded-full shadow-md transition-all transform hover:scale-105 focus:outline-none focus:ring-1
+                      bg-white/5 backdrop-blur-md"
+            onClick={handleRedirect}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            បើកផែនទី
+          </motion.button>
         </motion.div>
       </motion.div>
     </div>

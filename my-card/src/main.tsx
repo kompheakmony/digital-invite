@@ -7,7 +7,9 @@ import Hero from "./components/Hero";
 import Detail from "./components/Detail";
 import Map from "./components/Map";
 
-createRoot(document.getElementById("root")).render(
+const rootElement = document.getElementById("root") as HTMLElement;
+
+createRoot(rootElement).render(
   <StrictMode>
     <div className="min-h-screen relative flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(34,197,94)_0%,rgb(21,128,61)_70%,rgb(20,83,45)_100%)] transition-all duration-1000"></div>

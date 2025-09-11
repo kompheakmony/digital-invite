@@ -1,9 +1,10 @@
-import { motion } from "framer-motion";
+import { motion, Variants } from "motion/react";
+import React from "react";
 
 export default function Details() {
-  const fadeUp = {
+  const fadeUp: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: (i = 0) => ({
+    visible: (i: number = 0) => ({
       opacity: 1,
       y: 0,
       transition: { delay: i * 0.2, duration: 0.8, ease: "easeOut" },
@@ -11,7 +12,7 @@ export default function Details() {
   };
 
   return (
-    <div className="flex flex-col items-center text-center px-6 mb-20">
+    <div className="flex flex-col items-center text-center px-6 mb-4">
       <motion.div
         className="flex items-center justify-center gap-2 my-10"
         initial={{ opacity: 0, scale: 0.8 }}
@@ -29,6 +30,7 @@ export default function Details() {
         initial="hidden"
         whileInView="visible"
       >
+        {/* Parents Section */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8 text-gold md:text-xl"
           variants={fadeUp}

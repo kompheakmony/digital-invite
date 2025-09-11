@@ -1,18 +1,23 @@
-import { motion } from "framer-motion";
+import { motion, Variants } from "motion/react";
 import FrameName from "../assets/name-frame.svg";
 import GuestName from "../assets/guest-frame.png";
+import React from "react";
 
-export default function Hero({ guestName = "លោក សែត កុម្ភម្នី" }) {
-  const fadeUp = {
+type HeroProps = {
+  guestName?: string;
+};
+
+export default function Hero({ guestName = "លោក សែត កុម្ភម្នី" }: HeroProps) {
+  const fadeUp: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: (i = 0) => ({
+    visible: (i: number = 0) => ({
       opacity: 1,
       y: 0,
       transition: { delay: i * 0.3, duration: 0.8, ease: "easeOut" },
     }),
   };
 
-  const shimmerStyle = {
+  const shimmerStyle: React.CSSProperties = {
     backgroundImage: `linear-gradient(
       90deg,
       #dda20c,
@@ -129,7 +134,6 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
         custom={4}
       >
         <h4>ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦​ វេលាម៉ោង៖ ៣ៈ០០ រសៀល</h4>
-
         <h4>នៅគេហដ្ឋានខាងស្រី</h4>
       </motion.div>
     </div>

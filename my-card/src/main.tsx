@@ -5,7 +5,6 @@ import "./App.css";
 import "./assets/fonts/tacteng.ttf";
 import Hero from "./components/Hero";
 import Detail from "./components/Detail";
-import Map from "./components/Map";
 
 const rootElement = document.getElementById("root") as HTMLElement;
 
@@ -39,7 +38,6 @@ createRoot(rootElement).render(
 
         <Hero />
         <Detail />
-        <Map />
 
         <span className="absolute bottom-2 left-2 font-face-gm md:text-9xl animate-fadeIn">
           ,

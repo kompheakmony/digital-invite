@@ -15,14 +15,6 @@ const fadeUpVariants: Variants = {
   }),
 };
 
-const containerVariants: Variants ={
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {},
-    },
-};
-
 const pathVariants: Variants = {
     hidden: {
         pathLength: 0,
@@ -72,7 +64,7 @@ export default function RouteSvg() {
     };
 
     return (
-        <motion.svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 800 800" variants={containerVariants}
+        <motion.svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 800 800"
           initial="hidden"
           animate="visible">
             <g id="Mask group">
@@ -153,7 +145,7 @@ export default function RouteSvg() {
                                 d="M330 86V540H551"
                                 fill="none"
                                 stroke="#FFFACD"
-                                strokeWidth="14"
+                                strokeWidth="13"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 variants={pathVariants}    
@@ -163,7 +155,7 @@ export default function RouteSvg() {
                                 d="M330 712V540"
                                 fill="none"
                                 stroke="#FFFACD"
-                                strokeWidth="14"
+                                strokeWidth="13"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 variants={pathVariants}  

@@ -67,9 +67,7 @@ export default function Details() {
   };
 
   const handleRedirect = () => {
-    const latitude = 10.662395591131407;
-    const longitude = 104.23083968459684;
-    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    const url = `https://maps.app.goo.gl/ZiEYZU2GpxkvH49DA?g_st=ic`;
     window.open(url, '_blank');
   };
 
@@ -121,14 +119,14 @@ export default function Details() {
           មានកិត្តិយសសូមអញ្ជើញ
         </motion.h4>
 
-        <motion.p
+        <motion.h4
           className="text-center text-gold md:text-base max-w-2xl mx-auto"
           variants={fadeUp}
           custom={4}
         >
           ចូលរួមក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍ កូនប្រុស កូនស្រី ជាអធិបតី និង
           ជាភ្ញៀវកិត្តិយស
-        </motion.p>
+        </motion.h4>
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8 text-gold md:text-xl"
@@ -145,9 +143,18 @@ export default function Details() {
           </div>
         </motion.div>
         <motion.div
-          className="w-full max-w-3xl"
+          className="text-center space-y-3 text-gold md:text-base max-w-2xl mx-auto"
           variants={fadeUp}
           custom={6}
+        >
+          <h4>ថ្ងៃសុក្រ ៥រោច ខែភទ្របទ ឆ្នាំម្សាញ់ សប្តស័ក ពុទ្ធសករាជ ២៥៦៩</h4>
+          <h3>ត្រូវនឹង</h3>
+          <h4>ថ្ងៃសុក្រ ទី១២ ខែកញ្ញា ឆ្នាំ២០២៥</h4>
+        </motion.div>
+        <motion.div
+          className="w-full max-w-3xl"
+          variants={fadeUp}
+          custom={7}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 800 800">
             <g id="Mask group">
@@ -290,23 +297,33 @@ export default function Details() {
           </svg>
 
         </motion.div>
-
         <motion.div
-          className="text-center text-gold md:text-base max-w-2xl mx-auto"
-          variants={fadeUp}
-          custom={6}
-        >
-          <motion.button
-            className="mt-8 px-6 py-3 rounded-full shadow-md transition-all transform hover:scale-105 focus:outline-none focus:ring-1
-                      bg-white/5 backdrop-blur-md"
-            onClick={handleRedirect}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="max-w-2xl mx-auto"
+            variants={fadeUp}
+            custom={8}
           >
-            បើកផែនទី
-          </motion.button>
-        </motion.div>
+            <button
+              className="py-3 px-6 mb-4 rounded-xl shadow-xs transition-all transform hover:scale-105
+                        bg-white/3 backdrop-blur-lg relative overflow-hidden"
+              onClick={handleRedirect}
+            >
+              <span className="relative z-10 text-center text-gold">
+                បើកផែនទី
+              </span>
+            </button>
+          </motion.div>
+        <p
+          className="text-center text-gold md:text-base max-w-2xl mx-auto"
+        >
+          <span className="font-face-gm ">°</span> ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី
+        </p>
+        <p
+          className="text-center text-gold md:text-base max-w-2xl mx-auto"
+        >
+          <span className="font-face-gm ">°</span> ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី
+        </p>
       </motion.div>
     </div>
   );
 }
+

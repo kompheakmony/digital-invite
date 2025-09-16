@@ -3,5 +3,10 @@
   src: local("Tacteng"), url("./assets/fonts/tacteng.ttf") format("truetype");
   font-weight: bold;
 }
+@font-face {
+  font-family: "Khmer Boran";
+  src: local("Khmer Boran"), url("./assets/fonts/Khmer_Boran.ttf") format("truetype");
+  font-weight: bold;
+}
 
 @import "tailwindcss";

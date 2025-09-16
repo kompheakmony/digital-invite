@@ -1,5 +1,6 @@
 import { motion, Variants, useSpring, useTransform } from "motion/react";
 import React from "react";
+import { MapPin } from "lucide-react";
 
 export default function Details() {
 
@@ -72,9 +73,9 @@ export default function Details() {
   };
 
   return (
-    <div className="flex flex-col items-center text-center px-6 mb-4">
+    <div className="flex flex-col items-center text-center px-6">
       <motion.div
-        className="flex items-center justify-center gap-2 my-10"
+        className="flex items-center justify-center gap-2 my-8"
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, type: "spring" }}
@@ -129,17 +130,20 @@ export default function Details() {
         </motion.h4>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8 text-gold md:text-xl"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 text-gold"
           variants={fadeUp}
           custom={5}
         >
           <div className="text-center space-y-3">
             <p>កូនប្រុសនាម</p>
-            <p>ហួត សុមន</p>
+            <h4 className="md:text-xl">ហួត សុមន</h4>
+          </div>
+          <div className="text-center">
+            <p>ជាគូនិង</p>
           </div>
           <div className="text-center space-y-3">
             <p>កូនស្រីនាម</p>
-            <p>គីម ណេត</p>
+            <h4 className="md:text-xl">គីម ណេត</h4>
           </div>
         </motion.div>
         <motion.div
@@ -307,21 +311,24 @@ export default function Details() {
                         bg-white/3 backdrop-blur-lg relative overflow-hidden"
               onClick={handleRedirect}
             >
-              <span className="relative z-10 text-center text-gold">
-                បើកផែនទី
+              <span className="flex items-center text-center">
+                <MapPin size={20} />
+                <span>បើកផែនទី</span>
               </span>
             </button>
           </motion.div>
-        <p
-          className="text-center text-gold md:text-base max-w-2xl mx-auto"
-        >
-          <span className="font-face-gm ">°</span> ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី
-        </p>
-        <p
-          className="text-center text-gold md:text-base max-w-2xl mx-auto"
-        >
-          <span className="font-face-gm ">°</span> ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី
-        </p>
+        <motion.div className="font-boran text-center text-gold leading-7 max-w-2xl mx-auto space-y-3"
+            variants={fadeUp}
+            custom={9}>
+          <h4 className="text-3xl md:text-2xl mb-4">ទិសដៅ</h4>
+          <p>
+            ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី
+          </p>
+          <p>
+            ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី
+          </p>
+        </motion.div>
+
       </motion.div>
     </div>
   );

@@ -41,20 +41,27 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
         transition={{ duration: 1, type: "spring" }}
       >
         <img src={FrameName} alt="Frame Name" />
-        <div className="absolute inset-0 flex items-center justify-center gap-6 moulpali-regular text-gold">
+        <motion.div className="absolute inset-0 flex items-center justify-center gap-6 font-boran text-gold" style={{
+            ...shimmerStyle,
+            paddingTop: "0.3em",
+            paddingBottom: "0.3em",
+          }}
+          variants={fadeUp}
+          animate={{ backgroundPosition: ["200% center", "0% center"] }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "linear",
+          }}>
           {["ក", "វ"].map((char, i) => (
-            <motion.span
+            <span
               key={i}
               className="text-5xl md:text-6xl"
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={i + 1}
             >
               {char}
-            </motion.span>
+            </span>
           ))}
-        </div>
+        </motion.div>
       </motion.div>
 
       <motion.div
@@ -99,7 +106,6 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
         </motion.h4>
       </motion.div>
 
-      {/* Guest frame with shimmering gold text */}
       <motion.div
         className="relative mb-4"
         initial={{ opacity: 0, scale: 0.9 }}

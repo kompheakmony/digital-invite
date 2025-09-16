@@ -3,8 +3,10 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import "./App.css";
 import "./assets/fonts/tacteng.ttf";
+import "./assets/fonts/Khmer_Boran.ttf";
 import Hero from "./components/Hero";
 import Detail from "./components/Detail";
+import PhotosGallary from "./components/PhotosGallary";
 
 const rootElement = document.getElementById("root") as HTMLElement;
 
@@ -19,7 +21,7 @@ createRoot(rootElement).render(
       <div className="absolute top-1/3 right-1/4 w-12 h-12 rounded-full bg-white/15 animate-float2"></div>
       <div className="absolute bottom-1/4 left-1/3 w-14 h-14 rounded-full bg-white/20 animate-float3"></div>
 
-      <div className="relative z-20 flex flex-col items-center justify-center max-w-6xl px-6 py-8 bg-white/1 backdrop-blur-xs rounded-2xl shadow-2xl border border-white/20">
+      <div className="relative z-20 flex flex-col items-center justify-center max-w-3xl px-6 py-8 bg-white/1 backdrop-blur-xs rounded-2xl shadow-2xl border border-white/20">
         <span className="absolute top-[128px] bottom-[128px] left-4 w-px bg-gradient-to-b from-transparent via-yellow-500 to-transparent"></span>
         <span className="absolute top-[128px] bottom-[128px] right-4 w-px bg-gradient-to-b from-transparent via-yellow-500 to-transparent"></span>
 
@@ -38,6 +40,7 @@ createRoot(rootElement).render(
 
         <Hero />
         <Detail />
+        <PhotosGallary />
 
         <span className="absolute bottom-2 left-2 font-face-gm md:text-9xl animate-fadeIn">
           ,

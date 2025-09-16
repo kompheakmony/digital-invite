@@ -16,8 +16,8 @@ const photos = [
 const PhotosGallery: React.FC = () => {
   return (
     <div className="flex flex-col items-center mx-auto px-5 mb-20">
-      <h4 className="text-gold md:text-xl mb-8">កម្រង</h4>
-
+      <h4 className="font-boran text-gold text-3xl md:text-2xl">កម្រង</h4>
+        <div className="w-18 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mt-1 mb-8" />
       <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
         {photos.map((photo) => (
           <motion.div

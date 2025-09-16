@@ -106,11 +106,12 @@ export default function Details() {
           </div>
         </motion.div>
 
-        <motion.div
+        <motion.h4
           className="w-24 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto my-8"
           variants={fadeUp}
           custom={2}
         />
+        
 
         <motion.h4
           className="text-2xl md:text-3xl mb-4 text-gold"
@@ -311,25 +312,41 @@ export default function Details() {
                         bg-white/3 backdrop-blur-lg relative overflow-hidden"
               onClick={handleRedirect}
             >
-              <span className="flex items-center text-center">
+              <div className="flex items-center text-center text-gold">
                 <MapPin size={20} />
                 <span>បើកផែនទី</span>
-              </span>
+              </div>
             </button>
           </motion.div>
-        <motion.div className="font-boran text-center text-gold leading-7 max-w-2xl mx-auto space-y-3"
-            variants={fadeUp}
-            custom={9}>
-          <h4 className="text-3xl md:text-2xl mb-4">ទិសដៅ</h4>
+
+      </motion.div>
+        <motion.div
+          className="flex flex-col items-center text-gold"
+          variants={fadeUp}
+          custom={9}
+        >
+          <h4 className="font-boran text-3xl md:text-2xl max-w-2xl text-center">
+            ទិសដៅ
+          </h4>
+          <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent my-2" />
+        </motion.div>
+
+        <motion.div
+          className="font-boran text-center text-gold leading-8 max-w-2xl mx-auto space-y-4"
+          variants={fadeUp}
+          custom={10}
+        >
           <p>
-            ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី
+            ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី
+            នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី។
           </p>
+
           <p>
-            ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី
+            ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី
+            នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី។
           </p>
         </motion.div>
 
-      </motion.div>
     </div>
   );
 }

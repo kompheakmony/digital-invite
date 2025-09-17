@@ -139,6 +139,7 @@ body::-webkit-scrollbar {
   }
 }
 
+
 .animate-float1 {
   animation: float1 8s ease-in-out infinite;
 }

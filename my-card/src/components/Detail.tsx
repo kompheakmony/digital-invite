@@ -37,7 +37,7 @@ export default function Details() {
       scale: 1,
       transition: {
         delay: custom * 0.8,
-        duration: 0.8,
+        duration: 1,
         ease: "easeOut",
       },
     }),
@@ -308,7 +308,7 @@ export default function Details() {
             custom={8}
           >
             <button
-              className="py-3 px-6 mb-4 rounded-xl shadow-xs transition-all transform hover:scale-105
+              className="cursor-pointer py-3 px-6 mb-4 rounded-xl shadow-xs transition-all transform hover:scale-105
                         bg-white/3 backdrop-blur-lg relative overflow-hidden"
               onClick={handleRedirect}
             >

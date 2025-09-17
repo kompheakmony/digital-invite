@@ -7,6 +7,7 @@ import "./assets/fonts/Khmer_Boran.ttf";
 import Hero from "./components/Hero";
 import Detail from "./components/Detail";
 import PhotosGallary from "./components/PhotosGallary";
+import AbaQr from "./components/AbaQr";
 
 const rootElement = document.getElementById("root") as HTMLElement;
 
@@ -41,6 +42,7 @@ createRoot(rootElement).render(
         <Hero />
         <Detail />
         <PhotosGallary />
+        <AbaQr />
 
         <span className="absolute bottom-2 left-2 font-face-gm md:text-9xl animate-fadeIn">
           ,

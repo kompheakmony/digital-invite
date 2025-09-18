@@ -8,6 +8,7 @@ import Hero from "./components/Hero";
 import Detail from "./components/Detail";
 import PhotosGallary from "./components/PhotosGallary";
 import AbaQr from "./components/AbaQr";
+import Footer from "./components/Footer";
 
 const rootElement = document.getElementById("root") as HTMLElement;
 
@@ -43,6 +44,7 @@ createRoot(rootElement).render(
         <Detail />
         <PhotosGallary />
         <AbaQr />
+        <Footer />
 
         <span className="absolute bottom-2 left-2 font-face-gm md:text-9xl animate-fadeIn">
           ,

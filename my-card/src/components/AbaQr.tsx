@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { QrCode } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import qrImage from "../assets/aba-qr.png";
 
 type AbaQrProps = {
@@ -22,28 +22,53 @@ const quotes = [
 
 export default function AbaQr({
   merchant = "SET K. & DETH V.",
-  qrSrc = qrImage,
   size = 200,
   showAnimation = true,
   cornerColor = "border-yellow-400",
 }: AbaQrProps) {
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentQuoteIndex((prev) => (prev + 1) % quotes.length);
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+
   return (
-    <motion.div
-      className="flex flex-col md:flex-row items-center justify-between p-8 mb-20 gap-10"
-      initial={{ opacity: 0, y: 60, scale: 0.9 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
-      {/* Left Column: QR Code */}
-      <div className="flex-1 flex flex-col items-center justify-center">
+    <div className="w-full max-w-6xl mx-auto">
+      <motion.div
+        className="text-center mb-12"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <div className="flex items-center justify-center">
+          <h4 className="font-boran text-xl md:text-2xl text-gold">
+            មិចក៏បាន
+          </h4>
+        </div>
+        <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto" />
+      </motion.div>
+
+      <motion.div
+        className="flex flex-col lg:flex-row items-center justify-between gap-12 p-8"
+        initial={{ opacity: 0, y: 60, scale: 0.9 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <div className="flex-1 flex flex-col items-center justify-center">
         <div className="relative group">
           <div
             className="relative p-4 rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-105"
             style={{ width: size + 32, height: size + 32 }}
           >
             <img
-              src={qrSrc}
+              src={qrImage}
               alt="ABA QR Code"
               width={size}
               height={size}
@@ -86,20 +111,57 @@ export default function AbaQr({
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col items-center justify-center text-center p-4">
-        <motion.div
-          className="font-boran italic text-gold space-y-4"
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-        >
-          <h4 className="text-xl">បទកាកគតិ</h4>
-          <p className="text-md leading-8">
-            {quotes[Math.floor(Math.random() * quotes.length)]}
-          </p>
-        </motion.div>
-      </div>
-    </motion.div>
+        <div className="flex-1 flex flex-col items-center justify-center text-center">
+          <motion.div
+            className="max-w-md space-y-6"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          >
+
+            <div className="relative bg-white/3 backdrop-blur-sm border border-yellow-400/20 rounded-2xl p-6 hover:bg-white/5 transition-all duration-500">
+              <div className="absolute -top-2 left-4 text-yellow-400/60 text-4xl font-serif">"</div>
+              <div className="absolute -bottom-6 right-4 text-yellow-400/60 text-4xl font-serif">"</div>
+              
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={currentQuoteIndex}
+                  className="font-boran italic text-gold text-sm md:text-base leading-7 md:leading-8 relative z-10 pt-3 pb-3"
+                  initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                >
+                  {quotes[currentQuoteIndex]}
+                </motion.p>
+              </AnimatePresence>
+
+              <div className="absolute top-2 right-2 w-3 h-3 bg-yellow-400/20 rounded-full" />
+              <div className="absolute bottom-2 left-2 w-2 h-2 bg-yellow-300/30 rounded-full" />
+            </div>
+
+            <div className="flex items-center justify-center gap-4 mt-6">
+              <div className="flex gap-1">
+                {quotes.map((_, index) => (
+                  <motion.button
+                    key={index}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentQuoteIndex 
+                        ? 'bg-yellow-400 w-6' 
+                        : 'bg-yellow-400/30 hover:bg-yellow-400/60'
+                    }`}
+                    onClick={() => setCurrentQuoteIndex(index)}
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                  />
+                ))}
+              </div>
+              
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+    </div>
   );
 }

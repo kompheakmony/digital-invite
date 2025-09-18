@@ -1,15 +1,40 @@
-/* App.css */
 @import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Moul&display=swap");
 
-html,
-body {
-  font-family: "Moul", sans-serif;
-  color: #efbf04;
+:root {
+  --gold-primary: #efbf04;
+  --gold-dark: #dda20c;
+  --gold-light: #ffd700;
+  --gold-lightest: #fffacd;
+  --gold-medium: #ffdf00;
+  --green-dark: rgb(20, 83, 45);
+  --green-medium: rgb(21, 128, 61);
+  --green-light: rgb(34, 197, 94);
+  --tile-size: 100px;
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-gold: 0 4px 20px rgba(239, 191, 4, 0.25);
 }
 
 html {
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  font-family: "Moul", sans-serif;
+  color: var(--gold-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  position: relative;
 }
 
 body::-webkit-scrollbar {
@@ -20,16 +45,18 @@ body::-webkit-scrollbar {
 .text-gold {
   background-image: radial-gradient(
     circle at center,
-    #dda20c,
-    #ffd700,
-    #fffacd,
-    #ffdf00,
-    #dda20c
+    var(--gold-dark),
+    var(--gold-light),
+    var(--gold-lightest),
+    var(--gold-medium),
+    var(--gold-dark)
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  color: transparent;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   padding-top: 0.3em;
   padding-bottom: 0.3em;
 }
@@ -47,6 +74,8 @@ body::-webkit-scrollbar {
   -webkit-text-fill-color: transparent;
   background-size: 200% auto;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s var(--transition-smooth);
+  position: relative;
 }
 
 .font-face-gm {
@@ -65,10 +94,11 @@ body::-webkit-scrollbar {
 }
 
 .pattern-bg {
-  --s: 100px; /* tile size */
+  --s: var(--tile-size);
   position: absolute;
   inset: 0;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .pattern-bg::before {
@@ -78,10 +108,11 @@ body::-webkit-scrollbar {
   background-image: url("/romdoul.png");
   background-repeat: repeat;
   background-size: var(--s) var(--s);
-  opacity: 0.1;
+  opacity: 0.08;
   mix-blend-mode: overlay;
   transform: rotate(45deg);
   transform-origin: center;
+  animation: pattern-drift 60s linear infinite;
 }
 @keyframes float {
   0%,
@@ -156,51 +187,151 @@ body::-webkit-scrollbar {
   animation: fadeIn 1s ease-out forwards;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(20, 83, 45, 0.2);
+  background: rgba(20, 83, 45, 0.1);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
+  background: linear-gradient(
+    180deg,
+    rgba(239, 191, 4, 0.6),
+    rgba(255, 215, 0, 0.4)
+  );
+  border-radius: 3px;
+  transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.4);
+  background: linear-gradient(
+    180deg,
+    rgba(239, 191, 4, 0.8),
+    rgba(255, 215, 0, 0.6)
+  );
 }
+
 .app-content {
   position: relative;
   z-index: 10;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(0.5px);
 }
 
 header {
   padding: 2rem 1rem;
   text-align: center;
+  position: relative;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold-light),
+    transparent
+  );
+  border-radius: 1px;
 }
 
 header h1 {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 700;
+  text-shadow: var(--shadow-gold);
+  position: relative;
 }
 
+/* Enhanced main content */
 main {
   flex: 1;
   padding: 2rem;
   text-align: center;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
+  position: relative;
 }
 
 main p {
-  font-size: 1.2rem;
-  line-height: 1.6;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  line-height: 1.8;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.gold-glow {
+  box-shadow: 
+    0 0 20px rgba(239, 191, 4, 0.3),
+    0 0 40px rgba(239, 191, 4, 0.1);
+}
+
+.smooth-transition {
+  transition: all 0.3s var(--transition-smooth);
+}
+
+@media (max-width: 768px) {
+  .pattern-bg::before {
+    opacity: 0.05;
+    background-size: calc(var(--s) * 0.7) calc(var(--s) * 0.7);
+  }
+  
+  header {
+    padding: 1.5rem 1rem;
+  }
+  
+  main {
+    padding: 1.5rem;
+  }
+  
+  .animate-float1,
+  .animate-float2,
+  .animate-float3 {
+    animation-duration: 6s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .pattern-bg::before {
+    animation: none;
+  }
+  
+  .combined-gold {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .text-gold,
+  .combined-gold {
+    background-image: none;
+    -webkit-text-fill-color: var(--gold-light);
+    color: var(--gold-light);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  }
 }

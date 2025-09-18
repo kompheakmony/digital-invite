@@ -41,7 +41,7 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
         transition={{ duration: 1, type: "spring" }}
       >
         <img src={FrameName} alt="Frame Name" />
-        <motion.div className="absolute inset-0 flex items-center justify-center gap-2 font-boran text-gold" style={{
+        <motion.div className="absolute inset-0 flex items-center justify-center gap-2 font-boran" style={{
             ...shimmerStyle,
             paddingTop: "0.3em",
             paddingBottom: "0.3em",

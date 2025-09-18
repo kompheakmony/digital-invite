@@ -327,7 +327,7 @@ export default function Details() {
                     <h4 className="font-boran text-3xl md:text-2xl text-center">
                         ទិសដៅ
                     </h4>
-                    <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent my-2" />
+                    <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto" />
 
                     <div
                         className="font-boran text-center text-gold leading-8 max-w-2xl mx-auto space-y-4"
@@ -344,8 +344,6 @@ export default function Details() {
                     </div>
                 </motion.div>
             </motion.div>
-            
-
         </div>
     );
 }

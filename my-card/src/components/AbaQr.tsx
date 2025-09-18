@@ -12,8 +12,12 @@ type AbaQrProps = {
 };
 
 const quotes = [
-  "ថ្ងៃនេះថ្ងៃជា មេបាគ្រប់គ្នា ចូលមកត្រៀបត្រា ជាអធិតេយ្យ ក្នុងមង្គលការ ឲ្យបានសុខា ដល់បុត្រជៀងជាក់។",
-  "លោកអើយពាក្យពរ ពិរោះសាទ រុងរឿងសុទ្ធិស័ក្ត ខ្ញុំនឹងថ្លាថ្លែង​ ចាចែងដោយថ្នាក់ ដោយបទជើងជាក់ ចួបចប់ចរចារ។"
+  "ថ្ងៃនេះថ្ងៃជា មេបាគ្រប់គ្នា ចូលមកត្រៀបត្រា ជាអធិតេយ្យ ក្នុងមង្គលការ ឱ្យបានសុខា ដល់បុត្រជៀងជាក់។",
+  "លោកអើយពាក្យពរ ពិរោះសាទ រុងរឿងសិទ្ធិស័ក្ត ខ្ញុំនឹងថ្លាថ្លែង​ ចាចែងដោយថ្នាក់ ដោយបទជើងជាក់ ជួបចប់វាចារ។",
+  "អំបោះសសម គួរគាប់ឧត្តម ដូចលួសសុវណ្ណា កកាន់លើកឡើង ថ្កល់ថ្កើងថ្លៃថ្លា ចូលចងហត្ថា ឱ្យអ្នកសុខសាន្ត។",
+  "ឱ្យអ្នកបានទី ខ្ពង់ខ្ពស់ឫទ្ធី បរិបូណ៌ថ្កើនថ្កាន អាយុយឺនយូរ កបគូបុរាណ មួយរយឆ្នាំបាន ចៀសចាករោគា។",
+  "នីរទុក្ខំ ទោមនស្សំ ឧបទ្ទវា នីរសោកេ រោគេពាធា ស្វាមីភរិយា ហោន្តុសុខំ។",
+  "ធនធនា ទាសីទាសា ធនធនំ អស្សធនោ ភោគោឧត្តម បរិសុខ ពហុយសា។"
 ];
 
 export default function AbaQr({
@@ -84,13 +88,14 @@ export default function AbaQr({
 
       <div className="flex-1 flex flex-col items-center justify-center text-center p-4">
         <motion.div
-          className="text-gray-700 space-y-4"
+          className="font-boran italic text-gold space-y-4"
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
         >
-          <p className="font-boran text-xl italic text-gold leading-7">
+          <h4 className="text-xl">បទកាកគតិ</h4>
+          <p className="text-md leading-8">
             {quotes[Math.floor(Math.random() * quotes.length)]}
           </p>
         </motion.div>

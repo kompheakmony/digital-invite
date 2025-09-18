@@ -47,7 +47,7 @@ export default function AbaQr({
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="flex items-center justify-center">
-          <h4 className="font-boran text-xl md:text-2xl text-gold">
+          <h4 className="font-khmer text-xl md:text-2xl text-gold">
             មិចក៏បាន
           </h4>
         </div>
@@ -127,7 +127,7 @@ export default function AbaQr({
               <AnimatePresence mode="wait">
                 <motion.p
                   key={currentQuoteIndex}
-                  className="font-boran italic text-gold text-sm md:text-base leading-7 md:leading-8 relative z-10 pt-3 pb-3"
+                  className="font-khmer italic text-gold text-sm md:text-base leading-7 md:leading-8 relative z-10 pt-3 pb-3"
                   initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}

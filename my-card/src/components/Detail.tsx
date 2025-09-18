@@ -80,8 +80,8 @@ export default function Details() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, type: "spring" }}
             >
-                <h1 className="font-face-gm text-7xl md:text-8xl combined-gold">Ó</h1>
-                <h1 className="font-face-gm text-7xl md:text-8xl combined-gold text-flip">
+                <h1 className="font-tacteng text-7xl md:text-8xl combined-gold">Ó</h1>
+                <h1 className="font-tacteng text-7xl md:text-8xl combined-gold text-flip">
                     Ó
                 </h1>
             </motion.div>
@@ -324,13 +324,13 @@ export default function Details() {
                     variants={fadeUp}
                     custom={9}
                 >
-                    <h4 className="font-boran text-3xl md:text-2xl text-center">
+                    <h4 className="font-khmer text-3xl md:text-2xl text-center">
                         ទិសដៅ
                     </h4>
                     <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto" />
 
                     <div
-                        className="font-boran text-center text-gold leading-8 max-w-2xl mx-auto space-y-4"
+                        className="font-khmer text-center text-gold leading-8 max-w-2xl mx-auto space-y-4"
                     >
                         <p>
                             ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី

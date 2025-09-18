@@ -48,7 +48,7 @@ const sparkleAnimation: Variants = {
 export default function Footer() {
   return (
     <motion.footer 
-      className="w-full py-8 my-13 relative overflow-hidden font-boran"
+      className="w-full py-8 my-13 relative overflow-hidden font-khmer"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}

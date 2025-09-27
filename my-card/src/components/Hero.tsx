@@ -1,13 +1,22 @@
 import { motion, Variants } from "motion/react";
 import FrameName from "../assets/name-frame.svg";
 import GuestName from "../assets/guest-frame.png";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { guestList } from "../data/guestList";
 
-type HeroProps = {
-  guestName?: string;
-};
+export default function Hero() {
+  const { guestSlug } = useParams<{ guestSlug?: string }>();
+  const [dynamicGuestName, setDynamicGuestName] = useState("លោក សែត កុម្ភម្នី");
 
-export default function Hero({ guestName = "លោក សែត កុម្ភម្នី" }: HeroProps) {
+  useEffect(() => {
+    if (guestSlug && guestList[guestSlug]) {
+      setDynamicGuestName(guestList[guestSlug]);
+    } else if (guestSlug) {
+      setDynamicGuestName("ភ្ញៀវកិត្តិយស");
+    }
+  }, [guestSlug]);
+
   const fadeUp: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: (i: number = 0) => ({
@@ -41,7 +50,9 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
         transition={{ duration: 1, type: "spring" }}
       >
         <img src={FrameName} alt="Frame Name" />
-        <motion.div className="absolute inset-0 flex items-center justify-center gap-2 font-khmer" style={{
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center gap-2 font-khmer"
+          style={{
             ...shimmerStyle,
             paddingTop: "0.3em",
             paddingBottom: "0.3em",
@@ -52,12 +63,10 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
             duration: 3,
             repeat: Infinity,
             ease: "linear",
-          }}>
+          }}
+        >
           {["ក", "វ"].map((char, i) => (
-            <span
-              key={i}
-              className="text-5xl md:text-6xl"
-            >
+            <span key={i} className="text-5xl md:text-6xl">
               {char}
             </span>
           ))}
@@ -127,7 +136,7 @@ export default function Hero({ guestName = "លោក សែត កុម្ភ�
               ease: "linear",
             }}
           >
-            {guestName}
+            {dynamicGuestName}
           </motion.span>
         </div>
       </motion.div>

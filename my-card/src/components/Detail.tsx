@@ -1,6 +1,5 @@
 import { motion, Variants, useSpring, useTransform } from "motion/react";
 import React from "react";
-import { MapPin } from "lucide-react";
 
 export default function Details() {
 
@@ -77,7 +76,7 @@ export default function Details() {
         "ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី។",
     ];
 
-    const khmerNumerals = ["០","១","២","៣","៤","៥","៦","៧","៨","៩"];
+    const khmerNumerals = ["០", "១", "២", "៣", "៤", "៥", "៦", "៧", "៨", "៩"];
 
     interface ToKhmerNumber {
         (num: number): string;
@@ -236,7 +235,7 @@ export default function Details() {
                                         >
                                             ២
                                         </text>
-                                        <circle id="Ellipse 1" cx="270" cy="624.5" r="12" stroke="#FFDF00" fill="none" strokeWidth="2"/>
+                                        <circle id="Ellipse 1" cx="270" cy="624.5" r="12" stroke="#FFDF00" fill="none" strokeWidth="2" />
                                     </motion.g>
 
                                     <motion.g
@@ -259,7 +258,7 @@ export default function Details() {
                                         >
                                             ១
                                         </text>
-                                        <circle id="Ellipse 1_2" cx="267.5" cy="101.5" r="11" stroke="#FFDF00" fill="none" strokeWidth="2"/>
+                                        <circle id="Ellipse 1_2" cx="267.5" cy="101.5" r="11" stroke="#FFDF00" fill="none" strokeWidth="2" />
                                     </motion.g>
 
                                     <motion.g id="routes">
@@ -346,33 +345,30 @@ export default function Details() {
                         bg-white/3 backdrop-blur-lg relative overflow-hidden"
                         onClick={handleRedirect}
                     >
-                        <div className="flex items-center text-center text-gold">
-                            <MapPin size={20} />
-                            <span>បើកផែនទី</span>
+                        <div className="flex items-center justify-center space-x-2">
+                            <span className="font-tacteng text-4xl drop-shadow-md">[</span>
+                            <span className="text-lg font-bold tracking-wide text-gold font-khmer">
+                                បើកផែនទី
+                            </span>
                         </div>
                     </button>
                 </motion.div>
 
                 <motion.div
-                    className="flex flex-col items-center text-gold"
+                    className="flex flex-col items-center"
                     variants={fadeUp}
                     custom={9}
                 >
-                    <h4 className="font-khmer text-3xl md:text-2xl text-center">
+                    <h4 className="font-khmer text-3xl md:text-2xl text-center text-gold">
                         ទិសដៅ
                     </h4>
                     <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto" />
 
-                    <div className="font-khmer text-center text-gold leading-8 max-w-2xl mx-auto space-y-4">
-                        {directions.map((text, index) => (
-                            <p key={index}>
-                            <span className="inline-flex items-center justify-center w-8 h-8 border-2 border-current border-solid rounded-full">
-                                {toKhmerNumber(index + 1)}
-                            </span>{" "}
-                            {text}
-                            </p>
-                        ))}
+                    <div className="font-khmer text-center text-gold leading-8 max-w-2xl mx-auto space-y-4 px-8" >
+                        <p> <span className="align-super">១</span> ចេញពីស្ពានអាកាសចោមចៅ តាមផ្លូវជាតិលេខ ៣ ចម្ងាយប្រមាណ <span className="text-xl md:text-2xl">១២៧គ.ម</span> ដល់ខ្លោងទ្វារវត្តសិរីធានី រួចបត់ចូលប្រមាណ <span className="text-xl md:text-2xl">១.៥គ.ម</span> លោកអ្នកនឹងទៅដល់ផ្ទះពិធីមង្គលការ។</p>
+                        <p> <span className="align-super">២</span> ចេញពីរង្វង់មូលទុរេន តាមផ្លូវជាតិលេខ ៣ ចម្ងាយប្រមាណ <span className="text-xl md:text-2xl">៩គ.ម</span> ដល់ខ្លោងទ្វារវត្តសិរីធានី រួចបត់ចូលប្រមាណ <span className="text-xl md:text-2xl">១.៥គ.ម</span> លោកអ្នកនឹងទៅដល់ផ្ទះពិធីមង្គលការ។</p>
                     </div>
+
                 </motion.div>
             </motion.div>
         </div>

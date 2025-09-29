@@ -48,7 +48,7 @@ export default function AbaQr({
       >
         <div className="flex items-center justify-center">
           <h4 className="font-khmer text-xl md:text-2xl text-gold">
-            មិចក៏បាន
+            ជ័យមង្គល
           </h4>
         </div>
         <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto" />

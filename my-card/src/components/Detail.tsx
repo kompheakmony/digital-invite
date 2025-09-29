@@ -72,6 +72,20 @@ export default function Details() {
         window.open(url, '_blank');
     };
 
+    const directions = [
+        "ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី។",
+        "ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី។",
+    ];
+
+    const khmerNumerals = ["០","១","២","៣","៤","៥","៦","៧","៨","៩"];
+
+    interface ToKhmerNumber {
+        (num: number): string;
+    }
+
+    const toKhmerNumber: ToKhmerNumber = (num) =>
+        num.toString().split("").map((d: string) => khmerNumerals[parseInt(d, 10)]).join("");
+
     return (
         <div className="flex flex-col items-center text-center px-6">
             <motion.div
@@ -213,6 +227,16 @@ export default function Details() {
                                         <path id="Vector_2"
                                             d="M311.682 695.365L310.355 687.308L302.298 688.635L303.626 696.692L311.682 695.365ZM263.762 661L264.345 660.187L264.084 660H263.762V661ZM189.217 661L194.99 666.774L200.764 661L194.99 655.226L189.217 661ZM306.99 692L307.573 691.187L264.345 660.187L263.762 661L263.179 661.813L306.407 692.813L306.99 692ZM263.762 661V660H194.99V661V662H263.762V661Z"
                                             fill="#FFFACD" />
+                                        <text
+                                            x="270"
+                                            y="630"
+                                            fill="#FFFACD"
+                                            textAnchor="middle"
+                                            fontSize="14"
+                                        >
+                                            ២
+                                        </text>
+                                        <circle id="Ellipse 1" cx="270" cy="624.5" r="12" stroke="#FFDF00" fill="none" strokeWidth="2"/>
                                     </motion.g>
 
                                     <motion.g
@@ -226,6 +250,16 @@ export default function Details() {
                                         <path id="Vector_3"
                                             d="M312.007 99.2251L303.847 98.9443L303.566 107.104L311.726 107.385L312.007 99.2251ZM265.134 142.979V143.979H265.528L265.816 143.71L265.134 142.979ZM184.717 142.979L190.49 148.753L196.264 142.979L190.49 137.206L184.717 142.979ZM307.787 103.165L307.104 102.434L264.451 142.248L265.134 142.979L265.816 143.71L308.469 103.896L307.787 103.165ZM265.134 142.979V141.979H190.49V142.979V143.979H265.134V142.979Z"
                                             fill="#FFFACD" />
+                                        <text
+                                            x="267.5"
+                                            y="107"
+                                            fill="#FFFACD"
+                                            textAnchor="middle"
+                                            fontSize="14"
+                                        >
+                                            ១
+                                        </text>
+                                        <circle id="Ellipse 1_2" cx="267.5" cy="101.5" r="11" stroke="#FFDF00" fill="none" strokeWidth="2"/>
                                     </motion.g>
 
                                     <motion.g id="routes">
@@ -329,18 +363,15 @@ export default function Details() {
                     </h4>
                     <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto" />
 
-                    <div
-                        className="font-khmer text-center text-gold leading-8 max-w-2xl mx-auto space-y-4"
-                    >
-                        <p>
-                            ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី
-                            នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី។
-                        </p>
-
-                        <p>
-                            ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី
-                            នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី។
-                        </p>
+                    <div className="font-khmer text-center text-gold leading-8 max-w-2xl mx-auto space-y-4">
+                        {directions.map((text, index) => (
+                            <p key={index}>
+                            <span className="inline-flex items-center justify-center w-8 h-8 border-2 border-current border-solid rounded-full">
+                                {toKhmerNumber(index + 1)}
+                            </span>{" "}
+                            {text}
+                            </p>
+                        ))}
                     </div>
                 </motion.div>
             </motion.div>

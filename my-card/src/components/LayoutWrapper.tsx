@@ -1,45 +1,126 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useEffect, useState } from "react";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 
 interface LayoutWrapperProps {
   children: ReactNode;
 }
 
-const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => (
-  <div className="min-h-screen relative flex items-center justify-center overflow-hidden">
-    {/* Background gradient */}
-    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgb(34,197,94)_0%,rgb(21,128,61)_70%,rgb(20,83,45)_100%)] transition-all duration-1000"></div>
-    <div className="pattern-bg" /> {/* Assume pattern-bg is defined in CSS */}
+const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
+  const [init, setInit] = useState(false);
 
-    {/* Floating circles */}
-    <div className="absolute top-1/4 left-1/4 w-16 h-16 rounded-full bg-white/10 animate-float1"></div>
-    <div className="absolute top-1/3 right-1/4 w-12 h-12 rounded-full bg-white/15 animate-float2"></div>
-    <div className="absolute bottom-1/4 left-1/3 w-14 h-14 rounded-full bg-white/20 animate-float3"></div>
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    }).then(() => setInit(true));
+  }, []);
 
-    {/* Main content wrapper */}
-    <div className="relative z-20 flex flex-col items-center justify-center max-w-3xl px-6 py-8 bg-white/1 backdrop-blur-xs rounded-2xl shadow-2xl border border-white/20">
-      {/* Vertical lines */}
-      <span className="absolute top-[128px] bottom-[128px] left-4 w-px bg-gradient-to-b from-transparent via-yellow-500 to-transparent"></span>
-      <span className="absolute top-[128px] bottom-[128px] right-4 w-px bg-gradient-to-b from-transparent via-yellow-500 to-transparent"></span>
+  return (
+    <div className="min-h-screen relative flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#15803d_0%,#166534_50%,#052e16_100%)] transition-all duration-1000"></div>
+      {init && (
+        <Particles
+          id="tsparticles"
+          className="absolute inset-0"
+          options={{
+            background: { color: "transparent" },
+            //   background: {
+            //   color: "#000",
+            //   repeat: "no-repeat",
+            //   size: "40%",
+            //   position: "60% 50%"
+            // },
+            interactivity: {
+              events: {
+                onClick: {
+                  enable: true,
+                  mode: "repulse"
+                },
+                onHover: {
+                  enable: true,
+                  mode: "bubble"
+                }
+              },
+              modes: {
+                bubble: {
+                  distance: 200,
+                  duration: 2,
+                  opacity: 0,
+                  size: 0,
+                  speed: 3
+                },
+                repulse: {
+                  distance: 400,
+                  duration: 0.4
+                }
+              }
+            },
+            particles: {
+              color: { value: ["#FFD700", "#E6B422", "#FFDF00"] },
+              move: {
+                direction: "none",
+                enable: true,
+                outModes: "out",
+                random: true,
+                speed: 0.2
+              },
+              number: {
+                density: { enable: true },
+                value: 250
+              },
+              opacity: {
+                animation: {
+                  enable: true,
+                  speed: 1.5,
+                  sync: false
+                },
+                value: { min: 0.2, max: 0.8 }
+              },
+              size: {
+                value: { min: 1, max: 5 },
+                animation: {
+                  enable: true,
+                  speed: 1,
+                  sync: false
+                }
+              },
+              shape: { type: "circle" }
+            }
+          }}
+        />
+      )}
+      <div className="pattern-bg" />
 
-      {/* Corner symbols */}
-      <span className="absolute top-2 left-2 font-tacteng md:text-9xl animate-fadeIn">*</span>
-      <div className="absolute top-2 left-1/2 -translate-x-1/2 flex">
-        <span className="font-tacteng md:text-8xl animate-fadeIn">&</span>
-        <span className="font-tacteng md:text-8xl animate-fadeIn">'</span>
+      <div className="absolute top-[10%] left-[15%] w-24 h-24 bg-gradient-to-br from-yellow-300/40 to-yellow-600/20 rounded-[50%_0_50%_0] transform rotate-45 blur-sm animate-khmer-float-1 origin-center"></div>
+
+      <div className="absolute top-[30%] right-[10%] w-20 h-20 bg-gradient-to-tl from-yellow-400/35 to-yellow-700/25 rounded-full shadow-lg transform scale-x-75 rotate-12 blur-xs animate-khmer-float-2 origin-center"></div>
+      <div className="absolute bottom-[20%] left-[25%] w-28 h-28 bg-gradient-to-tl from-yellow-200/30 to-yellow-500/15 rounded-[0_50%_0_50%] transform -rotate-30 blur-sm animate-khmer-float-3 origin-center"></div>
+      <div className="absolute top-[55%] left-[8%] w-16 h-16 bg-gradient-to-br from-yellow-500/30 to-yellow-800/20 rounded-full shadow-md transform scale-y-75 -rotate-45 blur-xs animate-khmer-float-1 origin-center"></div>
+      <div className="absolute bottom-[10%] right-[18%] w-20 h-32 bg-gradient-to-t from-yellow-600/25 to-yellow-300/15 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] transform rotate-90 blur-sm animate-khmer-float-2 origin-center"></div>
+
+      <div className="relative z-20 flex flex-col items-center justify-center max-w-3xl px-6 py-8 
+                    bg-white/1 backdrop-blur-xs rounded-2xl shadow-2xl border border-yellow-500/40">
+        <span className="absolute top-[128px] bottom-[128px] left-4 w-px bg-gradient-to-b from-transparent via-yellow-500 to-transparent"></span>
+        <span className="absolute top-[128px] bottom-[128px] right-4 w-px bg-gradient-to-b from-transparent via-yellow-500 to-transparent"></span>
+
+        <span className="absolute top-2 left-2 font-tacteng md:text-9xl text-yellow-500/80 animate-fadeIn">*</span>
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 flex">
+          <span className="font-tacteng md:text-8xl text-yellow-500/80 animate-fadeIn">&</span>
+          <span className="font-tacteng md:text-8xl text-yellow-500/80 animate-fadeIn">'</span>
+        </div>
+        <span className="absolute top-2 right-2 font-tacteng md:text-9xl text-yellow-500/80 animate-fadeIn">+</span>
+
+        {children}
+
+        <span className="absolute bottom-2 left-2 font-tacteng md:text-9xl text-yellow-500/80 animate-fadeIn">,</span>
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex">
+          <span className="font-tacteng md:text-8xl text-yellow-500/80 animate-fadeIn">(</span>
+          <span className="font-tacteng md:text-8xl text-yellow-500/80 animate-fadeIn">)</span>
+        </div>
+        <span className="absolute bottom-2 right-2 font-tacteng md:text-9xl text-yellow-500/80 animate-fadeIn">-</span>
       </div>
-      <span className="absolute top-2 right-2 font-tacteng md:text-9xl animate-fadeIn">+</span>
-
-      {children} {/* This is where your routed content goes */}
-
-      {/* Bottom corner symbols */}
-      <span className="absolute bottom-2 left-2 font-tacteng md:text-9xl animate-fadeIn">,</span>
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex">
-        <span className="font-tacteng md:text-8xl animate-fadeIn">(</span>
-        <span className="font-tacteng md:text-8xl animate-fadeIn">)</span>
-      </div>
-      <span className="absolute bottom-2 right-2 font-tacteng md:text-9xl animate-fadeIn">-</span>
     </div>
-  </div>
-);
+  );
+};
 
 export default LayoutWrapper;

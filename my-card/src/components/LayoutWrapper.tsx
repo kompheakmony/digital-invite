@@ -30,31 +30,6 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
             //   size: "40%",
             //   position: "60% 50%"
             // },
-            interactivity: {
-              events: {
-                onClick: {
-                  enable: true,
-                  mode: "repulse"
-                },
-                onHover: {
-                  enable: true,
-                  mode: "bubble"
-                }
-              },
-              modes: {
-                bubble: {
-                  distance: 200,
-                  duration: 2,
-                  opacity: 0,
-                  size: 0,
-                  speed: 3
-                },
-                repulse: {
-                  distance: 400,
-                  duration: 0.4
-                }
-              }
-            },
             particles: {
               color: { value: ["#FFD700", "#E6B422", "#FFDF00"] },
               move: {
@@ -66,25 +41,36 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
               },
               number: {
                 density: { enable: true },
-                value: 250
+                value: 120
               },
               opacity: {
                 animation: {
                   enable: true,
-                  speed: 1.5,
+                  speed: 0.3,
                   sync: false
                 },
-                value: { min: 0.2, max: 0.8 }
+                value: { min: 0, max: 0.2 }
               },
               size: {
-                value: { min: 1, max: 5 },
+                value: { min: 5, max: 10 },
                 animation: {
                   enable: true,
                   speed: 1,
                   sync: false
                 }
               },
-              shape: { type: "circle" }
+              shape: {
+                type: ["circle"],
+                options: {
+                  star: {
+                    sides: 4, // creates a diamond shape
+                    inset: 2
+                  },
+                  polygon: {
+                    sides: 6 // hexagon
+                  }
+                }
+              }
             }
           }}
         />
@@ -98,8 +84,8 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
       <div className="absolute top-[55%] left-[8%] w-16 h-16 bg-gradient-to-br from-yellow-500/30 to-yellow-800/20 rounded-full shadow-md transform scale-y-75 -rotate-45 blur-xs animate-khmer-float-1 origin-center"></div>
       <div className="absolute bottom-[10%] right-[18%] w-20 h-32 bg-gradient-to-t from-yellow-600/25 to-yellow-300/15 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] transform rotate-90 blur-sm animate-khmer-float-2 origin-center"></div>
 
-      <div className="relative z-20 flex flex-col items-center justify-center max-w-3xl px-6 py-8 
-                    bg-white/1 backdrop-blur-xs rounded-2xl shadow-2xl border border-yellow-500/40">
+      <div className="relative z-20 flex flex-col items-center justify-center w-full max-w-3xl mx-4 px-4 py-8 
+              bg-white/1 backdrop-blur-xs rounded-2xl shadow-2xl border border-yellow-500/40">
         <span className="absolute top-[128px] bottom-[128px] left-4 w-px bg-gradient-to-b from-transparent via-yellow-500 to-transparent"></span>
         <span className="absolute top-[128px] bottom-[128px] right-4 w-px bg-gradient-to-b from-transparent via-yellow-500 to-transparent"></span>
 

@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import { motion, Variants, useSpring, useTransform } from "motion/react";
 import React from "react";
 
@@ -339,17 +340,26 @@ export default function Details() {
                     className="max-w-2xl mx-auto"
                     variants={fadeUp}
                     custom={8}
-                >
-                    <button
-                        className="cursor-pointer py-3 px-6 mb-4 rounded-xl shadow-xs transition-all transform hover:scale-105
-                        bg-white/3 backdrop-blur-lg relative overflow-hidden"
-                        onClick={handleRedirect}
                     >
-                        <div className="flex items-center justify-center space-x-2">
-                            <span className="font-tacteng text-4xl drop-shadow-md">[</span>
-                            <span className="text-lg font-bold tracking-wide text-gold font-khmer">
-                                បើកផែនទី
-                            </span>
+                    <button
+                        onClick={handleRedirect}
+                        className="group relative cursor-pointer py-3 px-6 mb-4 rounded-2xl 
+                                font-khmer text-lg tracking-wide shadow-md
+                                border-2 border-yellow-500 transition-all duration-300 
+                                hover:shadow-xl hover:scale-105"
+                    >
+                        <span className="absolute inset-0 rounded-2xl p-[2px] 
+                                        bg-white/3 blur-md group-hover:opacity-90"></span>
+
+                        <div className="relative flex items-center justify-center space-x-2">
+                        <span className="bg-gradient-to-r from-yellow-600 via-yellow-200 to-yellow-600 
+                                        bg-clip-text text-transparent">
+                            បើកផែនទី
+                        </span>
+                        <ArrowRight
+                            size={20}
+                            className="text-yellow-600 group-hover:translate-x-1 transition-transform duration-300"
+                        />
                         </div>
                     </button>
                 </motion.div>

@@ -1,6 +1,7 @@
 import { motion, Variants } from "motion/react";
-import FrameName from "../assets/name-frame.svg";
+import FrameName from "../assets/name-frame-wd.svg";
 import GuestName from "../assets/guest-frame.png";
+import React from "react";
 
 export default function Hero() {
 
@@ -24,52 +25,96 @@ export default function Hero() {
     )`,
     backgroundSize: "200% auto",
     WebkitBackgroundClip: "text",
+    backgroundClip: "text",
     WebkitTextFillColor: "transparent",
+    color: "transparent",
+  };
+
+  const shadowStyle: React.CSSProperties = {
     textShadow: "0 2px 4px rgba(0,0,0,0.25)",
+    WebkitTextStroke: "0.25px rgba(0,0,0,0.25)",
   };
 
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
       <motion.div
-        className="relative mt-32"
+        className="relative mt-3 sm:mt-12 md:mt-20 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg flex justify-center"
         initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
         whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
         transition={{ duration: 1, type: "spring" }}
       >
-        <img src={FrameName} alt="Frame Name" />
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center gap-2 font-khmer"
-          style={{
-            ...shimmerStyle,
-            paddingTop: "0.3em",
-            paddingBottom: "0.3em",
-          }}
-          variants={fadeUp}
-          animate={{ backgroundPosition: ["200% center", "0% center"] }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          {["ក", "វ"].map((char, i) => (
-            <span key={i} className="text-5xl md:text-6xl">
-              {char}
-            </span>
-          ))}
-        </motion.div>
+        <div className="relative">
+          <img src={FrameName} alt="Frame Name" className="w-48 h-auto" />
+
+          <div className="absolute inset-0 pointer-events-none font-khmer">
+            <motion.div
+              className="relative w-full h-full"
+              initial="hidden"
+              whileInView="visible"
+              variants={fadeUp}
+            >
+              <motion.span
+                className="absolute"
+                style={{
+                  ...shimmerStyle,
+                  ...shadowStyle,
+                  top: "2.5rem",
+                  left: "3rem",
+                  fontSize: "3rem",
+                  lineHeight: 1,
+                  transformOrigin: "center",
+                }}
+                animate={{ backgroundPosition: ["200% center", "0% center"] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              >
+                ក
+              </motion.span>
+
+              <motion.span
+                className="absolute"
+                style={{
+                  ...shimmerStyle,
+                  ...shadowStyle,
+                  bottom: "3rem",
+                  right: "3rem",
+                  fontSize: "3rem",
+                  lineHeight: 1,
+                }}
+                animate={{ backgroundPosition: ["200% center", "0% center"] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              >
+                វ
+              </motion.span>
+
+              <motion.span
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                style={{
+                  ...shimmerStyle,
+                  paddingTop: "0.3em",
+                  paddingBottom: "0.3em",
+                  fontSize: "1rem",
+                }}
+                animate={{ backgroundPosition: ["200% center", "0% center"] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              >
+                និង
+              </motion.span>
+            </motion.div>
+          </div>
+        </div>
       </motion.div>
 
       <motion.div
-        className="mt-8 mb-4"
+        className="mt-6 sm:mt-8 mb-4 w-full max-w-4xl"
         initial="hidden"
         whileInView="visible"
         variants={fadeUp}
       >
         <motion.h1
-          className="text-5xl md:text-4xl mb-4 inline-block"
+          className="text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4 inline-block px-2"
           style={{
             ...shimmerStyle,
+            ...shadowStyle,
             paddingTop: "0.3em",
             paddingBottom: "0.3em",
           }}
@@ -86,7 +131,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.h3
-          className="text-3xl md:text-2xl mb-4 text-gold"
+          className="text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4 text-gold"
           variants={fadeUp}
           custom={2}
         >
@@ -94,26 +139,28 @@ export default function Hero() {
         </motion.h3>
 
         <motion.h4
-          className="text-2xl md:text-xl mb-4 text-gold"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl mb-3 sm:mb-4 text-gold px-4"
           variants={fadeUp}
           custom={3}
         >
           ឯកឧត្តម លោកជំទាវ​​ លោក លោកស្រី អ្នកនាងកញ្ញា
         </motion.h4>
+
       </motion.div>
 
       <motion.div
-        className="relative mb-4"
+        className="relative mb-4 sm:mb-6 w-full max-w-xs sm:max-w-sm md:max-w-md"
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, type: "spring" }}
       >
-        <img src={GuestName} alt="Guest Name Frame" />
-        <div className="absolute inset-0 flex items-center justify-center">
+        <img src={GuestName} alt="Guest Name Frame" className="w-full h-auto" />
+        <div className="absolute inset-0 flex items-center justify-center px-4">
           <motion.span
-            className="text-xl md:text-2xl"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl"
             style={{
               ...shimmerStyle,
+              ...shadowStyle,
               paddingTop: "0.3em",
               paddingBottom: "0.3em",
             }}
@@ -130,15 +177,16 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="text-2xl md:text-xl space-y-6 text-gold"
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        custom={4}
-      >
-        <h4>ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦​ វេលាម៉ោង៖ ៣ៈ០០ រសៀល</h4>
-        <h4>នៅគេហដ្ឋានខាងស្រី</h4>
-      </motion.div>
+              className="text-base md:text-lg space-y-3 sm:space-y-4 md:space-y-6 text-gold max-w-3xl px-4"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              custom={4}
+            >
+              <h6 className="leading-6">ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦​ វេលាម៉ោង៖ ៣ៈ០០ រសៀល</h6>
+              <h6>នៅគេហដ្ឋានខាងស្រី</h6>
+            </motion.div>
+
     </div>
   );
 }

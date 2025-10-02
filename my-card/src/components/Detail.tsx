@@ -3,7 +3,7 @@ import { motion, Variants, useSpring, useTransform } from "motion/react";
 import React from "react";
 
 export default function Details() {
-
+    // Animation variants
     const fadeUp: Variants = {
         hidden: { opacity: 0, y: 30 },
         visible: (i: number = 0) => ({
@@ -12,7 +12,6 @@ export default function Details() {
             transition: { delay: i * 0.2, duration: 0.8, ease: "easeOut" },
         }),
     };
-
     const pathVariants: Variants = {
         hidden: {
             pathLength: 0,
@@ -43,17 +42,6 @@ export default function Details() {
         }),
     };
 
-    const kmSpring1 = useSpring(0, { stiffness: 10, damping: 20 });
-    const kmSpring2 = useSpring(0, { stiffness: 10, damping: 20 });
-
-    const km1 = useTransform(kmSpring1, latest => `${Math.round(latest)} គ.ម`);
-    const km2 = useTransform(kmSpring2, latest => `${Math.round(latest)} គ.ម`);
-
-    React.useEffect(() => {
-        kmSpring1.set(127);
-        kmSpring2.set(9);
-    }, [kmSpring1, kmSpring2]);
-
     const textVariants = {
         hidden: {
             opacity: 0,
@@ -67,115 +55,151 @@ export default function Details() {
         },
     };
 
+
+    // Animated distance counters
+    const kmSpring1 = useSpring(0, { stiffness: 10, damping: 20 });
+    const kmSpring2 = useSpring(0, { stiffness: 10, damping: 20 });
+    const km1 = useTransform(kmSpring1, latest => `${Math.round(latest)} គ.ម`);
+    const km2 = useTransform(kmSpring2, latest => `${Math.round(latest)} គ.ម`);
+
+    React.useEffect(() => {
+        kmSpring1.set(127);
+        kmSpring2.set(9);
+    }, [kmSpring1, kmSpring2]);
+
+    // Utility functions
     const handleRedirect = () => {
         const url = `https://maps.app.goo.gl/ZiEYZU2GpxkvH49DA?g_st=ic`;
         window.open(url, '_blank');
     };
 
-    const directions = [
-        "ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី។",
-        "ធ្វើដំណើរចេញភ្នំពេញត្រង់ចំណុចស្ពានអាកាសចោមចៅ លោកអ្នកនឹងត្រូវការធ្វើដំណើរចម្ងាយប្រមាណ ១២៧គ.ម ទើបដល់ផ្លូវបេតុងបត់ចូលតាមខ្លោងថ្វារវត្ត សិរីធានី នឹងចូលក្នុងចម្ងាយ ១.៥គ.ម ទើបដល់ផ្ទះកម្មវិធី។",
-    ];
-
     const khmerNumerals = ["០", "១", "២", "៣", "៤", "៥", "៦", "៧", "៨", "៩"];
-
-    interface ToKhmerNumber {
-        (num: number): string;
-    }
-
-    const toKhmerNumber: ToKhmerNumber = (num) =>
+    const toKhmerNumber = (num: number): string =>
         num.toString().split("").map((d: string) => khmerNumerals[parseInt(d, 10)]).join("");
 
+    // Data
+    const parents = [
+        { father: "លោក យ៉ង់ វីរៈ", mother: "លោកស្រី ហួត សុមន" },
+        { father: "លោក ខួន ពិនុច", mother: "លោកស្រី គីម ណេត" }
+    ];
+
+    const couple = {
+        groom: "ហួត សុមន",
+        bride: "គីម ណេត"
+    };
+
+    const dateInfo = {
+        lunar: "ថ្ងៃសុក្រ ៥រោច ខែភទ្របទ ឆ្នាំម្សាញ់ សប្តស័ក ពុទ្ធសករាជ ២៥៦៩",
+        solar: "ថ្ងៃសុក្រ ទី១២ ខែកញ្ញា ឆ្នាំ២០២៥"
+    };
+
+    const directions = [
+        {
+            id: 1,
+            description: "ចេញពីស្ពានអាកាសចោមចៅ តាមផ្លូវជាតិលេខ ៣ ចម្ងាយប្រមាណ",
+            distance: "១២៧គ.ម",
+            detail: "ដល់ខ្លោងទ្វារវត្តសិរីធានី រួចបត់ចូលប្រមាណ ១.៥គ.ម លោកអ្នកនឹងទៅដល់ផ្ទះពិធីមង្គលការ។"
+        },
+        {
+            id: 2,
+            description: "ចេញពីរង្វង់មូលទុរេន តាមផ្លូវជាតិលេខ ៣ ចម្ងាយប្រមាណ",
+            distance: "៩គ.ម",
+            detail: "ដល់ខ្លោងទ្វារវត្តសិរីធានី រួចបត់ចូលប្រមាណ ១.៥គ.ម លោកអ្នកនឹងទៅដល់ផ្ទះពិធីមង្គលការ។"
+        }
+    ];
+
     return (
-        <div className="flex flex-col items-center text-center px-6">
+        <div className="flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
+            {/* Decorative Header */}
             <motion.div
                 className="flex items-center justify-center gap-2 my-8"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, type: "spring" }}
             >
-                <h1 className="font-tacteng text-7xl md:text-8xl combined-gold">Ó</h1>
-                <h1 className="font-tacteng text-7xl md:text-8xl combined-gold text-flip">
-                    Ó
-                </h1>
+                <h1 className="font-tacteng text-6xl sm:text-7xl md:text-8xl combined-gold">Ó</h1>
+                <h1 className="font-tacteng text-6xl sm:text-7xl md:text-8xl combined-gold text-flip">Ó</h1>
             </motion.div>
 
             <motion.div
-                className="mb-12 space-y-6 leading-relaxed"
+                className="w-full max-w-6xl space-y-8 md:space-y-12 leading-relaxed"
                 initial="hidden"
                 whileInView="visible"
             >
+                {/* Parents Section */}
                 <motion.div
-                    className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8 text-gold md:text-xl"
+                    className="flex flex-row justify-center items-start gap-8 md:gap-12 text-gold text-lg md:text-xl"
                     variants={fadeUp}
                     custom={1}
                 >
-                    <div className="text-center space-y-3">
-                        <p>លោក យ៉ង់ វីរៈ</p>
-                        <p>លោកស្រី ហួត សុមន</p>
-                    </div>
-                    <div className="text-center space-y-3">
-                        <p>លោក ខួន ពិនុច</p>
-                        <p>លោកស្រី គីម ណេត</p>
-                    </div>
+                    {parents.map((parent, index) => (
+                        <div key={index} className="text-center space-y-3 min-w-0 flex-1 text-sm md:text-2xl">
+                            <p>{parent.father}</p>
+                            <p>{parent.mother}</p>
+                        </div>
+                    ))}
                 </motion.div>
 
-                <motion.h4
-                    className="w-24 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto my-8"
+                {/* Divider */}
+                <motion.div
+                    className="w-24 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto"
                     variants={fadeUp}
                     custom={2}
                 />
 
-
+                {/* Invitation Text */}
                 <motion.h4
-                    className="text-2xl md:text-3xl mb-4 text-gold"
+                    className="text-2xl sm:text-3xl md:text-4xl mb-4 text-gold font-medium"
                     variants={fadeUp}
                     custom={3}
                 >
                     មានកិត្តិយសសូមអញ្ជើញ
                 </motion.h4>
 
-                <motion.h4
-                    className="text-center text-gold md:text-base max-w-2xl mx-auto"
+                <motion.p
+                    className="text-center text-gold text-sm md:text-base max-w-2xl mx-auto leading-6"
                     variants={fadeUp}
                     custom={4}
                 >
                     ចូលរួមក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍ កូនប្រុស កូនស្រី ជាអធិបតី និង
                     ជាភ្ញៀវកិត្តិយស
-                </motion.h4>
+                </motion.p>
 
+                {/* Couple Section */}
                 <motion.div
-                    className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 text-gold"
+                    className="flex flex-row justify-between items-center gap-4 md:gap-8 text-gold max-w-2xl mx-auto px-4"
                     variants={fadeUp}
                     custom={5}
                 >
-                    <div className="text-center space-y-3">
-                        <p>កូនប្រុសនាម</p>
-                        <h4 className="md:text-xl">ហួត សុមន</h4>
+                    <div className="text-center space-y-3 flex-1">
+                        <p className="text-base md:text-lg">កូនប្រុសនាម</p>
+                        <h4 className="text-xl md:text-2xl font-medium">{couple.groom}</h4>
                     </div>
-                    <div className="text-center">
-                        <p>ជាគូនិង</p>
+                    <div className="text-center flex items-center justify-center px-4 md:px-8">
+                        <p className="text-base md:text-lg whitespace-nowrap">ជាគូនិង</p>
                     </div>
-                    <div className="text-center space-y-3">
-                        <p>កូនស្រីនាម</p>
-                        <h4 className="md:text-xl">គីម ណេត</h4>
+                    <div className="text-center space-y-3 flex-1">
+                        <p className="text-base md:text-lg">កូនស្រីនាម</p>
+                        <h4 className="text-xl md:text-2xl font-medium">{couple.bride}</h4>
                     </div>
                 </motion.div>
+
+                {/* Date Section */}
                 <motion.div
-                    className="text-center space-y-3 text-gold md:text-base max-w-2xl mx-auto"
+                    className="text-center space-y-3 text-gold text-base md:text-lg max-w-2xl mx-auto"
                     variants={fadeUp}
                     custom={6}
                 >
-                    <h4>ថ្ងៃសុក្រ ៥រោច ខែភទ្របទ ឆ្នាំម្សាញ់ សប្តស័ក ពុទ្ធសករាជ ២៥៦៩</h4>
-                    <h3>ត្រូវនឹង</h3>
-                    <h4>ថ្ងៃសុក្រ ទី១២ ខែកញ្ញា ឆ្នាំ២០២៥</h4>
+                    <h4 className="text-sm md:text-base leading-6">{dateInfo.lunar}</h4>
+                    <h3 className="text-xs md:text-base">ត្រូវនឹង</h3>
+                    <h4 className="text-sm md:text-base leading-6">{dateInfo.solar}</h4>
                 </motion.div>
                 <motion.div
                     className="w-full max-w-3xl"
                     variants={fadeUp}
                     custom={7}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 800 800">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-auto h-full" viewBox="0 0 800 800">
                         <g id="Mask group">
                             <mask id="mask0_28_64" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="800">
                                 <g id="box" filter="url(#goldShadow)">
@@ -336,49 +360,64 @@ export default function Details() {
                     </svg>
 
                 </motion.div>
+                {/* Map Button */}
                 <motion.div
-                    className="max-w-2xl mx-auto"
+                    className="flex justify-center"
                     variants={fadeUp}
-                    custom={8}
-                    >
+                    custom={7}
+                >
                     <button
                         onClick={handleRedirect}
-                        className="group relative cursor-pointer py-3 px-6 mb-4 rounded-2xl 
-                                font-khmer text-lg tracking-wide shadow-md
-                                border-2 border-yellow-500 transition-all duration-300 
-                                hover:shadow-xl hover:scale-105"
+                        className="group relative cursor-pointer py-3 px-6 rounded-2xl 
+                     font-khmer text-base md:text-lg tracking-wide shadow-md
+                     border border-yellow-500 transition-all duration-300 
+                     hover:shadow-xl hover:scale-105 active:scale-95
+                     focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50"
                     >
                         <span className="absolute inset-0 rounded-2xl p-[2px] 
-                                        bg-white/3 blur-md group-hover:opacity-90"></span>
+                           bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 
+                           blur-md group-hover:opacity-90 transition-opacity"></span>
 
                         <div className="relative flex items-center justify-center space-x-2">
-                        <span className="bg-gradient-to-r from-yellow-600 via-yellow-200 to-yellow-600 
-                                        bg-clip-text text-transparent">
-                            បើកផែនទី
-                        </span>
-                        <ArrowRight
-                            size={20}
-                            className="text-yellow-600 group-hover:translate-x-1 transition-transform duration-300"
-                        />
+                            <span className="bg-gradient-to-r from-yellow-600 via-yellow-200 to-yellow-600 
+                             bg-clip-text text-transparent font-medium">
+                                បើកផែនទី
+                            </span>
+                            <ArrowRight
+                                size={20}
+                                className="text-yellow-600 group-hover:translate-x-1 transition-transform duration-300"
+                            />
                         </div>
                     </button>
                 </motion.div>
 
                 <motion.div
-                    className="flex flex-col items-center"
+                    className="flex flex-col items-center space-y-6 md:space-y-8"
                     variants={fadeUp}
-                    custom={9}
+                    custom={8}
                 >
-                    <h4 className="font-khmer text-3xl md:text-2xl text-center text-gold">
-                        ទិសដៅ
-                    </h4>
-                    <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto" />
-
-                    <div className="font-khmer text-center text-gold leading-8 max-w-2xl mx-auto space-y-4 px-8" >
-                        <p> <span className="align-super">១</span> ចេញពីស្ពានអាកាសចោមចៅ តាមផ្លូវជាតិលេខ ៣ ចម្ងាយប្រមាណ <span className="text-xl md:text-2xl">១២៧គ.ម</span> ដល់ខ្លោងទ្វារវត្តសិរីធានី រួចបត់ចូលប្រមាណ <span className="text-xl md:text-2xl">១.៥គ.ម</span> លោកអ្នកនឹងទៅដល់ផ្ទះពិធីមង្គលការ។</p>
-                        <p> <span className="align-super">២</span> ចេញពីរង្វង់មូលទុរេន តាមផ្លូវជាតិលេខ ៣ ចម្ងាយប្រមាណ <span className="text-xl md:text-2xl">៩គ.ម</span> ដល់ខ្លោងទ្វារវត្តសិរីធានី រួចបត់ចូលប្រមាណ <span className="text-xl md:text-2xl">១.៥គ.ម</span> លោកអ្នកនឹងទៅដល់ផ្ទះពិធីមង្គលការ។</p>
+                    <div className="text-center space-y-3">
+                        <h4 className="font-khmer text-2xl sm:text-3xl md:text-4xl text-gold font-medium">
+                            ទិសដៅ
+                        </h4>
+                        <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto" />
                     </div>
 
+                    <div className="font-khmer text-center text-gold leading-7 md:leading-8 
+                         max-w-4xl mx-auto space-y-6 md:space-y-8 px-4">
+                        {directions.map((direction) => (
+                            <div key={direction.id} className="space-y-2">
+                                <p className="text-base md:text-lg leading-relaxed">
+                                    <span className="align-super text-yellow-400">{toKhmerNumber(direction.id)}</span>
+                                    {" "}{direction.description}{" "}
+                                    <span className="text-xl md:text-2xl font-semibold text-yellow-300">
+                                        {direction.distance}
+                                    </span>{" "}
+                                    {direction.detail}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
                 </motion.div>
             </motion.div>
         </div>

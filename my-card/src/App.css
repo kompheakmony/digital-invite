@@ -111,7 +111,7 @@ body::-webkit-scrollbar {
   background-image: url("/pkarchan2.png");
   background-repeat: repeat;
   background-size: var(--s) var(--s);
-  opacity: 0.08;
+  opacity: 0.2;
   mix-blend-mode: overlay;
   transform: rotate(45deg);
   transform-origin: center;

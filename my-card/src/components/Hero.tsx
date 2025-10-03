@@ -1,9 +1,12 @@
 import { motion, Variants } from "motion/react";
-import FrameName from "../assets/name-frame-wd.svg";
-import GuestName from "../assets/guest-frame.png";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import { guestList } from "../data/guestList";
+
+// Lazy load SVG components
+const GuestFrame = lazy(() => import("./kbach/GuestFrame"));
+const ShortName = lazy(() => import("./kbach/ShortName"));
+
 
 export default function Hero() {
   const { guestSlug } = useParams<{ guestSlug?: string }>();
@@ -56,7 +59,13 @@ export default function Hero() {
         transition={{ duration: 1, type: "spring" }}
       >
         <div className="relative">
-          <img src={FrameName} alt="Frame Name" className="w-48 h-auto" />
+          <Suspense fallback={
+            <div className="w-full h-32 flex items-center justify-center">
+              <div className="w-16 h-16 border-4 border-gold border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          }>
+            <ShortName color="#efbf04" />
+          </Suspense>
 
           <div className="absolute inset-0 pointer-events-none font-khmer">
             <motion.div
@@ -161,15 +170,21 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="relative mb-4 sm:mb-6 w-full max-w-xs sm:max-w-sm md:max-w-md"
+        className="relative mb-4 sm:mb-6 w-full max-w-xs sm:max-w-sm md:max-w-md flex items-center justify-center"
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, type: "spring" }}
       >
-        <img src={GuestName} alt="Guest Name Frame" className="w-full h-auto" />
-        <div className="absolute inset-0 flex items-center justify-center px-4">
+        <Suspense fallback={
+          <div className="w-full h-24 flex items-center justify-center">
+              <div className="w-12 h-12 border-4 border-gold border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          }>
+            <GuestFrame color="#efbf04" />
+          </Suspense>
+        <div className="absolute inset-0 flex items-center justify-center">
           <motion.span
-            className="text-base sm:text-lg md:text-xl lg:text-2xl"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-center px-4 mt-10 md:mt-12"
             style={{
               ...shimmerStyle,
               ...shadowStyle,
@@ -193,7 +208,6 @@ export default function Hero() {
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
-        custom={4}
       >
         <h6 className="leading-6">ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦​ វេលាម៉ោង៖ ៣ៈ០០ រសៀល</h6>
         <h6>នៅគេហដ្ឋានខាងស្រី</h6>

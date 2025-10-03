@@ -353,9 +353,6 @@ export default function Details() {
                                 <stop offset="50%" stopColor="#DDA20C" />
                             </radialGradient>
 
-                            <filter id="goldShadow" x="-50%" y="-50%" width="200%" height="200%">
-                                <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodColor="rgba(0,0,0,0.35)" />
-                            </filter>
                         </defs>
                     </svg>
 
@@ -397,7 +394,7 @@ export default function Details() {
                     custom={8}
                 >
                     <div className="text-center space-y-3">
-                        <h4 className="font-khmer text-2xl sm:text-3xl md:text-4xl text-gold font-medium">
+                        <h4 className="font-khmer text-3xl md:text-2xl text-gold font-medium">
                             ទិសដៅ
                         </h4>
                         <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto" />

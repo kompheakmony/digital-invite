@@ -108,23 +108,13 @@ body::-webkit-scrollbar {
   left: -100%; 
   right: -100%;
   bottom: -100%;
-  background-image: url("/pkarchan2.png");
+  background-image: url("/pkarchan-pattern.svg");
   background-repeat: repeat;
   background-size: var(--s) var(--s);
-  opacity: 0.2;
+  opacity: 0.1;
   mix-blend-mode: overlay;
   transform: rotate(45deg);
   transform-origin: center;
-  animation: pattern-drift 60s linear infinite;
-}
-
-@keyframes pattern-drift {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: var(--s) var(--s);
-  }
 }
 
 @keyframes float {

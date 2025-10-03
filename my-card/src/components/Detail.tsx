@@ -1,9 +1,42 @@
 import { ArrowRight } from "lucide-react";
 import { motion, Variants, useSpring, useTransform } from "motion/react";
-import React from "react";
+import React, { useState, useEffect } from 'react';
+
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
 
 export default function Details() {
-    // Animation variants
+    const targetDate = '2025-12-26T11:59:59';
+    const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+    useEffect(() => {
+        const calculateTimeLeft = (): TimeLeft => {
+        const difference = +new Date(targetDate) - +new Date();
+        
+        if (difference > 0) {
+            return {
+            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+            minutes: Math.floor((difference / 1000 / 60) % 60),
+            seconds: Math.floor((difference / 1000) % 60)
+            };
+        }
+        
+        return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+        };
+
+        const timer = setInterval(() => {
+        setTimeLeft(calculateTimeLeft());
+        }, 1000);
+
+        setTimeLeft(calculateTimeLeft());
+
+        return () => clearInterval(timer);
+    }, []);
     const fadeUp: Variants = {
         hidden: { opacity: 0, y: 30 },
         visible: (i: number = 0) => ({
@@ -55,18 +88,6 @@ export default function Details() {
         },
     };
 
-
-    // Animated distance counters
-    const kmSpring1 = useSpring(0, { stiffness: 10, damping: 20 });
-    const kmSpring2 = useSpring(0, { stiffness: 10, damping: 20 });
-    const km1 = useTransform(kmSpring1, latest => `${Math.round(latest)} គ.ម`);
-    const km2 = useTransform(kmSpring2, latest => `${Math.round(latest)} គ.ម`);
-
-    React.useEffect(() => {
-        kmSpring1.set(127);
-        kmSpring2.set(9);
-    }, [kmSpring1, kmSpring2]);
-
     // Utility functions
     const handleRedirect = () => {
         const url = `https://maps.app.goo.gl/ZiEYZU2GpxkvH49DA?g_st=ic`;
@@ -75,7 +96,21 @@ export default function Details() {
 
     const khmerNumerals = ["០", "១", "២", "៣", "៤", "៥", "៦", "៧", "៨", "៩"];
     const toKhmerNumber = (num: number): string =>
-        num.toString().split("").map((d: string) => khmerNumerals[parseInt(d, 10)]).join("");
+        num.toString().padStart(2, '0').split("").map((d: string) => khmerNumerals[parseInt(d, 10)]).join("");
+
+
+    // Animated distance counters
+    const kmSpring1 = useSpring(0, { stiffness: 5, damping: 10 });
+    const kmSpring2 = useSpring(0, { stiffness: 10, damping: 20 });
+
+    React.useEffect(() => {
+        kmSpring1.set(127);
+        kmSpring2.set(9);
+    }, [kmSpring1, kmSpring2]);
+
+    // Create Khmer number transforms
+    const km1Khmer = useTransform(kmSpring1, latest => `${toKhmerNumber(Math.round(latest))} គ.ម`);
+    const km2Khmer = useTransform(kmSpring2, latest => `${toKhmerNumber(Math.round(latest))} គ.ម`);
 
     // Data
     const parents = [
@@ -89,8 +124,8 @@ export default function Details() {
     };
 
     const dateInfo = {
-        lunar: "ថ្ងៃសុក្រ ៥រោច ខែភទ្របទ ឆ្នាំម្សាញ់ សប្តស័ក ពុទ្ធសករាជ ២៥៦៩",
-        solar: "ថ្ងៃសុក្រ ទី១២ ខែកញ្ញា ឆ្នាំ២០២៥"
+        lunar: "ថ្ងៃសុក្រ ៧ កើត ខែបុស្ស ឆ្នាំម្សាញ់ សប្តស័ក ពុទ្ធសករាជ ២៥៦៩",
+        solar: "ថ្ងៃទី២៦ ខែធ្នូ ឆ្នាំ២០២៥"
     };
 
     const directions = [
@@ -149,7 +184,7 @@ export default function Details() {
 
                 {/* Invitation Text */}
                 <motion.h4
-                    className="text-2xl sm:text-3xl md:text-4xl mb-4 text-gold font-medium"
+                    className="text-2xl md:text-3xl mb-4 text-gold font-medium"
                     variants={fadeUp}
                     custom={3}
                 >
@@ -193,13 +228,38 @@ export default function Details() {
                     <h4 className="text-sm md:text-base leading-6">{dateInfo.lunar}</h4>
                     <h3 className="text-xs md:text-base">ត្រូវនឹង</h3>
                     <h4 className="text-sm md:text-base leading-6">{dateInfo.solar}</h4>
+                    
+                    <div className="pt-2">
+                        {timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0 ? (
+                            <p className="text-lg md:text-xl">ថ្ងៃមង្គលការបានមកដល់!</p>
+                        ) : (
+                            <div className="flex items-center justify-center gap-3 flex-wrap">
+                                {timeLeft.days > 0 && (
+                                    <span className="text-lg md:text-2xl">{toKhmerNumber(timeLeft.days)} <span className="text-sm md:text-base font-normal">ថ្ងៃ</span></span>
+                                )}
+                                {timeLeft.hours > 0 && (
+                                    <span className="text-lg md:text-2xl">{toKhmerNumber(timeLeft.hours)} <span className="text-sm md:text-base font-normal">ម៉ោង</span></span>
+                                )}
+                                {timeLeft.minutes > 0 && (
+                                    <span className="text-lg md:text-2xl">{toKhmerNumber(timeLeft.minutes)} <span className="text-sm md:text-base font-normal">នាទី</span></span>
+                                )}
+                                <span className="text-lg md:text-2xl">{toKhmerNumber(timeLeft.seconds)} <span className="text-sm md:text-base font-normal">វិនាទី</span></span>
+                            </div>
+                        )}
+                    </div>
                 </motion.div>
+                
                 <motion.div
                     className="w-full max-w-3xl"
                     variants={fadeUp}
                     custom={7}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-auto h-full" viewBox="0 0 800 800">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-auto h-full"
+                        viewBox="100 50 655 675"
+                        preserveAspectRatio="xMidYMid meet"
+                        >
                         <g id="Mask group">
                             <mask id="mask0_28_64" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="800">
                                 <g id="box" filter="url(#goldShadow)">
@@ -219,8 +279,8 @@ export default function Details() {
                                             x="369"
                                             y="515"
                                             fill="#FFFACD"
-                                            className="font-mono"
-                                            fontSize="18"
+                                            className="font-khmer"
+                                            fontSize="16"
                                             textAnchor="start"
                                         >
                                             1.5 គ.ម
@@ -291,7 +351,7 @@ export default function Details() {
                                             d="M330 86V540H551 M330 712V540"
                                             fill="none"
                                             stroke="#4B5563"
-                                            strokeWidth="13"
+                                            strokeWidth="10"
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                         />
@@ -299,7 +359,7 @@ export default function Details() {
                                             d="M330 86V540H551"
                                             fill="none"
                                             stroke="#FFFACD"
-                                            strokeWidth="13"
+                                            strokeWidth="10"
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             variants={pathVariants}
@@ -309,7 +369,7 @@ export default function Details() {
                                             d="M330 712V540"
                                             fill="none"
                                             stroke="#FFFACD"
-                                            strokeWidth="13"
+                                            strokeWidth="10"
                                             strokeLinecap="round"
                                             strokeLinejoin="round"
                                             variants={pathVariants}
@@ -319,24 +379,24 @@ export default function Details() {
                                         x="369"
                                         y="316"
                                         fill="#FFFACD"
-                                        className="font-mono"
+                                        className="font-khmer"
                                         textAnchor="start"
-                                        fontSize="18"
+                                        fontSize="16"
                                         variants={textVariants}
                                     >
-                                        {km1}
+                                        {km1Khmer}
                                     </motion.text>
 
                                     <motion.text
                                         x="369"
                                         y="639"
                                         fill="#FFFACD"
-                                        className="font-mono"
-                                        fontSize="18"
+                                        className="font-khmer"
                                         textAnchor="start"
+                                        fontSize="16"
                                         variants={textVariants}
                                     >
-                                        {km2}
+                                        {km2Khmer}
                                     </motion.text>
 
                                 </g>
@@ -357,11 +417,32 @@ export default function Details() {
                     </svg>
 
                 </motion.div>
-                {/* Map Button */}
                 <motion.div
-                    className="flex justify-center"
+                    className="flex flex-col items-center space-y-6 md:space-y-8"
                     variants={fadeUp}
                     custom={7}
+                >
+
+                    <div className="font-khmer text-center text-gold leading-7 md:leading-8 
+                         max-w-4xl mx-auto space-y-6 md:space-y-8 px-4">
+                        {directions.map((direction) => (
+                            <div key={direction.id} className="space-y-2">
+                                <p className="text-base md:text-lg leading-relaxed">
+                                    <span className="align-super text-yellow-400">{toKhmerNumber(direction.id)}</span>
+                                    {" "}{direction.description}{" "}
+                                    <span className="text-xl md:text-2xl text-yellow-300">
+                                        {direction.distance}
+                                    </span>{" "}
+                                    {direction.detail}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
+                <motion.div
+                    className="flex justify-center mb-6"
+                    variants={fadeUp}
+                    custom={8}
                 >
                     <button
                         onClick={handleRedirect}
@@ -388,34 +469,7 @@ export default function Details() {
                     </button>
                 </motion.div>
 
-                <motion.div
-                    className="flex flex-col items-center space-y-6 md:space-y-8"
-                    variants={fadeUp}
-                    custom={8}
-                >
-                    <div className="text-center space-y-3">
-                        <h4 className="font-khmer text-3xl md:text-2xl text-gold font-medium">
-                            ទិសដៅ
-                        </h4>
-                        <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto" />
-                    </div>
-
-                    <div className="font-khmer text-center text-gold leading-7 md:leading-8 
-                         max-w-4xl mx-auto space-y-6 md:space-y-8 px-4">
-                        {directions.map((direction) => (
-                            <div key={direction.id} className="space-y-2">
-                                <p className="text-base md:text-lg leading-relaxed">
-                                    <span className="align-super text-yellow-400">{toKhmerNumber(direction.id)}</span>
-                                    {" "}{direction.description}{" "}
-                                    <span className="text-xl md:text-2xl font-semibold text-yellow-300">
-                                        {direction.distance}
-                                    </span>{" "}
-                                    {direction.detail}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </motion.div>
+                
             </motion.div>
         </div>
     );

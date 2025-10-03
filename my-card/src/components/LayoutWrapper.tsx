@@ -2,6 +2,7 @@ import { FC, ReactNode, useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { ISourceOptions } from "@tsparticles/engine";
+import PatternBackground from "./PatternBackground";
 
 interface LayoutWrapperProps {
   children: ReactNode;
@@ -77,7 +78,9 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
         />
       )}
       
-      <div className="pattern-bg" />
+      {/* <div className="pattern-bg" /> */}
+
+      <PatternBackground />
 
       <div className="absolute top-[10%] left-[15%] w-24 h-24 bg-gradient-to-br from-yellow-300/40 to-yellow-600/20 rounded-[50%_0_50%_0] transform rotate-45 blur-sm animate-khmer-float-1 origin-center"></div>
 

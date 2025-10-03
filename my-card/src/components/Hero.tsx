@@ -54,9 +54,9 @@ export default function Hero() {
     <div className="flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
       <motion.div
         className="relative mt-3 sm:mt-12 md:mt-20 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg flex justify-center"
-        initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+        initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
         whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-        transition={{ duration: 1, type: "spring" }}
+        transition={{ duration: 1.5, type: "spring" }}
       >
         <div className="relative">
           <Suspense fallback={

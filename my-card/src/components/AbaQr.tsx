@@ -47,7 +47,7 @@ export default function AbaQr({
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="flex items-center justify-center">
-          <h4 className="font-khmer text-xl md:text-2xl text-gold">
+          <h4 className="font-khmer text-gold text-3xl md:text-2xl">
             ជ័យមង្គល
           </h4>
         </div>

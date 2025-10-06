@@ -96,16 +96,16 @@ export default function Details() {
 
     const khmerNumerals = ["០", "១", "២", "៣", "៤", "៥", "៦", "៧", "៨", "៩"];
     const toKhmerNumber = (num: number): string =>
-        num.toString().padStart(2, '0').split("").map((d: string) => khmerNumerals[parseInt(d, 10)]).join("");
+        num.toString().split("").map((d: string) => khmerNumerals[parseInt(d, 10)]).join("");
 
 
     // Animated distance counters
     const kmSpring1 = useSpring(0, { stiffness: 5, damping: 10 });
-    const kmSpring2 = useSpring(0, { stiffness: 10, damping: 20 });
+    const kmSpring2 = useSpring(0, { stiffness: 5, damping: 10 });
 
     React.useEffect(() => {
         kmSpring1.set(127);
-        kmSpring2.set(9);
+        kmSpring2.set(9.0);
     }, [kmSpring1, kmSpring2]);
 
     // Create Khmer number transforms
@@ -145,7 +145,6 @@ export default function Details() {
 
     return (
         <div className="flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
-            {/* Decorative Header */}
             <motion.div
                 className="flex items-center justify-center gap-2 my-8"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -161,7 +160,6 @@ export default function Details() {
                 initial="hidden"
                 whileInView="visible"
             >
-                {/* Parents Section */}
                 <motion.div
                     className="flex flex-row justify-center items-start gap-8 md:gap-12 text-gold text-lg md:text-xl"
                     variants={fadeUp}
@@ -175,14 +173,12 @@ export default function Details() {
                     ))}
                 </motion.div>
 
-                {/* Divider */}
                 <motion.div
                     className="w-24 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto"
                     variants={fadeUp}
                     custom={2}
                 />
 
-                {/* Invitation Text */}
                 <motion.h4
                     className="text-2xl md:text-3xl mb-4 text-gold font-medium"
                     variants={fadeUp}
@@ -200,22 +196,21 @@ export default function Details() {
                     ជាភ្ញៀវកិត្តិយស
                 </motion.p>
 
-                {/* Couple Section */}
                 <motion.div
                     className="flex flex-row justify-between items-center gap-4 md:gap-8 text-gold max-w-2xl mx-auto px-4"
                     variants={fadeUp}
                     custom={5}
                 >
                     <div className="text-center space-y-3 flex-1">
-                        <p className="text-base md:text-lg">កូនប្រុសនាម</p>
-                        <h4 className="text-xl md:text-2xl font-medium">{couple.groom}</h4>
+                        <p className="text-sm md:text-lg">កូនប្រុសនាម</p>
+                        <h4 className="text-base md:text-2xl font-medium">{couple.groom}</h4>
                     </div>
                     <div className="text-center flex items-center justify-center px-4 md:px-8">
-                        <p className="text-base md:text-lg whitespace-nowrap">ជាគូនិង</p>
+                        <p className="text-sm md:text-lg whitespace-nowrap">ជាគូនិង</p>
                     </div>
                     <div className="text-center space-y-3 flex-1">
-                        <p className="text-base md:text-lg">កូនស្រីនាម</p>
-                        <h4 className="text-xl md:text-2xl font-medium">{couple.bride}</h4>
+                        <p className="text-sm md:text-lg">កូនស្រីនាម</p>
+                        <h4 className="text-base md:text-2xl font-medium">{couple.bride}</h4>
                     </div>
                 </motion.div>
 

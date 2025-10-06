@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: "Tacteng";
-  src: local("Tacteng"), url("./assets/fonts/tacteng.ttf") format("truetype");
+  src: local("Tacteng"), url("/fonts/tacteng.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Khmer Boran";
-  src: local("Khmer Boran"), url("./assets/fonts/Khmer_Boran.ttf") format("truetype");
+  src: local("Khmer Boran"), url("/fonts/Khmer_Boran.ttf") format("truetype");
   font-weight: bold;
 }

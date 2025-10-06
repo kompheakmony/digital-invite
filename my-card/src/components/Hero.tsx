@@ -2,10 +2,12 @@ import { motion, Variants } from "motion/react";
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import { guestList } from "../data/guestList";
+import GuestFrame from "./kbach/GuestFrame";
+import ShortName from "./kbach/ShortName";
 
 // Lazy load SVG components
-const GuestFrame = lazy(() => import("./kbach/GuestFrame"));
-const ShortName = lazy(() => import("./kbach/ShortName"));
+// const GuestFrame = lazy(() => import("./kbach/GuestFrame"));
+// const ShortName = lazy(() => import("./kbach/ShortName"));
 
 
 export default function Hero() {
@@ -59,13 +61,11 @@ export default function Hero() {
         transition={{ duration: 1.5, type: "spring" }}
       >
         <div className="relative">
-          <Suspense fallback={
             <div className="w-full h-32 flex items-center justify-center">
               <div className="w-16 h-16 border-4 border-gold border-t-transparent rounded-full animate-spin"></div>
             </div>
-          }>
+
             <ShortName color="#efbf04" />
-          </Suspense>
 
           <div className="absolute inset-0 pointer-events-none font-khmer">
             <motion.div
@@ -175,13 +175,10 @@ export default function Hero() {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, type: "spring" }}
       >
-        <Suspense fallback={
           <div className="w-full h-24 flex items-center justify-center">
               <div className="w-12 h-12 border-4 border-gold border-t-transparent rounded-full animate-spin"></div>
             </div>
-          }>
             <GuestFrame color="#efbf04" />
-          </Suspense>
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.span
             className="text-base sm:text-lg md:text-xl lg:text-2xl text-center px-4 mt-10 md:mt-12"

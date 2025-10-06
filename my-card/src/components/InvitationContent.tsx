@@ -1,11 +1,7 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { motion, Variants } from "motion/react";
-import FrameName from "../assets/name-frame-wd.svg";
-import GuestName from "../assets/guest-frame.png";
-
-// Lazy load SVG components
-const GuestFrame = lazy(() => import("./kbach/GuestFrame"));
-const ShortName = lazy(() => import("./kbach/ShortName"));
+import GuestFrame from "./kbach/GuestFrame";
+import ShortName from "./kbach/ShortName";
 
 export default function Hero() {
 

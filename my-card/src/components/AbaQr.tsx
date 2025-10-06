@@ -47,11 +47,11 @@ export default function AbaQr({
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="flex items-center justify-center">
-          <h4 className="font-khmer text-gold text-3xl md:text-2xl">
-            ជ័យមង្គល
+          <h4 className="font-khmer text-gold text-xl md:text-2xl">
+            សូមពរជ័យគ្រប់ប្រការ
           </h4>
         </div>
-        <div className="w-24 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto" />
+        <div className="w-40 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto" />
       </motion.div>
 
       <motion.div

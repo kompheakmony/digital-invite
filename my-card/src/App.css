@@ -24,7 +24,7 @@ html {
 
 html,
 body {
-  font-family: "Moul", sans-serif;
+  font-family: "Moul", "Cursive", sans-serif;
   color: var(--gold-primary);
   overflow-x: hidden;
   line-height: 1.6;

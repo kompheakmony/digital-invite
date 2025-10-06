@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+// src/components/Preloader.tsx
+import React, { useState, useEffect } from "react";
+import { motion } from "motion/react";
 
 interface PreloaderProps {
   onLoadingComplete: () => void;
@@ -7,235 +8,191 @@ interface PreloaderProps {
 
 const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
   const [progress, setProgress] = useState(0);
-  const [loadingStage, setLoadingStage] = useState('Initializing...');
+  const [loadingStage, setLoadingStage] = useState("កំពុងរៀបចំ...");
 
   useEffect(() => {
     loadAllAssets();
   }, []);
 
+  const updateProgress = (value: number, label: string) => {
+    setLoadingStage(label);
+    setProgress(value);
+  };
+
   const loadAllAssets = async () => {
     try {
-      // Stage 1: Load Fonts (20%)
-      setLoadingStage('Loading fonts...');
+      updateProgress(10, "កំពុងផ្ទុកពុម្ពអក្សរ...");
       await loadFonts();
-      setProgress(20);
 
-      // Stage 2: Load Images (60%)
-      setLoadingStage('Loading images...');
+      updateProgress(40, "កំពុងផ្ទុករូបភាព...");
       await loadImages();
-      setProgress(60);
 
-      // Stage 3: Load SVG/Vector Assets (80%)
-      setLoadingStage('Loading patterns...');
-      await loadVectorAssets();
-      setProgress(80);
+      updateProgress(70, "កំពុងផ្ទុករូបភាពវ៉ិចទ័រ...");
+      await loadVectors();
 
-      // Stage 4: Load Videos/Audio (if any) (90%)
-      setLoadingStage('Loading media...');
-      await loadMediaAssets();
-      setProgress(90);
+      updateProgress(90, "កំពុងផ្ទុកមេឌៀ...");
+      await loadMedia();
 
-      // Stage 5: Final preparation (100%)
-      setLoadingStage('Almost ready...');
-      await new Promise(resolve => setTimeout(resolve, 300));
-      setProgress(100);
+      updateProgress(100, "សូមរង់ចាំមួយភ្លែត...");
+      await new Promise((r) => setTimeout(r, 600));
 
-      // Wait a bit then complete
-      setTimeout(() => onLoadingComplete(), 500);
-    } catch (error) {
-      console.error('Asset loading error:', error);
-      // Complete anyway to prevent stuck loading
+      setTimeout(() => onLoadingComplete(), 1000);
+    } catch (err) {
+      console.error("Loading error:", err);
       setProgress(100);
       setTimeout(() => onLoadingComplete(), 500);
     }
   };
 
-  const loadFonts = async (): Promise<void> => {
+  const loadFonts = async () => {
     const fonts = [
-      { name: 'Tacteng', url: '/assets/fonts/tacteng.ttf' },
-      { name: 'Khmer Boran', url: '/assets/fonts/Khmer_Boran.ttf' },
-      // Add more fonts here
+      { name: "Tacteng", url: "/fonts/tacteng.ttf" },
+      { name: "Khmer Boran", url: "/fonts/Khmer_Boran.ttf" },
     ];
-
-    const fontPromises = fonts.map(async (font) => {
-      try {
-        const fontFace = new FontFace(font.name, `url(${font.url})`);
-        const loadedFont = await fontFace.load();
-        document.fonts.add(loadedFont);
-      } catch (error) {
-        console.warn(`Failed to load font ${font.name}:`, error);
-      }
-    });
-
-    await Promise.all(fontPromises);
+    await Promise.all(
+      fonts.map(async (font) => {
+        try {
+          const fontFace = new FontFace(font.name, `url(${font.url})`);
+          const loadedFont = await fontFace.load();
+          document.fonts.add(loadedFont);
+        } catch (e) {
+          console.warn(`Font failed: ${font.name}`, e);
+        }
+      })
+    );
   };
 
-  const loadImages = async (): Promise<void> => {
+  const loadImages = async () => {
     const images = [
-      '/images/hero-image.jpg',
-      '/images/couple-photo.jpg',
-      '/images/venue-photo.jpg',
-      '/images/background.jpg',
-      // Add all your image paths here
+      "/images/hero-image.jpg",
+      "/images/couple-photo.jpg",
+      "/images/venue-photo.jpg",
+      "/images/background.jpg",
     ];
-
-    const imagePromises = images.map((src) => 
-      new Promise<void>((resolve) => {
-        const img = new Image();
-        img.src = src;
-        img.onload = () => resolve();
-        img.onerror = () => {
-          console.warn(`Failed to load image: ${src}`);
-          resolve(); // Resolve anyway to prevent blocking
-        };
-      })
+    await Promise.all(
+      images.map(
+        (src) =>
+          new Promise<void>((resolve) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => resolve();
+            img.onerror = () => {
+              console.warn(`Failed image: ${src}`);
+              resolve();
+            };
+          })
+      )
     );
-
-    await Promise.all(imagePromises);
   };
 
-  const loadVectorAssets = async (): Promise<void> => {
-    const vectors = [
-      '/pkarchan-pattern.svg',
-      '/decorations/ornament.svg',
-      // Add all SVG paths here
-    ];
-
-    const vectorPromises = vectors.map((src) =>
-      fetch(src)
-        .then(response => response.text())
-        .catch(error => console.warn(`Failed to load vector: ${src}`, error))
+  const loadVectors = async () => {
+    const vectors = ["/pkarchan-pattern.svg", "/pkarchan.svg" ,"./kbach/GuestFrame", "./kbach/ShortName"];
+    await Promise.all(
+      vectors.map((src) =>
+        fetch(src).then((r) => r.text()).catch(() => console.warn(`Vector: ${src} failed`))
+      )
     );
-
-    await Promise.all(vectorPromises);
   };
 
-  const loadMediaAssets = async (): Promise<void> => {
-    // Load videos and audio if you have any
-    const mediaFiles = [
-      // '/audio/background-music.mp3',
-      '/video/intro.mp4',
-    ];
-
-    if (mediaFiles.length === 0) return;
-
-    const mediaPromises = mediaFiles.map((src) =>
-      new Promise<void>((resolve) => {
-        const media = document.createElement(src.endsWith('.mp3') || src.endsWith('.wav') ? 'audio' : 'video');
-        media.src = src;
-        media.onloadeddata = () => resolve();
-        media.onerror = () => {
-          console.warn(`Failed to load media: ${src}`);
-          resolve();
-        };
-      })
+  const loadMedia = async () => {
+    const media = ["/video/intro.mp4"];
+    await Promise.all(
+      media.map(
+        (src) =>
+          new Promise<void>((resolve) => {
+            const el = document.createElement(
+              src.endsWith(".mp3") || src.endsWith(".wav") ? "audio" : "video"
+            );
+            el.src = src;
+            el.onloadeddata = () => resolve();
+            el.onerror = () => {
+              console.warn(`Failed media: ${src}`);
+              resolve();
+            };
+          })
+      )
     );
-
-    await Promise.all(mediaPromises);
   };
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-amber-50 via-white to-rose-50"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[radial-gradient(ellipse_at_center,#15803d_0%,#166534_50%,#052e16_100%)]"
       initial={{ opacity: 1 }}
-      exit={{ 
-        opacity: 0,
-        transition: { duration: 0.8, ease: "easeInOut" }
-      }}
+      exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
     >
-      <div className="flex flex-col items-center gap-8 px-6">
-        {/* Animated Ring */}
-        <motion.div
-          className="relative"
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ 
-            type: "spring", 
-            stiffness: 100, 
-            damping: 10,
-            duration: 1.5 
-          }}
+      <div className="relative w-[130px] h-[130px] mb-8 flex items-center justify-center">
+        <motion.svg
+          width="130"
+          height="130"
+          viewBox="0 0 130 130"
+          className="absolute inset-0"
         >
-          <svg width="100" height="100" viewBox="0 0 100 100" className="transform -rotate-90">
-            {/* Background circle */}
-            <circle 
-              cx="50" 
-              cy="50" 
-              r="40" 
-              fill="none" 
-              stroke="#f3e5d1" 
-              strokeWidth="3"
-            />
-            {/* Progress circle */}
-            <motion.circle 
-              cx="50" 
-              cy="50" 
-              r="40" 
-              fill="none" 
-              stroke="#d4af37" 
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeDasharray="251.2"
-              initial={{ strokeDashoffset: 251.2 }}
-              animate={{ strokeDashoffset: 251.2 - (progress / 100) * 251.2 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            />
-          </svg>
-          
-          {/* Center percentage */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-2xl font-bold text-amber-700">
-              {Math.round(progress)}%
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Loading Text */}
-        <motion.div
-          className="text-center"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-        >
-          <h1 className="text-3xl font-serif text-amber-900 mb-2">
-            Loading Your Invitation
-          </h1>
-          <p className="text-amber-700 text-sm">
-            {loadingStage}
-          </p>
-        </motion.div>
-
-        {/* Progress Bar */}
-        <motion.div 
-          className="w-72 h-2 bg-amber-100 rounded-full overflow-hidden shadow-inner"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-        >
-          <motion.div 
-            className="h-full bg-gradient-to-r from-amber-400 to-amber-600 rounded-full"
-            initial={{ width: "0%" }}
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+          <defs>
+            <linearGradient id="weddingGold" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#FFFACD" />
+              <stop offset="50%" stopColor="#FFD700" />
+              <stop offset="100%" stopColor="#DDA20C" />
+            </linearGradient>
+          </defs>
+          <circle
+            cx="65"
+            cy="65"
+            r="55"
+            stroke="#FFFACD"
+            strokeWidth="6"
+            fill="none"
           />
-        </motion.div>
+          <motion.circle
+            cx="65"
+            cy="65"
+            r="55"
+            stroke="url(#weddingGold)"
+            strokeWidth="6"
+            fill="none"
+            strokeLinecap="round"
+            strokeDasharray="345"
+            animate={{
+              strokeDashoffset: 345 - (progress / 100) * 345,
+            }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            filter="drop-shadow(0 0 6px rgba(198,166,100,0.4))"
+          />
+        </motion.svg>
 
-        {/* Decorative Elements */}
-        <motion.div
-          className="absolute top-10 left-10 text-amber-300 text-6xl opacity-20"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        >
-          ❀
-        </motion.div>
-        <motion.div
-          className="absolute bottom-10 right-10 text-amber-300 text-6xl opacity-20"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        >
-          ❀
-        </motion.div>
+        <motion.img
+          src="/couple.png"
+          alt="Couple illustration"
+          className="w-[80px] h-auto object-contain"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
+        />
       </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+        className="text-center"
+      >
+        <p className="text-4xl font-mono font-semibold tracking-wide bg-gradient-to-r from-amber-200 to-yellow-500 bg-clip-text text-transparent">
+          {Math.round(progress)}%
+        </p>
+        <motion.p
+          className="mt-3 font-khmer text-lg italic bg-gradient-to-r from-amber-200 to-yellow-500 bg-clip-text text-transparent"
+          animate={{ opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          {loadingStage}
+        </motion.p>
+      </motion.div>
+
+      <motion.div
+        className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#efbf04] to-transparent mt-6"
+        initial={{ width: 0 }}
+        animate={{ width: 64 }}
+        transition={{ duration: 1 }}
+      />
     </motion.div>
   );
 };

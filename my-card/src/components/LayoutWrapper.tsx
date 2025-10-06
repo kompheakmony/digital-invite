@@ -77,8 +77,6 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
           options={particlesOptions}
         />
       )}
-      
-      {/* <div className="pattern-bg" /> */}
 
       <PatternBackground />
 

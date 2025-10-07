@@ -1,9 +1,19 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { lazy, Suspense, useMemo, useEffect, useState } from "react";
 import { motion, Variants } from "motion/react";
-import GuestFrame from "./kbach/GuestFrame";
 import ShortName from "./kbach/ShortName";
+import GuestFrame from "./kbach/GuestFrame";
 
-export default function Hero() {
+export default function InviationContent() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
 
   const fadeUp: Variants = {
     hidden: { opacity: 0, y: 30 },
@@ -14,7 +24,7 @@ export default function Hero() {
     }),
   };
 
-  const shimmerStyle: React.CSSProperties = {
+  const shimmerStyle = useMemo((): React.CSSProperties => ({
     backgroundImage: `linear-gradient(
       90deg,
       #dda20c,
@@ -28,15 +38,45 @@ export default function Hero() {
     backgroundClip: "text",
     WebkitTextFillColor: "transparent",
     color: "transparent",
-  };
+  }), []);
 
-  const shadowStyle: React.CSSProperties = {
+  const shadowStyle = useMemo((): React.CSSProperties => ({
     textShadow: "0 2px 4px rgba(0,0,0,0.25)",
     WebkitTextStroke: "0.25px rgba(0,0,0,0.25)",
-  };
+  }), []);
+
+  // Reusable Shimmer Text Component
+  interface ShimmerTextProps {
+    children: React.ReactNode;
+    delay?: number;
+    className?: string;
+    style?: React.CSSProperties;
+  }
+
+  const ShimmerText: React.FC<ShimmerTextProps> = ({
+    children,
+    delay = 0,
+    className = "",
+    style = {}
+  }) => (
+    <motion.span
+      className={className}
+      style={{ ...shimmerStyle, ...shadowStyle, ...style }}
+      animate={!prefersReducedMotion ? { backgroundPosition: ["200% center", "0% center"] } : {}}
+      transition={{
+        duration: 3,
+        repeat: Infinity,
+        ease: "linear",
+        delay
+      }}
+    >
+      {children}
+    </motion.span>
+  );
 
   return (
     <div className="flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
+      {/* Main Logo/Icon Section */}
       <motion.div
         className="relative mt-3 sm:mt-12 md:mt-20 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg flex justify-center"
         initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
@@ -44,14 +84,10 @@ export default function Hero() {
         transition={{ duration: 1, type: "spring" }}
       >
         <div className="relative">
-          <Suspense fallback={
-            <div className="w-full h-32 flex items-center justify-center">
-              <div className="w-16 h-16 border-4 border-gold border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          }>
-            <ShortName color="#efbf04" />
-          </Suspense>
 
+          <ShortName color="#efbf04" />
+
+          {/* Decorative Khmer Characters */}
           <div className="absolute inset-0 pointer-events-none font-khmer">
             <motion.div
               className="relative w-full h-full"
@@ -59,57 +95,49 @@ export default function Hero() {
               whileInView="visible"
               variants={fadeUp}
             >
-              <motion.span
-                className="absolute"
+              <ShimmerText
                 style={{
-                  ...shimmerStyle,
-                  ...shadowStyle,
+                  position: "absolute",
                   top: "2.5rem",
                   left: "3rem",
                   fontSize: "3rem",
                   lineHeight: 1,
                   transformOrigin: "center",
                 }}
-                animate={{ backgroundPosition: ["200% center", "0% center"] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
               >
                 ក
-              </motion.span>
+              </ShimmerText>
 
-              <motion.span
-                className="absolute"
+              <ShimmerText
                 style={{
-                  ...shimmerStyle,
-                  ...shadowStyle,
+                  position: "absolute",
                   bottom: "3rem",
                   right: "3rem",
                   fontSize: "3rem",
                   lineHeight: 1,
                 }}
-                animate={{ backgroundPosition: ["200% center", "0% center"] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                delay={0.5}
               >
                 វ
-              </motion.span>
+              </ShimmerText>
 
-              <motion.span
+              <ShimmerText
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
                 style={{
-                  ...shimmerStyle,
                   paddingTop: "0.3em",
                   paddingBottom: "0.3em",
                   fontSize: "1rem",
                 }}
-                animate={{ backgroundPosition: ["200% center", "0% center"] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                delay={1}
               >
                 និង
-              </motion.span>
+              </ShimmerText>
             </motion.div>
           </div>
         </div>
       </motion.div>
 
+      {/* Main Heading Section */}
       <motion.div
         className="mt-6 sm:mt-8 mb-4 w-full max-w-4xl"
         initial="hidden"
@@ -119,27 +147,27 @@ export default function Hero() {
         <motion.h1
           className="text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4 inline-block px-2"
           style={{
-            ...shimmerStyle,
-            ...shadowStyle,
             paddingTop: "0.3em",
             paddingBottom: "0.3em",
           }}
-          animate={{ backgroundPosition: ["200% center", "0% center"] }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "linear",
-          }}
           variants={fadeUp}
           custom={1}
+          aria-label="Wedding Greeting"
+          role="heading"
+          aria-level={1}
         >
-          សិរីសួស្ដីអាពាហ៍ពិពាហ៍
+          <ShimmerText>
+            សិរីសួស្ដីអាពាហ៍ពិពាហ៍
+          </ShimmerText>
         </motion.h1>
 
         <motion.h3
           className="text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4 text-gold"
           variants={fadeUp}
           custom={2}
+          aria-label="Respectfully Inviting"
+          role="heading"
+          aria-level={3}
         >
           សូមគោរមអញ្ជើញ
         </motion.h3>
@@ -148,46 +176,37 @@ export default function Hero() {
           className="text-base sm:text-lg md:text-xl lg:text-2xl mb-3 sm:mb-4 text-gold px-4"
           variants={fadeUp}
           custom={3}
+          aria-label="Honorable Guests"
+          role="heading"
+          aria-level={4}
         >
           ឯកឧត្តម លោកជំទាវ​​ លោក លោកស្រី អ្នកនាងកញ្ញា
         </motion.h4>
-
       </motion.div>
 
+      {/* Guest Frame Section */}
       <motion.div
         className="relative mb-4 sm:mb-6 w-full max-w-xs sm:max-w-sm md:max-w-md flex items-center justify-center"
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, type: "spring" }}
       >
-        <Suspense fallback={
-          <div className="w-full h-24 flex items-center justify-center">
-            <div className="w-12 h-12 border-4 border-gold border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        }>
-          <GuestFrame color="#efbf04" />
-        </Suspense>
+        <GuestFrame color="#efbf04" />
         <div className="absolute inset-0 flex items-center justify-center px-4">
-          <motion.span
+          <ShimmerText
             className="text-base sm:text-lg md:text-xl lg:text-2xl mt-10 md:mt-12"
             style={{
-              ...shimmerStyle,
-              ...shadowStyle,
               paddingTop: "0.3em",
               paddingBottom: "0.3em",
             }}
-            animate={{ backgroundPosition: ["200% center", "0% center"] }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "linear",
-            }}
+            delay={0.3}
           >
             ភ្ញៀវកិត្តិយស
-          </motion.span>
+          </ShimmerText>
         </div>
       </motion.div>
 
+      {/* Event Details Section */}
       <motion.div
         className="text-base md:text-lg space-y-3 sm:space-y-4 md:space-y-6 text-gold max-w-3xl px-4"
         variants={fadeUp}
@@ -195,10 +214,13 @@ export default function Hero() {
         whileInView="visible"
         custom={4}
       >
-        <h6 className="leading-6">ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦​ វេលាម៉ោង៖ ៣ៈ០០ រសៀល</h6>
-        <h6>នៅគេហដ្ឋានខាងស្រី</h6>
+        <h6 className="leading-6" aria-label="Event Date and Time">
+          ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦​ វេលាម៉ោង៖ ៣ៈ០០ រសៀល
+        </h6>
+        <h6 aria-label="Event Location">
+          នៅគេហដ្ឋានខាងស្រី
+        </h6>
       </motion.div>
-
     </div>
   );
 }

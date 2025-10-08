@@ -7,6 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import AbaQr from "./components/AbaQr";
 import Footer from "./components/Footer";
 import InvitationContent from "./components/InvitationContent";
+import BackgroundMusic from "./components/BackgroundMusic";
 
 const LazyPhotosGallary = React.lazy(() => import("./components/PhotosGallary"));
 
@@ -24,6 +25,7 @@ const AppRoutes: FC = () => (
           </Suspense>
           <AbaQr />
           <Footer />
+          <BackgroundMusic />
         </>
       }
     />
@@ -37,6 +39,7 @@ const AppRoutes: FC = () => (
           </Suspense>
           <AbaQr />
           <Footer />
+          <BackgroundMusic />
         </>
     } 
       />

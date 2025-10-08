@@ -1,6 +1,7 @@
 // src/components/Preloader.tsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { motion } from "motion/react";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 interface PreloaderProps {
   onLoadingComplete: () => void;
@@ -8,49 +9,25 @@ interface PreloaderProps {
 
 const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
   const [progress, setProgress] = useState(0);
-  const [loadingStage, setLoadingStage] = useState("កំពុងរៀបចំ...");
+  const [hasError, setHasError] = useState(false);
 
-  useEffect(() => {
-    loadAllAssets();
-  }, []);
-
-  const updateProgress = (value: number, label: string) => {
-    setLoadingStage(label);
-    setProgress(value);
-  };
-
-  const loadAllAssets = async () => {
-    try {
-      updateProgress(10, "កំពុងផ្ទុកពុម្ពអក្សរ...");
-      await loadFonts();
-
-      updateProgress(40, "កំពុងផ្ទុករូបភាព...");
-      await loadImages();
-
-      updateProgress(70, "កំពុងផ្ទុករូបភាពវ៉ិចទ័រ...");
-      await loadVectors();
-
-      updateProgress(90, "កំពុងផ្ទុកមេឌៀ...");
-      await loadMedia();
-
-      updateProgress(100, "សូមរង់ចាំមួយភ្លែត...");
-      await new Promise((r) => setTimeout(r, 600));
-
-      setTimeout(() => onLoadingComplete(), 1000);
-    } catch (err) {
-      console.error("Loading error:", err);
-      setProgress(100);
-      setTimeout(() => onLoadingComplete(), 500);
-    }
-  };
-
-  const loadFonts = async () => {
-    const fonts = [
+  const assetConfig = useMemo(() => ({
+    fonts: [
       { name: "Tacteng", url: "/fonts/tacteng.ttf" },
       { name: "Khmer Boran", url: "/fonts/Khmer_Boran.ttf" },
-    ];
+    ],
+    images: ["/images/background.jpg"],
+    vectors: ["/pkarchan-pattern.svg", "/pkarchan.svg", "./kbach/GuestFrame", "./kbach/ShortName"],
+    media: ["/hormrong.mp3"]
+  }), []);
+
+  const updateProgress = useCallback((value: number) => {
+    setProgress(value);
+  }, []);
+
+  const loadFonts = useCallback(async () => {
     await Promise.all(
-      fonts.map(async (font) => {
+      assetConfig.fonts.map(async (font) => {
         try {
           const fontFace = new FontFace(font.name, `url(${font.url})`);
           const loadedFont = await fontFace.load();
@@ -60,17 +37,11 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
         }
       })
     );
-  };
+  }, [assetConfig.fonts]);
 
-  const loadImages = async () => {
-    const images = [
-      "/images/hero-image.jpg",
-      "/images/couple-photo.jpg",
-      "/images/venue-photo.jpg",
-      "/images/background.jpg",
-    ];
+  const loadImages = useCallback(async () => {
     await Promise.all(
-      images.map(
+      assetConfig.images.map(
         (src) =>
           new Promise<void>((resolve) => {
             const img = new Image();
@@ -83,21 +54,28 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
           })
       )
     );
-  };
+  }, [assetConfig.images]);
 
-  const loadVectors = async () => {
-    const vectors = ["/pkarchan-pattern.svg", "/pkarchan.svg" ,"./kbach/GuestFrame", "./kbach/ShortName"];
+  const loadVectors = useCallback(async () => {
     await Promise.all(
-      vectors.map((src) =>
-        fetch(src).then((r) => r.text()).catch(() => console.warn(`Vector: ${src} failed`))
+      assetConfig.vectors.map(
+        (src) =>
+          new Promise<void>((resolve) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => resolve();
+            img.onerror = () => {
+              console.warn(`Vector failed: ${src}`);
+              resolve();
+            };
+          })
       )
     );
-  };
+  }, [assetConfig.vectors]);
 
-  const loadMedia = async () => {
-    const media = ["/video/intro.mp4"];
+  const loadMedia = useCallback(async () => {
     await Promise.all(
-      media.map(
+      assetConfig.media.map(
         (src) =>
           new Promise<void>((resolve) => {
             const el = document.createElement(
@@ -112,87 +90,60 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
           })
       )
     );
-  };
+  }, [assetConfig.media]);
+
+  const loadAllAssets = useCallback(async () => {
+    try {
+      updateProgress(10);
+      await loadFonts();
+
+      updateProgress(40);
+      await loadImages();
+
+      updateProgress(70);
+      await loadVectors();
+
+      updateProgress(90);
+      await loadMedia();
+
+      updateProgress(100);
+      
+      await new Promise((resolve) => setTimeout(resolve, 800));
+
+      onLoadingComplete();
+    } catch (err) {
+      console.error("Loading error:", err);
+      setHasError(true);
+      setProgress(100);
+      setTimeout(() => onLoadingComplete(), 1000);
+    }
+  }, [loadFonts, loadImages, loadVectors, loadMedia, updateProgress, onLoadingComplete]);
+
+  useEffect(() => {
+    loadAllAssets();
+  }, [loadAllAssets]);
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[radial-gradient(ellipse_at_center,#15803d_0%,#166534_50%,#052e16_100%)]"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#052e16]"
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
+      exit={{ 
+        opacity: 0, 
+        transition: { 
+          duration: 0.8, 
+          ease: "easeInOut" 
+        } 
+      }}
+      role="status"
+      aria-label="Loading application"
     >
-      <div className="relative w-[130px] h-[130px] mb-8 flex items-center justify-center">
-        <motion.svg
-          width="130"
-          height="130"
-          viewBox="0 0 130 130"
-          className="absolute inset-0"
-        >
-          <defs>
-            <linearGradient id="weddingGold" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#FFFACD" />
-              <stop offset="50%" stopColor="#FFD700" />
-              <stop offset="100%" stopColor="#DDA20C" />
-            </linearGradient>
-          </defs>
-          <circle
-            cx="65"
-            cy="65"
-            r="55"
-            stroke="#FFFACD"
-            strokeWidth="6"
-            fill="none"
-          />
-          <motion.circle
-            cx="65"
-            cy="65"
-            r="55"
-            stroke="url(#weddingGold)"
-            strokeWidth="6"
-            fill="none"
-            strokeLinecap="round"
-            strokeDasharray="345"
-            animate={{
-              strokeDashoffset: 345 - (progress / 100) * 345,
-            }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            filter="drop-shadow(0 0 6px rgba(198,166,100,0.4))"
-          />
-        </motion.svg>
-
-        <motion.img
-          src="/couple.png"
-          alt="Couple illustration"
-          className="w-[80px] h-auto object-contain"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
+      <div className="relative w-[350px] h-auto flex items-center justify-center">
+        <DotLottieReact
+          src="https://lottie.host/ae36f22a-8cd2-48cd-8ded-ca8276c76143/D0MXqhz2jd.lottie"
+          loop
+          autoplay
         />
       </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="text-center"
-      >
-        <p className="text-4xl font-mono font-semibold tracking-wide bg-gradient-to-r from-amber-200 to-yellow-500 bg-clip-text text-transparent">
-          {Math.round(progress)}%
-        </p>
-        <motion.p
-          className="mt-3 font-khmer text-lg italic bg-gradient-to-r from-amber-200 to-yellow-500 bg-clip-text text-transparent"
-          animate={{ opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          {loadingStage}
-        </motion.p>
-      </motion.div>
-
-      <motion.div
-        className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#efbf04] to-transparent mt-6"
-        initial={{ width: 0 }}
-        animate={{ width: 64 }}
-        transition={{ duration: 1 }}
-      />
     </motion.div>
   );
 };

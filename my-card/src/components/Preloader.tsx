@@ -1,4 +1,3 @@
-// src/components/Preloader.tsx
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { motion } from "motion/react";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
@@ -125,7 +124,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#052e16]"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#013220]"
       initial={{ opacity: 1 }}
       exit={{ 
         opacity: 0, 

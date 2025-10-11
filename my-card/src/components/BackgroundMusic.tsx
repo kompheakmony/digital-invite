@@ -1,4 +1,3 @@
-// src/components/AutoBackgroundMusic.jsx
 import React, { useEffect, useRef } from "react";
 
 export default function BackgroundMusic() {
@@ -10,7 +9,6 @@ export default function BackgroundMusic() {
     audio.loop = true;
     audio.volume = 0.5;
 
-    // Restore last playback position
     const savedTime = localStorage.getItem(STORAGE_KEY);
     if (savedTime) {
       audio.currentTime = parseFloat(savedTime);
@@ -20,7 +18,6 @@ export default function BackgroundMusic() {
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
-          // Wait for user gesture if autoplay blocked
           const resume = () => {
             audio.play();
             document.removeEventListener("click", resume);
@@ -32,12 +29,10 @@ export default function BackgroundMusic() {
 
     playAudio();
 
-    // Save playback time periodically
     const saveInterval = setInterval(() => {
       localStorage.setItem(STORAGE_KEY, audio.currentTime.toString());
-    }, 2000); // every 2 seconds
+    }, 2000);
 
-    // Cleanup
     return () => {
       clearInterval(saveInterval);
       audio.pause();
@@ -45,5 +40,5 @@ export default function BackgroundMusic() {
     };
   }, []);
 
-  return null; // Purely background behavior
+  return null;
 }

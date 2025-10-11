@@ -25,7 +25,7 @@ const AppRoutes: FC = () => (
           </Suspense>
           <AbaQr />
           <Footer />
-          <BackgroundMusic />
+          {/* <BackgroundMusic /> */}
         </>
       }
     />
@@ -39,7 +39,7 @@ const AppRoutes: FC = () => (
           </Suspense>
           <AbaQr />
           <Footer />
-          <BackgroundMusic />
+          {/* <BackgroundMusic /> */}
         </>
     } 
       />

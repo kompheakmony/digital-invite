@@ -17,12 +17,10 @@ export default function Hero() {
     }
   }, [guestSlug]);
 
-  // Dynamic metadata for link previews
-  const invitationTitle = "សិរីសួស្ដីអាពាហ៍ពិពាហ៍";
-  const invitationDescription = `សូមគោរមអញ្ជើញ ${dynamicGuestName} ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦ វេលាម៉ោង៖ ៣ៈ០០ រសៀល នៅគេហដ្ឋានខាងស្រី`;
+  const invitationTitle = "សូមគោរមអញ្ជើញ";
+  const invitationDescription = `ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦ វេលាម៉ោង៖ ៣ៈ០០ រសៀល នៅគេហដ្ឋានខាងស្រី`;
   
-  // Replace with your actual invitation image URL (e.g., a static PNG/JPG of the invite design, 1200x630px ideal for OG)
-  const invitationImageUrl = "/preview_image.webp"; // Update this URL
+  const invitationImageUrl = "/preview_image.webp";
 
   const fadeUp: Variants = {
     hidden: { opacity: 0, y: 30 },
@@ -56,18 +54,15 @@ export default function Hero() {
 
   return (
     <>
-      {/* Native React 19 metadata tags—dynamically rendered and hoisted to <head> */}
       <title>{`${invitationTitle} - ${dynamicGuestName}`}</title>
       <meta name="description" content={invitationDescription} />
       
-      {/* Open Graph for Facebook, Telegram, etc. */}
       <meta property="og:title" content={`${invitationTitle} - ${dynamicGuestName}`} />
       <meta property="og:description" content={invitationDescription} />
       <meta property="og:image" content={invitationImageUrl} />
       <meta property="og:url" content={window.location.href} />
       <meta property="og:type" content="website" />
       
-      {/* Twitter Card for additional compatibility */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={`${invitationTitle} - ${dynamicGuestName}`} />
       <meta name="twitter:description" content={invitationDescription} />

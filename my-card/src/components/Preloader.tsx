@@ -15,8 +15,8 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
       { name: "Tacteng", url: "/fonts/tacteng.ttf" },
       { name: "Khmer Boran", url: "/fonts/Khmer_Boran.ttf" },
     ],
-    images: ["/images/background.jpg"],
-    vectors: ["/pkarchan-pattern.svg", "/pkarchan.svg", "./kbach/GuestFrame", "./kbach/ShortName"],
+    images: ["/preview_image.webp"],
+    vectors: ["/pkarchan-pattern.svg", "/pkarchan.svg"],
     media: ["/hormrong.mp3"]
   }), []);
 

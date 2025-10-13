@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 
-const PatternBackground = memo(({ tileSize = "120px" }: { tileSize?: string }) => {
+const PatternBackground = memo(() => {
   return (
     <div 
       className="pattern-bg"

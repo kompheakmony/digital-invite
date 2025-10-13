@@ -173,19 +173,19 @@ export default function Details() {
                     ))}
                 </motion.div>
 
-                <motion.div
-                    className="w-24 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto"
-                    variants={fadeUp}
-                    custom={2}
-                />
-
                 <motion.h4
                     className="text-2xl md:text-3xl mb-4 text-gold font-medium"
                     variants={fadeUp}
-                    custom={3}
+                    custom={2}
                 >
                     មានកិត្តិយសសូមអញ្ជើញ
                 </motion.h4>
+
+                <motion.div
+                    className="w-24 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto"
+                    variants={fadeUp}
+                    custom={3}
+                />
 
                 <motion.p
                     className="text-center text-gold text-sm md:text-base max-w-2xl mx-auto leading-6"

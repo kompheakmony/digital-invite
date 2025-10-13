@@ -45,7 +45,6 @@ export default function InviationContent() {
     WebkitTextStroke: "0.25px rgba(0,0,0,0.25)",
   }), []);
 
-  // Reusable Shimmer Text Component
   interface ShimmerTextProps {
     children: React.ReactNode;
     delay?: number;
@@ -76,7 +75,6 @@ export default function InviationContent() {
 
   return (
     <div className="flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
-      {/* Main Logo/Icon Section */}
       <motion.div
         className="relative mt-3 sm:mt-12 md:mt-20 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg flex justify-center"
         initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
@@ -87,7 +85,6 @@ export default function InviationContent() {
 
           <ShortName color="#efbf04" />
 
-          {/* Decorative Khmer Characters */}
           <div className="absolute inset-0 pointer-events-none font-khmer">
             <motion.div
               className="relative w-full h-full"
@@ -137,7 +134,6 @@ export default function InviationContent() {
         </div>
       </motion.div>
 
-      {/* Main Heading Section */}
       <motion.div
         className="mt-6 sm:mt-8 mb-4 w-full max-w-4xl"
         initial="hidden"
@@ -184,7 +180,6 @@ export default function InviationContent() {
         </motion.h4>
       </motion.div>
 
-      {/* Guest Frame Section */}
       <motion.div
         className="relative mb-4 sm:mb-6 w-full max-w-xs sm:max-w-sm md:max-w-md flex items-center justify-center"
         initial={{ opacity: 0, scale: 0.9 }}
@@ -206,7 +201,6 @@ export default function InviationContent() {
         </div>
       </motion.div>
 
-      {/* Event Details Section */}
       <motion.div
         className="text-base md:text-lg space-y-3 sm:space-y-4 md:space-y-6 text-gold max-w-3xl px-4"
         variants={fadeUp}

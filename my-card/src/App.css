@@ -54,6 +54,7 @@ body::-webkit-scrollbar {
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -94,7 +95,7 @@ body::-webkit-scrollbar {
 }
 
 .pattern-bg {
-  --s: var(--tile-size);
+  --s: var(--tile-size, 100px);
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -108,15 +109,14 @@ body::-webkit-scrollbar {
   height: 500vmax;
   top: 50%;
   left: 50%;
-  
-  background-image: url("/pkarchan-pattern.svg");
+  background-image: var(--bg-url);
   background-repeat: repeat;
   background-size: var(--s) var(--s);
   opacity: 0.13;
   mix-blend-mode: overlay;
-  
   transform: translate(-50%, -50%) rotate(45deg);
 }
+
 
 @keyframes float {
   0%,

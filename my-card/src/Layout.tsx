@@ -9,10 +9,11 @@ import Footer from "./components/Footer";
 import InvitationContent from "./components/InvitationContent";
 import BackgroundMusic from "./components/BackgroundMusic";
 
-const LazyPhotosGallary = React.lazy(() => import("./components/PhotosGallary"));
+const LazyPhotosGallary = React.lazy(
+  () => import("./components/PhotosGallary")
+);
 
 const AppRoutes: FC = () => (
-
   <Routes>
     <Route
       path="/invite/:guestSlug"
@@ -30,8 +31,10 @@ const AppRoutes: FC = () => (
       }
     />
 
-    <Route path="/" element={
-      <>
+    <Route
+      path="/"
+      element={
+        <>
           <InvitationContent />
           <Detail />
           <Suspense fallback={<div>Loading photos...</div>}>
@@ -41,11 +44,10 @@ const AppRoutes: FC = () => (
           <Footer />
           {/* <BackgroundMusic /> */}
         </>
-    } 
-      />
+      }
+    />
   </Routes>
 );
-
 
 const Layout: FC = () => (
   <Router>

@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Moul&display=swap");
 
 :root {
+  /* --gold-primary: #5d2f40; */
   --gold-primary: #efbf04;
   --gold-dark: #dda20c;
   --gold-light: #ffd700;
@@ -60,7 +61,6 @@ body::-webkit-scrollbar {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   padding-top: 0.3em;
   padding-bottom: 0.3em;
-  /* position: relative; */
 }
 
 .combined-gold {
@@ -82,7 +82,7 @@ body::-webkit-scrollbar {
 
 .font-tacteng {
   font-family: "Tacteng";
-  color: #efbf04;
+  color: var(--gold-primary);
 }
 
 .font-khmer {
@@ -112,11 +112,10 @@ body::-webkit-scrollbar {
   background-image: var(--bg-url);
   background-repeat: repeat;
   background-size: var(--s) var(--s);
-  opacity: 0.13;
+  opacity: 0.15;
   mix-blend-mode: overlay;
   transform: translate(-50%, -50%) rotate(45deg);
 }
-
 
 @keyframes float {
   0%,
@@ -129,18 +128,33 @@ body::-webkit-scrollbar {
 }
 
 @keyframes khmer-float-1 {
-  0%, 100% { transform: translateY(0px) rotate(45deg); }
-  50% { transform: translateY(-20px) rotate(45deg); }
+  0%,
+  100% {
+    transform: translateY(0px) rotate(45deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(45deg);
+  }
 }
 
 @keyframes khmer-float-2 {
-  0%, 100% { transform: translateY(0px) rotate(12deg) scaleX(0.75); }
-  50% { transform: translateY(-15px) rotate(12deg) scaleX(0.75); }
+  0%,
+  100% {
+    transform: translateY(0px) rotate(12deg) scaleX(0.75);
+  }
+  50% {
+    transform: translateY(-15px) rotate(12deg) scaleX(0.75);
+  }
 }
 
 @keyframes khmer-float-3 {
-  0%, 100% { transform: translateY(0px) rotate(-30deg); }
-  50% { transform: translateY(-25px) rotate(-30deg); }
+  0%,
+  100% {
+    transform: translateY(0px) rotate(-30deg);
+  }
+  50% {
+    transform: translateY(-25px) rotate(-30deg);
+  }
 }
 
 @keyframes fadeIn {
@@ -154,11 +168,18 @@ body::-webkit-scrollbar {
   }
 }
 
-
-.animate-khmer-float-1 { animation: khmer-float-1 6s ease-in-out infinite; }
-.animate-khmer-float-2 { animation: khmer-float-2 8s ease-in-out infinite; }
-.animate-khmer-float-3 { animation: khmer-float-3 7s ease-in-out infinite; }
-.animate-fadeIn { animation: fadeIn 1s ease-out; }
+.animate-khmer-float-1 {
+  animation: khmer-float-1 6s ease-in-out infinite;
+}
+.animate-khmer-float-2 {
+  animation: khmer-float-2 8s ease-in-out infinite;
+}
+.animate-khmer-float-3 {
+  animation: khmer-float-3 7s ease-in-out infinite;
+}
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out;
+}
 
 ::-webkit-scrollbar {
   width: 6px;
@@ -203,7 +224,7 @@ header {
 }
 
 header::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -250,9 +271,7 @@ main p {
 }
 
 .gold-glow {
-  box-shadow: 
-    0 0 20px rgba(239, 191, 4, 0.3),
-    0 0 40px rgba(239, 191, 4, 0.1);
+  box-shadow: 0 0 20px rgba(239, 191, 4, 0.3), 0 0 40px rgba(239, 191, 4, 0.1);
 }
 
 .smooth-transition {
@@ -264,15 +283,15 @@ main p {
     opacity: 0.2;
     background-size: calc(var(--s) * 0.6) calc(var(--s) * 0.6);
   }
-  
+
   header {
     padding: 1.5rem 1rem;
   }
-  
+
   main {
     padding: 1.5rem;
   }
-  
+
   .animate-float1,
   .animate-float2,
   .animate-float3 {
@@ -288,11 +307,11 @@ main p {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .pattern-bg::before {
     animation: none !important;
   }
-  
+
   .combined-gold {
     animation: none !important;
   }

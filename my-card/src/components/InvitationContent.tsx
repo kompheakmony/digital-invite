@@ -7,12 +7,13 @@ export default function InviationContent() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
 
-    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
+    const handler = (e: MediaQueryListEvent) =>
+      setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
   }, []);
 
   const fadeUp: Variants = {
@@ -24,8 +25,9 @@ export default function InviationContent() {
     }),
   };
 
-  const shimmerStyle = useMemo((): React.CSSProperties => ({
-    backgroundImage: `linear-gradient(
+  const shimmerStyle = useMemo(
+    (): React.CSSProperties => ({
+      backgroundImage: `linear-gradient(
       90deg,
       #dda20c,
       #ffd700,
@@ -33,17 +35,22 @@ export default function InviationContent() {
       #ffdf00,
       #dda20c
     )`,
-    backgroundSize: "200% auto",
-    WebkitBackgroundClip: "text",
-    backgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    color: "transparent",
-  }), []);
+      backgroundSize: "200% auto",
+      WebkitBackgroundClip: "text",
+      backgroundClip: "text",
+      WebkitTextFillColor: "transparent",
+      color: "transparent",
+    }),
+    []
+  );
 
-  const shadowStyle = useMemo((): React.CSSProperties => ({
-    textShadow: "0 2px 4px rgba(0,0,0,0.25)",
-    WebkitTextStroke: "0.25px rgba(0,0,0,0.25)",
-  }), []);
+  const shadowStyle = useMemo(
+    (): React.CSSProperties => ({
+      textShadow: "0 2px 4px rgba(0,0,0,0.25)",
+      WebkitTextStroke: "0.25px rgba(0,0,0,0.25)",
+    }),
+    []
+  );
 
   interface ShimmerTextProps {
     children: React.ReactNode;
@@ -56,17 +63,21 @@ export default function InviationContent() {
     children,
     delay = 0,
     className = "",
-    style = {}
+    style = {},
   }) => (
     <motion.span
       className={className}
       style={{ ...shimmerStyle, ...shadowStyle, ...style }}
-      animate={!prefersReducedMotion ? { backgroundPosition: ["200% center", "0% center"] } : {}}
+      animate={
+        !prefersReducedMotion
+          ? { backgroundPosition: ["200% center", "0% center"] }
+          : {}
+      }
       transition={{
         duration: 3,
         repeat: Infinity,
         ease: "linear",
-        delay
+        delay,
       }}
     >
       {children}
@@ -82,7 +93,6 @@ export default function InviationContent() {
         transition={{ duration: 1, type: "spring" }}
       >
         <div className="relative">
-
           <ShortName color="#efbf04" />
 
           <div className="absolute inset-0 pointer-events-none font-khmer">
@@ -152,9 +162,7 @@ export default function InviationContent() {
           role="heading"
           aria-level={1}
         >
-          <ShimmerText>
-            សិរីសួស្ដីអាពាហ៍ពិពាហ៍
-          </ShimmerText>
+          <ShimmerText>សិរីសួស្ដីអាពាហ៍ពិពាហ៍</ShimmerText>
         </motion.h1>
 
         <motion.h3
@@ -211,9 +219,7 @@ export default function InviationContent() {
         <h6 className="leading-6" aria-label="Event Date and Time">
           ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦​ វេលាម៉ោង៖ ៣ៈ០០ រសៀល
         </h6>
-        <h6 aria-label="Event Location">
-          នៅគេហដ្ឋានខាងស្រី
-        </h6>
+        <h6 aria-label="Event Location">នៅគេហដ្ឋានខាងស្រី</h6>
       </motion.div>
     </div>
   );

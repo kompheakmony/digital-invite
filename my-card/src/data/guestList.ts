@@ -3,5 +3,4 @@ export const guestList: { [key: string]: string } = {
   "jane-doe": "អ្នកនាង ជេន ដូ",
   "john-smith": "លោក ចន ស្ម៊ីធ",
   "family-jones": "គ្រួសារ ចូនស៍",
-  // Add more guests as needed
 };

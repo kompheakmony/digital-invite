@@ -1,13 +1,25 @@
-import { motion, Variants } from "motion/react";
-import React, { useEffect, useState } from "react";
+import { motion, Variants } from "framer-motion";
+import React, { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { guestList } from "../data/guestList";
 import ShortName from "./kbach/ShortName";
 import GuestFrame from "./kbach/GuestFrame";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Hero() {
+  const { currentTheme } = useTheme();
   const { guestSlug } = useParams<{ guestSlug?: string }>();
   const [dynamicGuestName, setDynamicGuestName] = useState("លោក សែត កុម្ភម្នី");
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    const handler = (e: MediaQueryListEvent) =>
+      setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
 
   useEffect(() => {
     if (guestSlug && guestList[guestSlug]) {
@@ -15,11 +27,20 @@ export default function Hero() {
     } else if (guestSlug) {
       setDynamicGuestName("ភ្ញៀវកិត្តិយស");
     }
-  }, [guestSlug]);
+    document.title = `${invitationTitle} - ${dynamicGuestName}`;
+    document
+      .querySelector('meta[property="og:title"]')
+      ?.setAttribute("content", `${invitationTitle} - ${dynamicGuestName}`);
+    document
+      .querySelector('meta[name="twitter:title"]')
+      ?.setAttribute("content", `${invitationTitle} - ${dynamicGuestName}`);
+    document
+      .querySelector('meta[property="og:url"]')
+      ?.setAttribute("content", window.location.href);
+  }, [guestSlug, dynamicGuestName]);
 
   const invitationTitle = "សូមគោរមអញ្ជើញ";
   const invitationDescription = `ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦ វេលាម៉ោង៖ ៣ៈ០០ រសៀល នៅគេហដ្ឋានខាងស្រី`;
-  
   const invitationImageUrl = "/preview_image.webp";
 
   const fadeUp: Variants = {
@@ -31,40 +52,85 @@ export default function Hero() {
     }),
   };
 
-  const shimmerStyle: React.CSSProperties = {
-    backgroundImage: `linear-gradient(
+  const shimmerStyle: React.CSSProperties = useMemo(
+    () => ({
+      backgroundImage: `linear-gradient(
       90deg,
-      #dda20c,
-      #ffd700,
-      #fffacd,
-      #ffdf00,
-      #dda20c
+      var(--gold-dark),
+      var(--gold-light),
+      var(--gold-lightest),
+      var(--gold-medium),
+      var(--gold-dark)
     )`,
-    backgroundSize: "200% auto",
-    WebkitBackgroundClip: "text",
-    backgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    color: "transparent",
-  };
+      backgroundSize: "200% auto",
+      WebkitBackgroundClip: "text",
+      backgroundClip: "text",
+      WebkitTextFillColor: "transparent",
+      color: "transparent",
+    }),
+    []
+  );
 
-  const shadowStyle: React.CSSProperties = {
-    textShadow: "0 2px 4px rgba(0,0,0,0.25)",
-    WebkitTextStroke: "0.25px rgba(0,0,0,0.25)",
-  };
+  const shadowStyle: React.CSSProperties = useMemo(
+    () => ({
+      textShadow: "0 2px 4px rgba(0,0,0,0.25)",
+      WebkitTextStroke: "0.25px rgba(0,0,0,0.25)",
+    }),
+    []
+  );
+
+  interface ShimmerMotionProps {
+    children: React.ReactNode;
+    delay?: number;
+    className?: string;
+    style?: React.CSSProperties;
+  }
+
+  const ShimmerMotion: React.FC<ShimmerMotionProps> = ({
+    children,
+    delay = 0,
+    className = "",
+    style = {},
+  }) => (
+    <motion.span
+      className={className}
+      style={{ ...shimmerStyle, ...shadowStyle, ...style }}
+      animate={
+        !prefersReducedMotion
+          ? { backgroundPosition: ["200% center", "0% center"] }
+          : { backgroundPosition: "0% center" }
+      }
+      transition={{
+        duration: 3,
+        repeat: Infinity,
+        ease: "linear",
+        delay,
+        ...(!prefersReducedMotion && { repeatDelay: 0 }),
+      }}
+    >
+      {children}
+    </motion.span>
+  );
 
   return (
     <>
       <title>{`${invitationTitle} - ${dynamicGuestName}`}</title>
       <meta name="description" content={invitationDescription} />
-      
-      <meta property="og:title" content={`${invitationTitle} - ${dynamicGuestName}`} />
+
+      <meta
+        property="og:title"
+        content={`${invitationTitle} - ${dynamicGuestName}`}
+      />
       <meta property="og:description" content={invitationDescription} />
       <meta property="og:image" content={invitationImageUrl} />
       <meta property="og:url" content={window.location.href} />
       <meta property="og:type" content="website" />
-      
+
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={`${invitationTitle} - ${dynamicGuestName}`} />
+      <meta
+        name="twitter:title"
+        content={`${invitationTitle} - ${dynamicGuestName}`}
+      />
       <meta name="twitter:description" content={invitationDescription} />
       <meta name="twitter:image" content={invitationImageUrl} />
 
@@ -76,7 +142,7 @@ export default function Hero() {
           transition={{ duration: 1.5, type: "spring" }}
         >
           <div className="relative">
-            <ShortName color="#efbf04" />
+            <ShortName color={currentTheme.accent} />
 
             <div className="absolute inset-0 pointer-events-none font-khmer">
               <motion.div
@@ -85,52 +151,44 @@ export default function Hero() {
                 whileInView="visible"
                 variants={fadeUp}
               >
-                <motion.span
+                <ShimmerMotion
                   className="absolute"
                   style={{
-                    ...shimmerStyle,
-                    ...shadowStyle,
                     top: "2.5rem",
                     left: "3rem",
                     fontSize: "3rem",
                     lineHeight: 1,
                     transformOrigin: "center",
                   }}
-                  animate={{ backgroundPosition: ["200% center", "0% center"] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  delay={0}
                 >
                   ក
-                </motion.span>
+                </ShimmerMotion>
 
-                <motion.span
+                <ShimmerMotion
                   className="absolute"
                   style={{
-                    ...shimmerStyle,
-                    ...shadowStyle,
                     bottom: "3rem",
                     right: "3rem",
                     fontSize: "3rem",
                     lineHeight: 1,
                   }}
-                  animate={{ backgroundPosition: ["200% center", "0% center"] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  delay={0.5}
                 >
                   វ
-                </motion.span>
+                </ShimmerMotion>
 
-                <motion.span
+                <ShimmerMotion
                   className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
                   style={{
-                    ...shimmerStyle,
                     paddingTop: "0.3em",
                     paddingBottom: "0.3em",
                     fontSize: "1rem",
                   }}
-                  animate={{ backgroundPosition: ["200% center", "0% center"] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  delay={1}
                 >
                   និង
-                </motion.span>
+                </ShimmerMotion>
               </motion.div>
             </div>
           </div>
@@ -145,21 +203,13 @@ export default function Hero() {
           <motion.h1
             className="text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4 inline-block px-2"
             style={{
-              ...shimmerStyle,
-              ...shadowStyle,
               paddingTop: "0.3em",
               paddingBottom: "0.3em",
-            }}
-            animate={{ backgroundPosition: ["200% center", "0% center"] }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "linear",
             }}
             variants={fadeUp}
             custom={1}
           >
-            សិរីសួស្ដីអាពាហ៍ពិពាហ៍
+            <ShimmerMotion delay={1}>សិរីសួស្ដីអាពាហ៍ពិពាហ៍</ShimmerMotion>
           </motion.h1>
 
           <motion.h3
@@ -185,25 +235,18 @@ export default function Hero() {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, type: "spring" }}
         >
-          <GuestFrame color="#efbf04" />
+          <GuestFrame color={currentTheme.accent} />
           <div className="absolute inset-0 flex items-center justify-center">
-            <motion.span
+            <ShimmerMotion
               className="text-base sm:text-lg md:text-xl lg:text-2xl text-center px-4 mt-10 md:mt-12"
               style={{
-                ...shimmerStyle,
-                ...shadowStyle,
                 paddingTop: "0.3em",
                 paddingBottom: "0.3em",
               }}
-              animate={{ backgroundPosition: ["200% center", "0% center"] }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "linear",
-              }}
+              delay={0.3}
             >
               {dynamicGuestName}
-            </motion.span>
+            </ShimmerMotion>
           </div>
         </motion.div>
 
@@ -212,8 +255,11 @@ export default function Hero() {
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
+          custom={4}
         >
-          <h6 className="leading-6">ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦ វេលាម៉ោង៖ ៣ៈ០០ រសៀល</h6>
+          <h6 className="leading-6">
+            ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦ វេលាម៉ោង៖ ៣ៈ០០ រសៀល
+          </h6>
           <h6>នៅគេហដ្ឋានខាងស្រី</h6>
         </motion.div>
       </div>

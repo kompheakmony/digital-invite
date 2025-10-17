@@ -1,9 +1,11 @@
 import React, { lazy, Suspense, useMemo, useEffect, useState } from "react";
-import { motion, Variants } from "motion/react";
+import { motion, Variants } from "framer-motion";
 import ShortName from "./kbach/ShortName";
 import GuestFrame from "./kbach/GuestFrame";
+import { useTheme } from "../context/ThemeContext";
 
-export default function InviationContent() {
+export default function InvitationContent() {
+  const { currentTheme } = useTheme();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -29,11 +31,11 @@ export default function InviationContent() {
     (): React.CSSProperties => ({
       backgroundImage: `linear-gradient(
       90deg,
-      #dda20c,
-      #ffd700,
-      #fffacd,
-      #ffdf00,
-      #dda20c
+      var(--gold-dark),
+      var(--gold-light),
+      var(--gold-lightest),
+      var(--gold-medium),
+      var(--gold-dark)
     )`,
       backgroundSize: "200% auto",
       WebkitBackgroundClip: "text",
@@ -71,13 +73,14 @@ export default function InviationContent() {
       animate={
         !prefersReducedMotion
           ? { backgroundPosition: ["200% center", "0% center"] }
-          : {}
+          : { backgroundPosition: "0% center" }
       }
       transition={{
         duration: 3,
         repeat: Infinity,
         ease: "linear",
         delay,
+        ...(!prefersReducedMotion && { repeatDelay: 0 }),
       }}
     >
       {children}
@@ -87,13 +90,13 @@ export default function InviationContent() {
   return (
     <div className="flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
       <motion.div
-        className="relative mt-3 sm:mt-12 md:mt-20 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg flex justify-center"
+        className="relative mt-10 sm:mt-12 md:mt-20 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg flex justify-center"
         initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
         whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
         transition={{ duration: 1, type: "spring" }}
       >
         <div className="relative">
-          <ShortName color="#efbf04" />
+          <ShortName color={currentTheme.accent} />
 
           <div className="absolute inset-0 pointer-events-none font-khmer">
             <motion.div
@@ -194,7 +197,7 @@ export default function InviationContent() {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, type: "spring" }}
       >
-        <GuestFrame color="#efbf04" />
+        <GuestFrame color={currentTheme.accent} />
         <div className="absolute inset-0 flex items-center justify-center px-4">
           <ShimmerText
             className="text-base sm:text-lg md:text-xl lg:text-2xl mt-10 md:mt-12"

@@ -8,6 +8,7 @@ import AbaQr from "./components/AbaQr";
 import Footer from "./components/Footer";
 import InvitationContent from "./components/InvitationContent";
 import BackgroundMusic from "./components/BackgroundMusic";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const LazyPhotosGallary = React.lazy(
   () => import("./components/PhotosGallary")
@@ -52,10 +53,13 @@ const AppRoutes: FC = () => (
 const Layout: FC = () => (
   <Router>
     <ErrorBoundary>
-      <LayoutWrapper>
-        <AppRoutes />
-      </LayoutWrapper>
+      <ThemeProvider>
+        <LayoutWrapper>
+          <AppRoutes />
+        </LayoutWrapper>
+      </ThemeProvider>
     </ErrorBoundary>
   </Router>
 );
+
 export default Layout;

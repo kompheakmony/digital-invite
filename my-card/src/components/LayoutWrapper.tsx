@@ -7,7 +7,7 @@ import TopLeft from "./kbach/TopLeft";
 import TopRight from "./kbach/TopRight";
 import BottomLeft from "./kbach/BottomLeft";
 import BottomRight from "./kbach/BottomRight";
-import { ThemeProvider, useTheme } from "../context/ThemeContext";
+import { useTheme } from "../context/ThemeContext";
 
 interface LayoutWrapperProps {
   children: ReactNode;
@@ -68,7 +68,7 @@ const particlesOptions: ISourceOptions = {
 
 const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
   const [isParticlesInitialized, setIsParticlesInitialized] = useState(false);
-  const { currentTheme } = useTheme(); // Consume theme from context
+  const { currentTheme } = useTheme();
 
   useEffect(() => {
     const initParticles = async () => {
@@ -80,19 +80,12 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
     initParticles();
   }, []);
 
-  // Effect to ensure body background is transparent when LayoutWrapper manages it
   useEffect(() => {
-    document.body.style.backgroundImage = "none"; // Clear background from ThemeProvider
-    document.body.style.backgroundColor = "transparent"; // Ensure no default color
-    // LayoutWrapper's absolute div will handle the main background
-    return () => {
-      // Potentially reset body background if LayoutWrapper is unmounted
-      // This is a complex decision and depends on your app structure.
-      // For a full-page layout, it might be fine to leave it as 'none'.
-    };
+    document.body.style.backgroundImage = "none";
+    document.body.style.backgroundColor = "transparent";
+    return () => {};
   }, []);
 
-  // Use the accent color for dynamic orb gradients
   const orbGradient1 = useMemo(
     () => generateGradientFromColor(currentTheme.accent, 0.4, 0.2),
     [currentTheme.accent]
@@ -116,13 +109,11 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen w-full overflow-hidden relative flex items-center justify-center">
-      {/* Dynamic background based on the current theme's gradient */}
       <div
-        key={currentTheme.gradient} // Key allows re-render on gradient change for transition
-        className="absolute inset-0 transition-all duration-700"
+        key={currentTheme.gradient}
+        className="absolute inset-0"
         style={{
           background: currentTheme.gradient,
-          transition: "background 0.8s ease-in-out",
         }}
       />
 
@@ -136,7 +127,6 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
 
       <PatternBackground />
 
-      {/* Floating Orbs - dynamically colored with selected.accent */}
       <div
         className="absolute top-[10%] left-[15%] w-24 h-24 rounded-[50%_0_50%_0] transform rotate-45 blur-sm animate-khmer-float-1"
         style={{ background: orbGradient1 }}

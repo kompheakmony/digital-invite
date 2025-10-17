@@ -12,46 +12,39 @@ import {
   Theme,
   themeConfig,
   DEFAULT_THEME,
-} from "../config/themeConfig"; // Adjust path if needed
+} from "../config/themeConfig";
 
-// Define the shape of our context value
 interface ThemeContextType {
   currentThemeName: ThemeName;
   currentTheme: Theme;
   setTheme: (name: ThemeName) => void;
 }
 
-// Create the context
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-// Helper function to apply CSS variables and body styles
 const applyThemeStyles = (theme: Theme) => {
   const root = document.documentElement;
   const body = document.body;
 
-  // Apply CSS variables
   root.style.setProperty("--gold-primary", theme.cssVars.goldPrimary);
   root.style.setProperty("--gold-dark", theme.cssVars.goldDark);
   root.style.setProperty("--gold-light", theme.cssVars.goldLight);
   root.style.setProperty("--gold-lightest", theme.cssVars.goldLightest);
   root.style.setProperty("--gold-medium", theme.cssVars.goldMedium);
-  root.style.setProperty("--accent-color", theme.accent); // Add accent to CSS vars if you use it
+  root.style.setProperty("--accent-color", theme.accent);
 
-  // Apply body background gradient
   body.style.backgroundImage = theme.gradient;
-  body.style.backgroundAttachment = "fixed"; // Optional: makes background fixed
-  body.style.backgroundSize = "cover"; // Optional: ensures gradient covers body
-  body.style.backgroundPosition = "center"; // Optional
+  body.style.backgroundAttachment = "fixed";
+  body.style.backgroundSize = "cover";
+  body.style.backgroundPosition = "center";
 };
 
-// Theme Provider Component
 interface ThemeProviderProps {
   children: ReactNode;
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [currentThemeName, setCurrentThemeName] = useState<ThemeName>(() => {
-    // Attempt to load theme from localStorage, or use default
     try {
       const storedTheme = localStorage.getItem("themeName") as ThemeName;
       if (storedTheme && themeConfig[storedTheme]) {
@@ -65,7 +58,6 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
   const currentTheme = themeConfig[currentThemeName];
 
-  // Callback to set the theme and update localStorage
   const setTheme = useCallback((name: ThemeName) => {
     if (themeConfig[name]) {
       setCurrentThemeName(name);
@@ -81,7 +73,6 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     }
   }, []);
 
-  // Effect to apply theme styles whenever currentThemeName changes
   useEffect(() => {
     applyThemeStyles(currentTheme);
   }, [currentTheme]);
@@ -93,7 +84,6 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   );
 };
 
-// Custom hook to use the theme context
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {

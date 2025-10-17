@@ -1,13 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Moul&display=swap");
 
 :root {
-  /* Remove these --gold-* initial values, they will be set by JS dynamically */
-  /* --gold-primary: #efbf04; */
-  /* --gold-dark: #dda20c; */
-  /* --gold-light: #ffd700; */
-  /* --gold-lightest: #fffacd; */
-  /* --gold-medium: #ffdf00; */
-
   --accent-color: #efbf04;
   --green-dark: rgb(20, 83, 45);
   --green-medium: rgb(21, 128, 61);
@@ -68,7 +61,7 @@ body::-webkit-scrollbar {
   background: linear-gradient(
     90deg,
     var(--gold-dark),
-    /* Use variables */ var(--gold-light),
+    var(--gold-light),
     var(--gold-lightest),
     var(--gold-medium),
     var(--gold-dark)
@@ -82,10 +75,7 @@ body::-webkit-scrollbar {
 }
 
 .gold-glow {
-  /* Ensure this uses a dynamically set variable or is specific enough to gold */
   box-shadow: 0 0 20px rgba(239, 191, 4, 0.3), 0 0 40px rgba(239, 191, 4, 0.1);
-  /* Or make it generic if you want a 'glow' based on accent: */
-  /* box-shadow: 0 0 20px var(--accent-color, rgba(239, 191, 4, 0.3)), 0 0 40px var(--accent-color, rgba(239, 191, 4, 0.1)); */
 }
 
 ::-webkit-scrollbar-thumb {

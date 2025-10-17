@@ -71,7 +71,7 @@ export const themeConfig: Record<ThemeName, Theme> = {
   },
 };
 
-export const DEFAULT_THEME: ThemeName = 'peach';
+export const DEFAULT_THEME: ThemeName = 'blue';
 
 export const getTheme = (themeName: ThemeName = DEFAULT_THEME): Theme => {
   return themeConfig[themeName];

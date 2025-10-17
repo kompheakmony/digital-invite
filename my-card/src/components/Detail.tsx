@@ -22,7 +22,6 @@ export default function Details() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    // Media query for reduced motion
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
     const handler = (e: MediaQueryListEvent) =>
@@ -127,17 +126,14 @@ export default function Details() {
 
   useEffect(() => {
     if (!prefersReducedMotion) {
-      // Only animate if not reduced motion
       kmSpring1.set(127);
       kmSpring2.set(9.0);
     } else {
-      // Set immediate values for reduced motion
       kmSpring1.set(127);
       kmSpring2.set(9.0);
     }
   }, [kmSpring1, kmSpring2, prefersReducedMotion]);
 
-  // Create Khmer number transforms
   const km1Khmer = useTransform(
     kmSpring1,
     (latest) => `${toKhmerNumber(Math.round(latest))} គ.ម`
@@ -147,7 +143,6 @@ export default function Details() {
     (latest) => `${toKhmerNumber(Math.round(latest))} គ.ម`
   );
 
-  // Data
   const parents = [
     { father: "លោក យ៉ង់ វីរៈ", mother: "លោកស្រី ហួត សុមន" },
     { father: "លោក ខួន ពិនុច", mother: "លោកស្រី គីម ណេត" },
@@ -167,14 +162,14 @@ export default function Details() {
     {
       id: 1,
       description: "ចេញពីស្ពានអាកាសចោមចៅ តាមផ្លូវជាតិលេខ ៣ ចម្ងាយប្រមាណ",
-      distance: km1Khmer, // Use motion value
+      distance: km1Khmer,
       detail:
         "ដល់ខ្លោងទ្វារវត្តសិរីធានី រួចបត់ចូលប្រមាណ ១.៥គ.ម លោកអ្នកនឹងទៅដល់ផ្ទះពិធីមង្គលការ។",
     },
     {
       id: 2,
       description: "ចេញពីរង្វង់មូលទុរេន តាមផ្លូវជាតិលេខ ៣ ចម្ងាយប្រមាណ",
-      distance: km2Khmer, // Use motion value
+      distance: km2Khmer,
       detail:
         "ដល់ខ្លោងទ្វារវត្តសិរីធានី រួចបត់ចូលប្រមាណ ១.៥គ.ម លោកអ្នកនឹងទៅដល់ផ្ទះពិធីមង្គលការ។",
     },
@@ -265,7 +260,6 @@ export default function Details() {
           </div>
         </motion.div>
 
-        {/* Date Section */}
         <motion.div
           className="text-center space-y-3 text-gold text-base md:text-lg max-w-2xl mx-auto"
           variants={fadeUp}
@@ -511,13 +505,19 @@ export default function Details() {
               </g>
             </g>
             <defs>
-              <radialGradient id="goldGradient" cx="50%" cy="50%" r="75%">
-                <stop offset="0%" stopColor={`${currentTheme.accent}00`} />{" "}
-                <stop offset="50%" stopColor={currentTheme.accent} />
+              <radialGradient
+                id="goldGradient"
+                cx="50%"
+                cy="50%"
+                r="75%"
+                gradientUnits="userSpaceOnUse"
+              >
                 <stop
-                  offset="100%"
-                  stopColor={`${currentTheme.accent}00`}
-                />{" "}
+                  offset="0%"
+                  stopColor={currentTheme.cssVars.goldLightest}
+                />
+                <stop offset="25%" stopColor={currentTheme.cssVars.goldLight} />
+                <stop offset="50%" stopColor={currentTheme.cssVars.goldDark} />
               </radialGradient>
             </defs>
           </svg>

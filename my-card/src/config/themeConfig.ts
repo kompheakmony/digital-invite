@@ -1,4 +1,4 @@
-export type ThemeName = 'red' | 'green' | 'blue' | 'roseGold' | 'peach';
+export type ThemeName = 'red' | 'green' | 'blue' | 'roseGold' | 'peach' | 'aurora' |'ocean' |'sunset' | 'jade';
 
 export interface Theme {
   gradient: string;
@@ -69,9 +69,53 @@ export const themeConfig: Record<ThemeName, Theme> = {
       goldMedium: "#745142",
     },
   },
+  aurora: {
+    gradient: "radial-gradient(ellipse at center, #667eea 0%, #764ba2 50%, #2b1055 100%)",
+    accent: "#fbbf24",
+    cssVars: {
+      goldPrimary: "#fbbf24",
+      goldDark: "#f59e0b",
+      goldLight: "#fcd34d",
+      goldLightest: "#fef3c7",
+      goldMedium: "#fbbf24",
+    },
+  },
+  ocean: {
+    gradient: "radial-gradient(ellipse at center, #006d77 0%, #003049 50%, #001219 100%)",
+    accent: "#ffd60a",
+    cssVars: {
+      goldPrimary: "#ffd60a",
+      goldDark: "#ffc300",
+      goldLight: "#ffed4e",
+      goldLightest: "#fff8dc",
+      goldMedium: "#ffd60a",
+    },
+  },
+  sunset: {
+    gradient: "radial-gradient(ellipse at center, #ff6b35 0%, #f7931e 30%, #c1121f 70%, #370617 100%)",
+    accent: "#ffe5d9",
+    cssVars: {
+      goldPrimary: "#ffe5d9",
+      goldDark: "#ffcdb2",
+      goldLight: "#fff0e8",
+      goldLightest: "#fff5f0",
+      goldMedium: "#ffe5d9",
+    },
+  },
+  jade: {
+    gradient: "radial-gradient(ellipse at center, #064e3b 0%, #022c22 50%, #0a0e0d 100%)",
+    accent: "#10b981",
+    cssVars: {
+      goldPrimary: "#10b981",
+      goldDark: "#059669",
+      goldLight: "#34d399",
+      goldLightest: "#d1fae5",
+      goldMedium: "#10b981",
+    },
+  }
 };
 
-export const DEFAULT_THEME: ThemeName = 'blue';
+export const DEFAULT_THEME: ThemeName = 'red';
 
 export const getTheme = (themeName: ThemeName = DEFAULT_THEME): Theme => {
   return themeConfig[themeName];

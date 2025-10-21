@@ -74,10 +74,6 @@ body::-webkit-scrollbar {
   position: relative;
 }
 
-.gold-glow {
-  box-shadow: 0 0 20px rgba(239, 191, 4, 0.3), 0 0 40px rgba(239, 191, 4, 0.1);
-}
-
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(
     180deg,
@@ -131,26 +127,16 @@ body::-webkit-scrollbar {
 .pattern-bg::before {
   content: "";
   position: absolute;
-  width: 500vmax;
-  height: 500vmax;
+  width: 450vmax;
+  height: 450vmax;
   top: 50%;
   left: 50%;
   background-image: var(--bg-url);
   background-repeat: repeat;
   background-size: var(--s) var(--s);
-  opacity: 0.15;
+  opacity: 0.18;
   mix-blend-mode: overlay;
   transform: translate(-50%, -50%) rotate(45deg);
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
 }
 
 @keyframes khmer-float-1 {
@@ -183,7 +169,7 @@ body::-webkit-scrollbar {
   }
 }
 
-@keyframes fadeIn {
+@keyframes animate-fadeIn {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -234,88 +220,10 @@ body::-webkit-scrollbar {
   );
 }
 
-.app-content {
-  position: relative;
-  z-index: 10;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  backdrop-filter: blur(0.5px);
-}
-
-header {
-  padding: 2rem 1rem;
-  text-align: center;
-  position: relative;
-}
-
-header::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--gold-light),
-    transparent
-  );
-  border-radius: 1px;
-}
-
-header h1 {
-  margin: 0;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 700;
-  text-shadow: var(--shadow-gold);
-  position: relative;
-}
-
-main {
-  flex: 1;
-  padding: 2rem;
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto;
-  position: relative;
-}
-
-main p {
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
-  line-height: 1.8;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.glass-effect {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.gold-glow {
-  box-shadow: 0 0 20px rgba(239, 191, 4, 0.3), 0 0 40px rgba(239, 191, 4, 0.1);
-}
-
-.smooth-transition {
-  transition: all 0.3s var(--transition-smooth);
-}
-
 @media (max-width: 768px) {
   .pattern-bg::before {
-    opacity: 0.2;
+    opacity: 0.26;
     background-size: calc(var(--s) * 0.6) calc(var(--s) * 0.6);
-  }
-
-  header {
-    padding: 1.5rem 1rem;
-  }
-
-  main {
-    padding: 1.5rem;
   }
 
   .animate-float1,

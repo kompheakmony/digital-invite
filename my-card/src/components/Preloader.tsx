@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { motion } from "motion/react";
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 interface PreloaderProps {
   onLoadingComplete: () => void;
@@ -10,15 +10,18 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
   const [progress, setProgress] = useState(0);
   const [hasError, setHasError] = useState(false);
 
-  const assetConfig = useMemo(() => ({
-    fonts: [
-      { name: "Tacteng", url: "/fonts/tacteng.ttf" },
-      { name: "Khmer Boran", url: "/fonts/Khmer_Boran.ttf" },
-    ],
-    images: ["/preview_image.webp"],
-    vectors: ["/pkarchan-pattern.svg", "/pkarchan.svg"],
-    media: ["/hormrong.mp3"]
-  }), []);
+  const assetConfig = useMemo(
+    () => ({
+      fonts: [
+        { name: "Tacteng", url: "/fonts/tacteng.ttf" },
+        { name: "Khmer Boran", url: "/fonts/Khmer_Boran.ttf" },
+      ],
+      images: ["/preview_image.webp"],
+      vectors: ["/pkarchan-pattern.svg", "/pkarchan.svg"],
+      media: ["/hormrong.mp3"],
+    }),
+    []
+  );
 
   const updateProgress = useCallback((value: number) => {
     setProgress(value);
@@ -106,7 +109,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
       await loadMedia();
 
       updateProgress(100);
-      
+
       await new Promise((resolve) => setTimeout(resolve, 800));
 
       onLoadingComplete();
@@ -116,7 +119,14 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
       setProgress(100);
       setTimeout(() => onLoadingComplete(), 1000);
     }
-  }, [loadFonts, loadImages, loadVectors, loadMedia, updateProgress, onLoadingComplete]);
+  }, [
+    loadFonts,
+    loadImages,
+    loadVectors,
+    loadMedia,
+    updateProgress,
+    onLoadingComplete,
+  ]);
 
   useEffect(() => {
     loadAllAssets();
@@ -124,14 +134,14 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#013220]"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[radial-gradient(ellipse_at_center,#6f0000_0%,#200122_100%)]"
       initial={{ opacity: 1 }}
-      exit={{ 
-        opacity: 0, 
-        transition: { 
-          duration: 0.8, 
-          ease: "easeInOut" 
-        } 
+      exit={{
+        opacity: 0,
+        transition: {
+          duration: 0.8,
+          ease: "easeInOut",
+        },
       }}
       role="status"
       aria-label="Loading application"

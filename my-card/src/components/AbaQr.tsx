@@ -49,7 +49,7 @@ export default function AbaQr({
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="flex items-center justify-center">
-          <h4 className="font-khmer text-xl md:text-2xl">
+          <h4 className="font-khmer text-gold text-xl md:text-2xl">
             សូមពរជ័យគ្រប់ប្រការ
           </h4>
         </div>
@@ -162,7 +162,7 @@ export default function AbaQr({
               <AnimatePresence mode="wait">
                 <motion.p
                   key={currentQuoteIndex}
-                  className="font-khmer italic text-sm md:text-base leading-7 md:leading-8 relative z-10 pt-3 pb-3"
+                  className="font-khmer text-gold italic text-sm md:text-base leading-7 md:leading-8 relative z-10 pt-3 pb-3"
                   initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}

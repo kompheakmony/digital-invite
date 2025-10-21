@@ -145,15 +145,11 @@ export default function Footer() {
 
         <div className="flex flex-col items-center justify-center text-center space-y-6">
           <motion.div className="space-y-3" variants={fadeInUp}>
-            <p
-              className="text-lg md:text-xl tracking-wide leading-relaxed"
-              style={{ color: goldPrimary }}
-            >
+            <p className="text-lg text-gold md:text-xl tracking-wide leading-relaxed">
               សូមអរគុណចំពោះការចូលរួម
             </p>
             <motion.p
-              className="text-sm md:text-base max-w-md mx-auto"
-              style={{ color: `${goldPrimary}80` }}
+              className="text-sm text-gold md:text-base max-w-md mx-auto"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1, duration: 0.8 }}
@@ -191,8 +187,7 @@ export default function Footer() {
 
           <motion.div className="space-y-3" variants={fadeInUp}>
             <motion.p
-              className="text-sm md:text-base flex items-center justify-center gap-2"
-              style={{ color: `${goldPrimary}80` }}
+              className="text-sm text-gold md:text-base flex items-center justify-center gap-2"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400 }}
             >

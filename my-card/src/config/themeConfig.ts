@@ -1,4 +1,13 @@
-export type ThemeName = 'red' | 'green' | 'blue' | 'roseGold' | 'peach' | 'aurora' |'ocean' |'sunset' | 'jade';
+export type ThemeName =
+  | "red"
+  | "green"
+  | "blue"
+  | "roseGold"
+  | "peach"
+  | "aurora"
+  | "ocean"
+  | "sunset"
+  | "jade";
 
 export interface Theme {
   gradient: string;
@@ -70,7 +79,8 @@ export const themeConfig: Record<ThemeName, Theme> = {
     },
   },
   aurora: {
-    gradient: "radial-gradient(ellipse at center, #667eea 0%, #764ba2 50%, #2b1055 100%)",
+    gradient:
+      "radial-gradient(ellipse at center, #667eea 0%, #764ba2 50%, #2b1055 100%)",
     accent: "#fbbf24",
     cssVars: {
       goldPrimary: "#fbbf24",
@@ -81,7 +91,8 @@ export const themeConfig: Record<ThemeName, Theme> = {
     },
   },
   ocean: {
-    gradient: "radial-gradient(ellipse at center, #006d77 0%, #003049 50%, #001219 100%)",
+    gradient:
+      "radial-gradient(ellipse at center, #006d77 0%, #003049 50%, #001219 100%)",
     accent: "#ffd60a",
     cssVars: {
       goldPrimary: "#ffd60a",
@@ -92,7 +103,8 @@ export const themeConfig: Record<ThemeName, Theme> = {
     },
   },
   sunset: {
-    gradient: "radial-gradient(ellipse at center, #ff6b35 0%, #f7931e 30%, #c1121f 70%, #370617 100%)",
+    gradient:
+      "radial-gradient(ellipse at center, #ff6b35 0%, #f7931e 30%, #c1121f 70%, #370617 100%)",
     accent: "#ffe5d9",
     cssVars: {
       goldPrimary: "#ffe5d9",
@@ -103,7 +115,8 @@ export const themeConfig: Record<ThemeName, Theme> = {
     },
   },
   jade: {
-    gradient: "radial-gradient(ellipse at center, #064e3b 0%, #022c22 50%, #0a0e0d 100%)",
+    gradient:
+      "radial-gradient(ellipse at center, #064e3b 0%, #022c22 50%, #0a0e0d 100%)",
     accent: "#10b981",
     cssVars: {
       goldPrimary: "#10b981",
@@ -112,10 +125,10 @@ export const themeConfig: Record<ThemeName, Theme> = {
       goldLightest: "#d1fae5",
       goldMedium: "#10b981",
     },
-  }
+  },
 };
 
-export const DEFAULT_THEME: ThemeName = 'red';
+export const DEFAULT_THEME: ThemeName = "red";
 
 export const getTheme = (themeName: ThemeName = DEFAULT_THEME): Theme => {
   return themeConfig[themeName];

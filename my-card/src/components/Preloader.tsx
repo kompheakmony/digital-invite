@@ -18,7 +18,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
       ],
       images: ["/preview_image.webp"],
       vectors: ["/pkarchan-pattern.svg", "/pkarchan.svg"],
-      media: ["/hormrong.mp3"],
+      media: ["/nokor-reach.mp3"],
     }),
     []
   );

@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from "react";
 
 export default function BackgroundMusic() {
-  const audioRef = useRef(new Audio("/hormrong.mp3"));
+  const audioRef = useRef(new Audio("/nokor-reach.mp3"));
   const STORAGE_KEY = "background-music-position";
 
   useEffect(() => {
     const audio = audioRef.current;
     audio.loop = true;
-    audio.volume = 0.5;
+    audio.volume = 0.3;
 
     const savedTime = localStorage.getItem(STORAGE_KEY);
     if (savedTime) {

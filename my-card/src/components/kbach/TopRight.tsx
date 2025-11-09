@@ -9,7 +9,7 @@ const TopRight = ({ color }: TopRight) => {
       fill={color}
       version="1.2"
       viewBox="0 0 593 648"
-      className="w-48 md:w-60 h-auto absolute top-5 right-1 animate-fadeIn"
+      className="w-48 md:w-60 h-auto absolute top-2 right-1 animate-fadeIn"
     >
       <g>
         <g>

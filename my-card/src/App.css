@@ -222,7 +222,7 @@ body::-webkit-scrollbar {
 
 @media (max-width: 768px) {
   .pattern-bg::before {
-    opacity: 0.26;
+    /* opacity: 0.26; */
     background-size: calc(var(--s) * 0.6) calc(var(--s) * 0.6);
   }
 

@@ -18,7 +18,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
       ],
       images: ["/preview_image.webp"],
       vectors: ["/pkarchan-pattern.svg", "/pkarchan.svg"],
-      media: ["/nokor-reach.mp3"],
+      // media: ["/nokor-reach.mp3"],
     }),
     []
   );
@@ -75,24 +75,24 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
     );
   }, [assetConfig.vectors]);
 
-  const loadMedia = useCallback(async () => {
-    await Promise.all(
-      assetConfig.media.map(
-        (src) =>
-          new Promise<void>((resolve) => {
-            const el = document.createElement(
-              src.endsWith(".mp3") || src.endsWith(".wav") ? "audio" : "video"
-            );
-            el.src = src;
-            el.onloadeddata = () => resolve();
-            el.onerror = () => {
-              console.warn(`Failed media: ${src}`);
-              resolve();
-            };
-          })
-      )
-    );
-  }, [assetConfig.media]);
+  // const loadMedia = useCallback(async () => {
+  //   await Promise.all(
+  //     assetConfig.media.map(
+  //       (src) =>
+  //         new Promise<void>((resolve) => {
+  //           const el = document.createElement(
+  //             src.endsWith(".mp3") || src.endsWith(".wav") ? "audio" : "video"
+  //           );
+  //           el.src = src;
+  //           el.onloadeddata = () => resolve();
+  //           el.onerror = () => {
+  //             console.warn(`Failed media: ${src}`);
+  //             resolve();
+  //           };
+  //         })
+  //     )
+  //   );
+  // }, [assetConfig.media]);
 
   const loadAllAssets = useCallback(async () => {
     try {
@@ -105,8 +105,8 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
       updateProgress(70);
       await loadVectors();
 
-      updateProgress(90);
-      await loadMedia();
+      // updateProgress(90);
+      // await loadMedia();
 
       updateProgress(100);
 
@@ -123,7 +123,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
     loadFonts,
     loadImages,
     loadVectors,
-    loadMedia,
+    // loadMedia,
     updateProgress,
     onLoadingComplete,
   ]);

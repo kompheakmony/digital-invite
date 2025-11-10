@@ -318,11 +318,23 @@ export default function Details() {
             className="w-auto h-full"
             viewBox="100 50 655 675"
             preserveAspectRatio="xMidYMid meet"
-            style={{
-              WebkitTapHighlightColor: "transparent",
-              shapeRendering: "crispEdges",
-            }}
           >
+            <defs>
+              <radialGradient
+                id="goldGradient"
+                cx="50%"
+                cy="50%"
+                r="75%"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop
+                  offset="0%"
+                  stopColor={currentTheme.cssVars.goldLightest}
+                />
+                <stop offset="25%" stopColor={currentTheme.cssVars.goldLight} />
+                <stop offset="50%" stopColor={currentTheme.cssVars.goldDark} />
+              </radialGradient>
+            </defs>
             <g id="Mask group">
               <mask
                 id="mask0_28_64"
@@ -505,25 +517,12 @@ export default function Details() {
                   width="800"
                   height="800"
                   fill="url(#goldGradient)"
+                  style={{
+                    WebkitMask: "url(#goldGradient)",
+                  }}
                 />
               </g>
             </g>
-            <defs>
-              <radialGradient
-                id="goldGradient"
-                cx="50%"
-                cy="50%"
-                r="75%"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop
-                  offset="0%"
-                  stopColor={currentTheme.cssVars.goldLightest}
-                />
-                <stop offset="25%" stopColor={currentTheme.cssVars.goldLight} />
-                <stop offset="50%" stopColor={currentTheme.cssVars.goldDark} />
-              </radialGradient>
-            </defs>
           </svg>
         </motion.div>
         <motion.div

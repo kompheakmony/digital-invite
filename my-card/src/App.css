@@ -37,6 +37,17 @@ body::-webkit-scrollbar {
   width: 0px;
   background: transparent;
 }
+/* Safari-specific SVG fixes */
+svg {
+  -webkit-mask-image: none; /* Reset any webkit mask */
+}
+
+/* Ensure crisp rendering in Safari */
+@media not all and (min-resolution: 0.001dpcm) {
+  svg {
+    shape-rendering: geometricPrecision;
+  }
+}
 
 .text-gold {
   background-image: radial-gradient(

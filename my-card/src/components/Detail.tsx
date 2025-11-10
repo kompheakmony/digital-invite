@@ -319,6 +319,30 @@ export default function Details() {
             viewBox="100 50 655 675"
             preserveAspectRatio="xMidYMid meet"
           >
+            <defs>
+              <radialGradient
+                id="goldGradient"
+                cx="50%"
+                cy="50%"
+                r="75%"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop
+                  offset="0%"
+                  stopColor={currentTheme.cssVars.goldLightest}
+                />
+                <stop offset="25%" stopColor={currentTheme.cssVars.goldLight} />
+                <stop offset="50%" stopColor={currentTheme.cssVars.goldDark} />
+              </radialGradient>
+              <g mask="url(#mask0_28_64)">
+                <rect
+                  id="gradient"
+                  width="800"
+                  height="800"
+                  fill="url(#goldGradient)"
+                />
+              </g>
+            </defs>
             <g id="Mask group">
               <mask
                 id="mask0_28_64"
@@ -492,34 +516,10 @@ export default function Details() {
                   >
                     {km2Khmer}
                   </motion.text>
+                  <rect width="800" height="800" fill="url(#goldGradient)" />
                 </g>
               </mask>
-
-              <g mask="url(#mask0_28_64)">
-                <rect
-                  id="gradient"
-                  width="800"
-                  height="800"
-                  fill="url(#goldGradient)"
-                />
-              </g>
             </g>
-            <defs>
-              <radialGradient
-                id="goldGradient"
-                cx="50%"
-                cy="50%"
-                r="75%"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop
-                  offset="0%"
-                  stopColor={currentTheme.cssVars.goldLightest}
-                />
-                <stop offset="25%" stopColor={currentTheme.cssVars.goldLight} />
-                <stop offset="50%" stopColor={currentTheme.cssVars.goldDark} />
-              </radialGradient>
-            </defs>
           </svg>
         </motion.div>
         <motion.div

@@ -315,13 +315,9 @@ export default function Details() {
         <motion.div className="w-full max-w-3xl" variants={fadeUp} custom={7}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-auto h-full"
-            viewBox="100 50 655 675"
+            className="w-full h-auto"
+            viewBox="0 0 800 800"
             preserveAspectRatio="xMidYMid meet"
-            style={{
-              WebkitTapHighlightColor: "transparent",
-              shapeRendering: "crispEdges",
-            }}
           >
             <g id="Mask group">
               <mask
@@ -329,8 +325,8 @@ export default function Details() {
                 maskUnits="userSpaceOnUse"
                 x="0"
                 y="0"
-                width="800"
-                height="800"
+                width="100%"
+                height="100%"
               >
                 <g id="box" filter="url(#goldShadow)">
                   <motion.g
@@ -502,8 +498,8 @@ export default function Details() {
               <g mask="url(#mask0_28_64)">
                 <rect
                   id="gradient"
-                  width="800"
-                  height="800"
+                  width="100%"
+                  height="100%"
                   fill="url(#goldGradient)"
                   mask="url(#goldGradient)"
                   style={{

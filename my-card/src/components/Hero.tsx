@@ -139,7 +139,7 @@ export default function Hero() {
           className="relative mt-3 sm:mt-12 md:mt-20 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg flex justify-center"
           initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
           whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 1.5, type: "spring" }}
+          transition={{ duration: 2, type: "spring" }}
         >
           <div className="relative">
             <ShortName color={currentTheme.accent} />
@@ -258,7 +258,7 @@ export default function Hero() {
           custom={4}
         >
           <h6 className="leading-6">
-            ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦ វេលាម៉ោង៖ ៣ៈ០០ រសៀល
+            ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦ វេលាម៉ោង៖ ៦ៈ០០ ល្ងាច
           </h6>
           <h6>នៅគេហដ្ឋានខាងស្រី</h6>
         </motion.div>

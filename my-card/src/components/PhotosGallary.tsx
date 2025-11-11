@@ -60,7 +60,7 @@ const PhotosGallery: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 1 }}
         className="text-center mb-12"
       >
         <h4 className="font-khmer text-gold text-xl md:text-2xl lg:text-3xl mb-2">
@@ -83,7 +83,7 @@ const PhotosGallery: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
             transition={{
-              duration: 0.5,
+              duration: 1,
               ease: "easeOut",
               delay: index * 0.1,
             }}

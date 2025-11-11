@@ -65,14 +65,20 @@ export default function Details() {
 
     return () => clearInterval(timer);
   }, [targetDate]);
+
   const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 40 },
     visible: (i: number = 0) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.2, duration: 0.8, ease: "easeOut" },
+      transition: {
+        delay: i * 0.25,
+        duration: 2.5,
+        ease: [0.3, 0.1, 0.3, 1],
+      },
     }),
   };
+
   const pathVariants: Variants = useMemo(
     () => ({
       hidden: {
@@ -85,7 +91,7 @@ export default function Details() {
         opacity: 1,
         y: 0,
         transition: {
-          pathLength: { duration: 3, delay: 1, ease: "easeInOut" },
+          pathLength: { duration: 4, delay: 3 },
           opacity: { duration: 0.5, delay: 1, ease: "easeInOut" },
         },
       },
@@ -99,7 +105,7 @@ export default function Details() {
       opacity: 1,
       scale: 1,
       transition: {
-        delay: custom * 0.8,
+        delay: custom * 1.3,
         duration: 1,
         ease: "easeOut",
       },
@@ -114,7 +120,7 @@ export default function Details() {
       opacity: 1,
       transition: {
         delay: 0,
-        duration: 0.8,
+        duration: 1,
       },
     },
   };
@@ -596,7 +602,9 @@ export default function Details() {
         </motion.div>
         <motion.div
           className="flex justify-center mb-6"
-          variants={fadeUp}
+          transition={{ duration: 2.5, ease: "easeOut" }}
+          animate={!prefersReducedMotion ? "float" : ""}
+          variants={floatVariants}
           custom={8}
         >
           <button

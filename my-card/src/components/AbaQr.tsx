@@ -46,7 +46,7 @@ export default function AbaQr({
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
       >
         <div className="flex items-center justify-center">
           <h4 className="font-khmer text-gold text-xl md:text-2xl">
@@ -66,7 +66,7 @@ export default function AbaQr({
         initial={{ opacity: 0, y: 60, scale: 0.9 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
       >
         <div className="flex-1 flex flex-col items-center justify-center">
           <div className="relative group">
@@ -138,7 +138,7 @@ export default function AbaQr({
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
           >
             <div
               className="relative backdrop-blur-sm border rounded-2xl p-6 hover:bg-white/5 transition-all duration-500"

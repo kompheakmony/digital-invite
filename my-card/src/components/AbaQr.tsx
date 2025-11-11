@@ -70,24 +70,30 @@ export default function AbaQr({
       >
         <div className="flex-1 flex flex-col items-center justify-center">
           <div className="relative group">
-            <div
-              className="relative p-4 rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-105"
-              style={{
-                width: size + 32,
-                height: size + 32,
-              }}
+            <a
+              href="https://pay.ababank.com/oRF8/miaea0t0"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <img
-                src={qrImage}
-                alt="ABA QR Code"
-                width={size}
-                height={size}
-                className="rounded-lg transition-all duration-300"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 rounded-2xl bg-white/3 pointer-events-none" />
-            </div>
+              <div
+                className="relative p-4 rounded-2xl shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-105"
+                style={{
+                  width: size + 32,
+                  height: size + 32,
+                }}
+              >
+                <img
+                  src={qrImage}
+                  alt="ABA QR Code"
+                  width={size}
+                  height={size}
+                  className="rounded-lg transition-all duration-300"
+                  loading="lazy"
+                />
 
+                <div className="absolute inset-0 rounded-2xl bg-white/3 pointer-events-none" />
+              </div>
+            </a>
             <div
               className={`absolute -top-4 -left-4 w-10 h-10 border-t-4 border-l-4 ${activeCornerColor} rounded-tl-3xl`}
             />

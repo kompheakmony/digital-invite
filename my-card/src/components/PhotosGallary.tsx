@@ -98,7 +98,6 @@ const PhotosGallery: React.FC = () => {
                 scale: 1.1,
                 transition: { duration: 0.3 },
               }}
-              loading="lazy"
             />
           </motion.div>
         ))}

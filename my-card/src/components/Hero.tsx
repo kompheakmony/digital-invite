@@ -40,7 +40,7 @@ export default function Hero() {
   }, [guestSlug, dynamicGuestName]);
 
   const invitationTitle = "សូមគោរមអញ្ជើញ";
-  const invitationDescription = `ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦ វេលាម៉ោង៖ ៣ៈ០០ រសៀល នៅគេហដ្ឋានខាងស្រី`;
+  const invitationDescription = `ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦ វេលាម៉ោង៖ ៦ៈ០០ ល្ងាច នៅគេហដ្ឋានខាងស្រី`;
   const invitationImageUrl = "/preview_image.webp";
 
   const fadeUp: Variants = {

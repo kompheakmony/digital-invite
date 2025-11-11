@@ -117,13 +117,13 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
         }}
       />
 
-      {isParticlesInitialized && (
+      {/* {isParticlesInitialized && (
         <Particles
           id="tsparticles"
           className="absolute inset-0"
           options={particlesOptions}
         />
-      )}
+      )} */}
 
       <PatternBackground />
 

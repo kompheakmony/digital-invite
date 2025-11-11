@@ -220,7 +220,7 @@ export default function InvitationContent() {
         custom={4}
       >
         <h6 className="leading-6" aria-label="Event Date and Time">
-          ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦​ វេលាម៉ោង៖ ៣ៈ០០ រសៀល
+          ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦​ វេលាម៉ោង៖ ៦ៈ០០ ល្ងាច
         </h6>
         <h6 aria-label="Event Location">នៅគេហដ្ឋានខាងស្រី</h6>
       </motion.div>

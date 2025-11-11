@@ -18,10 +18,20 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Safari-specific fixes */
 @supports (-webkit-touch-callout: none) {
-  html, body {
+  html,
+  body {
     height: -webkit-fill-available;
+  }
+}
+
+svg {
+  -webkit-mask-image: none;
+}
+
+@media not all and (min-resolution: 0.001dpcm) {
+  svg {
+    shape-rendering: geometricPrecision;
   }
 }
 
@@ -31,7 +41,6 @@ body {
   color: var(--gold-primary);
   overflow-x: hidden;
   line-height: 1.6;
-  /* Improve text rendering across browsers */
   text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
 }
@@ -40,9 +49,8 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  min-height: -webkit-fill-available; /* Safari mobile fix */
+  min-height: -webkit-fill-available;
   position: relative;
-  /* Hardware acceleration for smoother animations */
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
@@ -281,9 +289,10 @@ body::-webkit-scrollbar {
     animation-duration: 6s;
     -webkit-animation-duration: 6s;
   }
-  
+
   /* Improve touch interactions on Safari iOS */
-  .text-gold, .combined-gold {
+  .text-gold,
+  .combined-gold {
     -webkit-tap-highlight-color: transparent;
   }
 }

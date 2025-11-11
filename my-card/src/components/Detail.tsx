@@ -164,14 +164,14 @@ export default function Details() {
       description: "ចេញពីស្ពានអាកាសចោមចៅ តាមផ្លូវជាតិលេខ ៣ ចម្ងាយប្រមាណ",
       distance: km1Khmer,
       detail:
-        "ដល់ខ្លោងទ្វារវត្តសិរីធានី រួចបត់ចូលប្រមាណ ១.៥គ.ម លោកអ្នកនឹងទៅដល់ផ្ទះពិធីមង្គលការ។",
+        "ដល់ខ្លោងទ្វារវត្តសិរីធានីខាងឆ្វេងដៃ រួចបត់ចូលប្រមាណ ១.៥គ.ម លោកអ្នកនឹងទៅដល់ផ្ទះពិធីមង្គលការ។",
     },
     {
       id: 2,
       description: "ចេញពីរង្វង់មូលទុរេន តាមផ្លូវជាតិលេខ ៣ ចម្ងាយប្រមាណ",
       distance: km2Khmer,
       detail:
-        "ដល់ខ្លោងទ្វារវត្តសិរីធានី រួចបត់ចូលប្រមាណ ១.៥គ.ម លោកអ្នកនឹងទៅដល់ផ្ទះពិធីមង្គលការ។",
+        "ដល់ខ្លោងទ្វារវត្តសិរីធានីខាងស្ដាំដៃ រួចបត់ចូលប្រមាណ ១.៥គ.ម លោកអ្នកនឹងទៅដល់ផ្ទះពិធីមង្គលការ។",
     },
   ];
 
@@ -318,6 +318,10 @@ export default function Details() {
             className="w-auto h-full"
             viewBox="100 50 655 675"
             preserveAspectRatio="xMidYMid meet"
+            style={{
+              WebkitTapHighlightColor: "transparent",
+              shapeRendering: "crispEdges",
+            }}
           >
             <g id="Mask group">
               <mask
@@ -501,6 +505,10 @@ export default function Details() {
                   width="800"
                   height="800"
                   fill="url(#goldGradient)"
+                  mask="url(#goldGradient)"
+                  style={{
+                    WebkitMask: "url(#goldGradient)",
+                  }}
                 />
               </g>
             </g>

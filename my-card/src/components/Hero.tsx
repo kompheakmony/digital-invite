@@ -44,12 +44,26 @@ export default function Hero() {
   const invitationImageUrl = "/preview_image.webp";
 
   const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 40 },
     visible: (i: number = 0) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.3, duration: 0.8, ease: "easeOut" },
+      transition: {
+        delay: i * 0.25,
+        duration: 2.5,
+        ease: [0.3, 0.1, 0.3, 1],
+      },
     }),
+  };
+  const floatVariants: Variants = {
+    float: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
   };
 
   const shimmerStyle: React.CSSProperties = useMemo(
@@ -137,9 +151,11 @@ export default function Hero() {
       <div className="flex flex-col items-center text-center px-4 sm:px-6 lg:px-8">
         <motion.div
           className="relative mt-3 sm:mt-12 md:mt-20 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg flex justify-center"
-          initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+          initial={{ opacity: 0, scale: 0.8, rotate: -15 }}
           whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 2, type: "spring" }}
+          transition={{ duration: 2.5, type: "spring" }}
+          animate={!prefersReducedMotion ? "float" : ""}
+          variants={floatVariants}
         >
           <div className="relative">
             <ShortName color={currentTheme.accent} />
@@ -231,9 +247,10 @@ export default function Hero() {
 
         <motion.div
           className="relative mb-4 sm:mb-6 w-full max-w-xs sm:max-w-sm md:max-w-md flex items-center justify-center"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, type: "spring" }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          custom={4}
         >
           <GuestFrame color={currentTheme.accent} />
           <div className="absolute inset-0 flex items-center justify-center">
@@ -255,7 +272,7 @@ export default function Hero() {
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          custom={4}
+          custom={5}
         >
           <h6 className="leading-6">
             ថ្ងៃ អាទិត្យ ទី ១៧ ខែ មេសា ឆ្នាំ ២០២៦ វេលាម៉ោង៖ ៦ៈ០០ ល្ងាច

@@ -118,6 +118,16 @@ export default function Details() {
       },
     },
   };
+  const floatVariants: Variants = {
+    float: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+  };
 
   const handleRedirect = () => {
     const url = `https://maps.app.goo.gl/ZiEYZU2GpxkvH49DA?g_st=ic`;
@@ -193,6 +203,8 @@ export default function Details() {
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, type: "spring" }}
+        animate={!prefersReducedMotion ? "float" : ""}
+        variants={floatVariants}
       >
         <h1 className="font-tacteng text-6xl sm:text-7xl md:text-8xl combined-gold">
           Ó
@@ -381,7 +393,7 @@ export default function Details() {
                       y="515"
                       fill="#FFFACD"
                       className="font-khmer"
-                      fontSize="16"
+                      fontSize="18"
                       textAnchor="start"
                     >
                       1.5 គ.ម
@@ -518,7 +530,7 @@ export default function Details() {
                     fill="#FFFACD"
                     className="font-khmer"
                     textAnchor="start"
-                    fontSize="16"
+                    fontSize="18"
                     variants={textVariants}
                   >
                     {km1Khmer}
@@ -530,7 +542,7 @@ export default function Details() {
                     fill="#FFFACD"
                     className="font-khmer"
                     textAnchor="start"
-                    fontSize="16"
+                    fontSize="18"
                     variants={textVariants}
                   >
                     {km2Khmer}

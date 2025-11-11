@@ -1,5 +1,11 @@
 import { ArrowRight } from "lucide-react";
-import { motion, Variants, useSpring, useTransform } from "motion/react";
+import {
+  motion,
+  Variants,
+  useSpring,
+  useTransform,
+  MotionValue,
+} from "motion/react";
 import React, { useState, useEffect, useMemo } from "react";
 import { useTheme } from "../context/ThemeContext";
 
@@ -8,6 +14,12 @@ interface TimeLeft {
   hours: number;
   minutes: number;
   seconds: number;
+}
+interface Direction {
+  id: number;
+  description: string;
+  distance: MotionValue<string>;
+  detail: string;
 }
 
 export default function Details() {
@@ -46,14 +58,13 @@ export default function Details() {
       return { days: 0, hours: 0, minutes: 0, seconds: 0 };
     };
 
+    setTimeLeft(calculateTimeLeft());
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
-    setTimeLeft(calculateTimeLeft());
-
     return () => clearInterval(timer);
-  }, []);
+  }, [targetDate]);
   const fadeUp: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: (i: number = 0) => ({
@@ -319,6 +330,22 @@ export default function Details() {
             viewBox="0 0 800 800"
             preserveAspectRatio="xMidYMid meet"
           >
+            <defs>
+              <radialGradient
+                id="goldGradient"
+                cx="50%"
+                cy="50%"
+                r="75%"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop
+                  offset="0%"
+                  stopColor={currentTheme.cssVars.goldLightest}
+                />
+                <stop offset="25%" stopColor={currentTheme.cssVars.goldLight} />
+                <stop offset="50%" stopColor={currentTheme.cssVars.goldDark} />
+              </radialGradient>
+            </defs>
             <g id="Mask group">
               <mask
                 id="mask0_28_64"
@@ -328,7 +355,7 @@ export default function Details() {
                 width="100%"
                 height="100%"
               >
-                <g id="box" filter="url(#goldShadow)">
+                <g id="box">
                   <motion.g
                     id="label_dest"
                     variants={scaleUpVariants}
@@ -439,16 +466,28 @@ export default function Details() {
                       strokeWidth="2"
                     />
                   </motion.g>
-
-                  <motion.g id="routes">
+                  <g id="routes-bg">
                     <path
-                      d="M330 86V540H551 M330 712V540"
+                      d="M330 86V540H551"
                       fill="none"
                       stroke="#4B5563"
                       strokeWidth="10"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      vectorEffect="non-scaling-stroke"
                     />
+                    <path
+                      d="M330 712V540"
+                      fill="none"
+                      stroke="#4B5563"
+                      strokeWidth="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  </g>
+
+                  <g id="routes">
                     <motion.path
                       d="M330 86V540H551"
                       fill="none"
@@ -456,7 +495,9 @@ export default function Details() {
                       strokeWidth="10"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      vectorEffect="non-scaling-stroke"
                       variants={pathVariants}
+                      style={{ pathLength: 0 }}
                     />
 
                     <motion.path
@@ -466,9 +507,11 @@ export default function Details() {
                       strokeWidth="10"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      vectorEffect="non-scaling-stroke"
                       variants={pathVariants}
+                      style={{ pathLength: 0 }}
                     />
-                  </motion.g>
+                  </g>
                   <motion.text
                     x="369"
                     y="316"
@@ -502,28 +545,10 @@ export default function Details() {
                   height="100%"
                   fill="url(#goldGradient)"
                   mask="url(#goldGradient)"
-                  style={{
-                    WebkitMask: "url(#goldGradient)",
-                  }}
+                  style={{ WebkitMask: "url(#goldGradient)" }}
                 />
               </g>
             </g>
-            <defs>
-              <radialGradient
-                id="goldGradient"
-                cx="50%"
-                cy="50%"
-                r="75%"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop
-                  offset="0%"
-                  stopColor={currentTheme.cssVars.goldLightest}
-                />
-                <stop offset="25%" stopColor={currentTheme.cssVars.goldLight} />
-                <stop offset="50%" stopColor={currentTheme.cssVars.goldDark} />
-              </radialGradient>
-            </defs>
           </svg>
         </motion.div>
         <motion.div

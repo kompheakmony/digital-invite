@@ -174,7 +174,7 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
         />
         <TopLeft color={currentTheme.accent} />
         <TopRight color={currentTheme.accent} />
-        <div className="relative w-full h-[92vh] sm:h-[88vh] md:h-[90vh] lg:h-[92vh]">
+        <div className="relative w-full h-[92vh] sm:h-[65vh] md:h-[90vh] lg:h-[92vh]">
           <motion.ul
             ref={ref}
             className="h-full list-none overflow-y-scroll space-y-4 scrollbar-hide"

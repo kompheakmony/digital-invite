@@ -67,8 +67,8 @@ const StyleSheet = () => (
       display: none;
     }
     .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
     }
   `}</style>
 );
@@ -127,57 +127,53 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
   );
 
   return (
-    <div className="min-h-screen w-full overflow-hidden relative flex items-center justify-center p-4 sm:p-8">
+    <div className="min-h-screen w-full overflow-hidden relative flex items-center justify-center">
       <div
         className="absolute inset-0"
         style={{ background: currentTheme.gradient }}
       />
+
       <PatternBackground />
 
-      {/* Floating Orbs */}
       <div
-        className="absolute top-[8%] left-[10%] w-16 h-16 sm:w-24 sm:h-24 rounded-[50%_0_50%_0] rotate-45 blur-sm animate-khmer-float-1"
+        className="absolute top-[10%] left-[15%] w-24 h-24 rounded-[50%_0_50%_0] transform rotate-45 blur-sm animate-khmer-float-1"
         style={{ background: orbGradient1 }}
       />
       <div
-        className="absolute top-[25%] right-[8%] w-14 h-14 sm:w-20 sm:h-20 rounded-full blur-xs animate-khmer-float-2"
+        className="absolute top-[30%] right-[10%] w-20 h-20 rounded-full blur-xs animate-khmer-float-2"
         style={{ background: orbGradient2 }}
       />
       <div
-        className="absolute bottom-[18%] left-[20%] w-20 h-20 sm:w-28 sm:h-28 rounded-[0_50%_0_50%] -rotate-30 blur-sm animate-khmer-float-3"
+        className="absolute bottom-[20%] left-[25%] w-28 h-28 rounded-[0_50%_0_50%] transform -rotate-30 blur-sm animate-khmer-float-3"
         style={{ background: orbGradient3 }}
       />
       <div
-        className="absolute top-[55%] left-[6%] w-12 h-12 sm:w-16 sm:h-16 rounded-full blur-xs animate-khmer-float-1"
+        className="absolute top-[55%] left-[8%] w-16 h-16 rounded-full blur-xs animate-khmer-float-1"
         style={{ background: orbGradient4 }}
       />
       <div
-        className="absolute bottom-[8%] right-[15%] w-16 h-24 sm:w-20 sm:h-32 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] -rotate-90 blur-sm animate-khmer-float-2"
+        className="absolute bottom-[10%] right-[18%] w-20 h-32 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] transform -rotate-90 blur-sm animate-khmer-float-2"
         style={{ background: orbGradient5 }}
       />
 
-      {/* Content Container */}
       <div
-        className="relative z-20 flex flex-col items-center justify-center w-full max-w-[95vw] sm:max-w-2xl md:max-w-3xl px-3 sm:px-6 py-6 sm:py-8 backdrop-blur-xs rounded-2xl shadow-2xl border"
+        className="relative z-20 flex flex-col items-center justify-center w-full max-w-3xl px-4 py-8 backdrop-blur-xs rounded-2xl shadow-2xl border"
         style={{ borderColor: `${currentTheme.accent}40` }}
       >
-        {/* Accent Borders */}
         <span
-          className="absolute top-[30%] bottom-[30%] left-3 sm:left-4 w-px"
+          className="absolute top-[270px] bottom-[270px] left-4 w-px"
           style={{
             background: `linear-gradient(to bottom, transparent, ${currentTheme.accent}, transparent)`,
           }}
         />
         <span
-          className="absolute top-[30%] bottom-[30%] right-3 sm:right-4 w-px"
+          className="absolute top-[270px] bottom-[270px] right-4 w-px"
           style={{
             background: `linear-gradient(to bottom, transparent, ${currentTheme.accent}, transparent)`,
           }}
         />
-
         <TopLeft color={currentTheme.accent} />
         <TopRight color={currentTheme.accent} />
-
         <div className="relative w-full h-[78vh] md:h-[92vh]">
           <motion.ul
             ref={ref}
@@ -191,7 +187,6 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
           </motion.ul>
           <StyleSheet />
         </div>
-
         <BottomLeft color={currentTheme.accent} />
         <BottomRight color={currentTheme.accent} />
       </div>

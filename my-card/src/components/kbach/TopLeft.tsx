@@ -9,7 +9,7 @@ const TopLeft = ({ color }: TopLeft) => {
       fill={color}
       version="1.2"
       viewBox="0 0 593 648"
-      className="w-48 md:w-60 h-auto absolute top-2 left-1 animate-fadeIn"
+      className="absolute w-48 md:w-60 h-auto top-2 left-1 pointer-events-none animate-fadeIn"
     >
       <g>
         <path d="M94.72 168.86c-14.05-3.95-10.25 6.71-5.88 9.13-7.61-.56-8.66-5.01-8-7.67-5.43 13.9-30.02 7.01-36.45.3 14.05 3.52 35.51-13.59 50.33-1.76zm-23.43 2.46c6.71-4.39 15.76-5.88 15.76-5.88-5.47-.46-11.45 1-14.91 3.19-3.97 2.5-6.32 4.08-14.43 4.76 0 0 7.81 1.71 13.58-2.07z" />

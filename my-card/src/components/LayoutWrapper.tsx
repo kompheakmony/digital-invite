@@ -127,7 +127,7 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
   );
 
   return (
-    <div className="w-full h-[100vh] overflow-hidden relative flex items-center justify-center">
+    <div className="w-full h-full overflow-hidden relative flex items-center justify-center">
       <div
         className="absolute inset-0"
         style={{ background: currentTheme.gradient }}
@@ -174,7 +174,7 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
         />
         <TopLeft color={currentTheme.accent} />
         <TopRight color={currentTheme.accent} />
-        <div className="relative w-full h-[78vh]">
+        <div className="relative w-full h-screen">
           <motion.ul
             ref={ref}
             className="h-full list-none overflow-y-scroll space-y-4 scrollbar-hide"

@@ -63,13 +63,8 @@ function useScrollOverflowMask(scrollYProgress: MotionValue<number>) {
 
 const StyleSheet = () => (
   <style>{`
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-hide {
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
-    }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
   `}</style>
 );
 
@@ -89,7 +84,6 @@ const generateGradientFromColor = (
     const b = parseInt(hex.slice(5, 7), 16);
     return `${r}, ${g}, ${b}`;
   };
-
   const rgb = hexToRgb(color);
   return `linear-gradient(to top right, rgba(${rgb}, ${startOpacity}) 0%, rgba(${rgb}, ${endOpacity}) 100%)`;
 };
@@ -127,7 +121,8 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
   );
 
   return (
-    <div className="w-full h-auto overflow-hidden relative flex items-center justify-center">
+    <div className="relative w-full min-h-screen overflow-hidden flex items-center justify-center">
+      {/* Full-screen gradient background */}
       <div
         className="absolute inset-0"
         style={{ background: currentTheme.gradient }}
@@ -135,49 +130,100 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
 
       <PatternBackground />
 
+      {/* ---------- FLOATING ORBS (responsive) ---------- */}
       <div
-        className="absolute top-[10%] left-[15%] w-24 h-24 rounded-[50%_0_50%_0] transform rotate-45 blur-sm animate-khmer-float-1"
+        className="absolute hidden sm:block top-[10%] left-[15%] w-24 h-24 rounded-[50%_0_50%_0] rotate-45 blur-sm animate-khmer-float-1"
         style={{ background: orbGradient1 }}
       />
       <div
-        className="absolute top-[30%] right-[10%] w-20 h-20 rounded-full blur-xs animate-khmer-float-2"
-        style={{ background: orbGradient2 }}
-      />
-      <div
-        className="absolute bottom-[20%] left-[25%] w-28 h-28 rounded-[0_50%_0_50%] transform -rotate-30 blur-sm animate-khmer-float-3"
-        style={{ background: orbGradient3 }}
-      />
-      <div
-        className="absolute top-[55%] left-[8%] w-16 h-16 rounded-full blur-xs animate-khmer-float-1"
-        style={{ background: orbGradient4 }}
-      />
-      <div
-        className="absolute bottom-[10%] right-[18%] w-20 h-32 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] transform -rotate-90 blur-sm animate-khmer-float-2"
-        style={{ background: orbGradient5 }}
+        className="absolute top-[8%] left-[10%] sm:top-[10%] sm:left-[15%] w-16 h-16 sm:w-24 sm:h-24 rounded-[50%_0_50%_0] rotate-45 blur-sm animate-khmer-float-1"
+        style={{ background: orbGradient1 }}
       />
 
       <div
-        className="relative z-20 flex flex-col items-center justify-center w-full max-w-3xl px-4 py-8 backdrop-blur-xs rounded-2xl shadow-2xl border"
+        className="absolute hidden sm:block top-[30%] right-[10%] w-20 h-20 rounded-full blur-xs animate-khmer-float-2"
+        style={{ background: orbGradient2 }}
+      />
+      <div
+        className="absolute top-[25%] right-[8%] sm:top-[30%] sm:right-[10%] w-14 h-14 sm:w-20 sm:h-20 rounded-full blur-xs animate-khmer-float-2"
+        style={{ background: orbGradient2 }}
+      />
+
+      <div
+        className="absolute hidden sm:block bottom-[20%] left-[25%] w-28 h-28 rounded-[0_50%_0_50%] -rotate-30 blur-sm animate-khmer-float-3"
+        style={{ background: orbGradient3 }}
+      />
+      <div
+        className="absolute bottom-[15%] left-[15%] sm:bottom-[20%] sm:left-[25%] w-20 h-20 sm:w-28 sm:h-28 rounded-[0_50%_0_50%] -rotate-30 blur-sm animate-khmer-float-3"
+        style={{ background: orbGradient3 }}
+      />
+
+      <div
+        className="absolute hidden sm:block top-[55%] left-[8%] w-16 h-16 rounded-full blur-xs animate-khmer-float-1"
+        style={{ background: orbGradient4 }}
+      />
+      <div
+        className="absolute top-[50%] left-[5%] sm:top-[55%] sm:left-[8%] w-12 h-12 sm:w-16 sm:h-16 rounded-full blur-xs animate-khmer-float-1"
+        style={{ background: orbGradient4 }}
+      />
+
+      <div
+        className="absolute hidden sm:block bottom-[10%] right-[18%] w-20 h-32 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] -rotate-90 blur-sm animate-khmer-float-2"
+        style={{ background: orbGradient5 }}
+      />
+      <div
+        className="absolute bottom-[8%] right-[12%] sm:bottom-[10%] sm:right-[18%] w-16 h-24 sm:w-20 sm:h-32 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] -rotate-90 blur-sm animate-khmer-float-2"
+        style={{ background: orbGradient5 }}
+      />
+
+      {/* ---------- CENTRAL CARD ---------- */}
+      <div
+        className="
+          relative z-20 flex flex-col items-center justify-center
+          w-full max-w-full sm:max-w-3xl
+          mx-4 sm:mx-0
+          px-4 py-6 sm:px-6 sm:py-8
+          backdrop-blur-xs rounded-2xl shadow-2xl border
+        "
         style={{ borderColor: `${currentTheme.accent}40` }}
       >
+        {/* Vertical accent lines – dynamic height */}
         <span
-          className="absolute top-[270px] bottom-[270px] left-4 w-px"
+          className="absolute left-3 sm:left-4 w-px"
           style={{
+            top: "6rem",
+            bottom: "6rem",
             background: `linear-gradient(to bottom, transparent, ${currentTheme.accent}, transparent)`,
           }}
         />
         <span
-          className="absolute top-[270px] bottom-[270px] right-4 w-px"
+          className="absolute right-3 sm:right-4 w-px"
           style={{
+            top: "6rem",
+            bottom: "6rem",
             background: `linear-gradient(to bottom, transparent, ${currentTheme.accent}, transparent)`,
           }}
         />
-        <TopLeft color={currentTheme.accent} />
-        <TopRight color={currentTheme.accent} />
-        <div className="relative w-full h-svh">
+
+        {/* Kbach corners – smaller on mobile */}
+        <div className="absolute top-0 left-0 w-12 h-12 sm:w-16 sm:h-16">
+          <TopLeft color={currentTheme.accent} />
+        </div>
+        <div className="absolute top-0 right-0 w-12 h-12 sm:w-16 sm:h-16">
+          <TopRight color={currentTheme.accent} />
+        </div>
+        <div className="absolute bottom-0 left-0 w-12 h-12 sm:w-16 sm:h-16">
+          <BottomLeft color={currentTheme.accent} />
+        </div>
+        <div className="absolute bottom-0 right-0 w-12 h-12 sm:w-16 sm:h-16">
+          <BottomRight color={currentTheme.accent} />
+        </div>
+
+        {/* Scrollable content area */}
+        <div className="relative w-full h-[calc(100svh-8rem)] sm:h-svh mt-12 sm:mt-0">
           <motion.ul
             ref={ref}
-            className="h-full list-none overflow-y-scroll space-y-4 scrollbar-hide"
+            className="h-full list-none overflow-y-scroll space-y-4 scrollbar-hide px-2 sm:px-0"
             style={{
               maskImage,
               WebkitMaskImage: maskImage,
@@ -187,8 +233,6 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
           </motion.ul>
           <StyleSheet />
         </div>
-        <BottomLeft color={currentTheme.accent} />
-        <BottomRight color={currentTheme.accent} />
       </div>
     </div>
   );

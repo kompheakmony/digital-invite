@@ -1,6 +1,7 @@
 import React, { FC, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LayoutWrapper from "./components/LayoutWrapper";
+import LayoutWrapperOld from "./components/LayoutWrapperOld";
 import Hero from "./components/Hero";
 import Detail from "./components/Detail";
 import ErrorBoundary from "./components/ErrorBoundary";

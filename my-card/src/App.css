@@ -300,6 +300,7 @@ body::-webkit-scrollbar {
 
   .pattern-bg::before {
     animation: none !important;
+    opacity: 0.2;
     -webkit-animation: none !important;
   }
 

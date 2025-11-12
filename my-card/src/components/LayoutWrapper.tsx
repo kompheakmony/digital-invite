@@ -163,13 +163,13 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
       >
         {/* Accent Borders */}
         <span
-          className="absolute top-[15%] bottom-[15%] left-3 sm:left-4 w-px"
+          className="absolute top-[30%] bottom-[30%] left-3 sm:left-4 w-px"
           style={{
             background: `linear-gradient(to bottom, transparent, ${currentTheme.accent}, transparent)`,
           }}
         />
         <span
-          className="absolute top-[15%] bottom-[15%] right-3 sm:right-4 w-px"
+          className="absolute top-[30%] bottom-[30%] right-3 sm:right-4 w-px"
           style={{
             background: `linear-gradient(to bottom, transparent, ${currentTheme.accent}, transparent)`,
           }}
@@ -178,7 +178,7 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
         <TopLeft color={currentTheme.accent} />
         <TopRight color={currentTheme.accent} />
 
-        <div className="relative w-full h-[80vh] sm:h-[92vh]">
+        <div className="relative w-full h-[78vh] md:h-[92vh]">
           <motion.ul
             ref={ref}
             className="h-full list-none overflow-y-scroll space-y-4 scrollbar-hide"

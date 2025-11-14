@@ -11,9 +11,6 @@
 }
 
 html {
-  scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -23,10 +20,6 @@ html {
   body {
     height: -webkit-fill-available;
   }
-}
-
-svg {
-  -webkit-mask-image: none;
 }
 
 @media not all and (min-resolution: 0.001dpcm) {
@@ -55,11 +48,6 @@ body {
   transform: translateZ(0);
 }
 
-body::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-}
-
 .text-gold {
   background-image: radial-gradient(
     circle at center,
@@ -77,7 +65,6 @@ body::-webkit-scrollbar {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   padding-top: 0.3em;
   padding-bottom: 0.3em;
-  background-attachment: scroll;
 }
 
 .combined-gold {
@@ -98,37 +85,6 @@ body::-webkit-scrollbar {
   position: relative;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(20, 83, 45, 0.1);
-  border-radius: 3px;
-  -webkit-border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    180deg,
-    var(--gold-primary, rgba(239, 191, 4, 0.6)),
-    var(--gold-light, rgba(255, 215, 0, 0.4))
-  );
-  border-radius: 3px;
-  -webkit-border-radius: 3px;
-  transition: background 0.3s ease;
-  -webkit-transition: background 0.3s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(
-    180deg,
-    var(--gold-primary, rgba(239, 191, 4, 0.8)),
-    var(--gold-light, rgba(255, 215, 0, 0.6))
-  );
 }
 
 @media (prefers-contrast: high) {
@@ -316,12 +272,5 @@ body::-webkit-scrollbar {
     background: none !important;
     color: var(--gold-light) !important;
     -webkit-text-fill-color: initial !important;
-  }
-}
-
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  .text-gold,
-  .combined-gold {
-    background-attachment: scroll;
   }
 }

@@ -189,7 +189,7 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
       >
         {/* Vertical accent lines – dynamic height */}
         <span
-          className="absolute left-3 sm:left-4 w-px"
+          className="absolute left-3 sm:left-5 w-px"
           style={{
             top: "6rem",
             bottom: "6rem",
@@ -197,7 +197,7 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
           }}
         />
         <span
-          className="absolute right-3 sm:right-4 w-px"
+          className="absolute right-3 sm:right-5 w-px"
           style={{
             top: "6rem",
             bottom: "6rem",

@@ -57,7 +57,7 @@ const LayoutWrapperOld: FC<LayoutWrapperProps> = ({ children }) => {
   );
 
   return (
-    <div className="min-h-screen w-full overflow-hidden relative flex items-center justify-center">
+    <div className="min-h-screen w-full overflow-hidden relative flex items-center justify-center p-2">
       <div
         key={currentTheme.gradient}
         className="absolute inset-0"

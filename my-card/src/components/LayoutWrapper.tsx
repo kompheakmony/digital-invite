@@ -121,7 +121,7 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
   );
 
   return (
-    <div className="relative w-full h-auto overflow-hidden flex items-center justify-center">
+    <div className="relative w-full h-full overflow-hidden flex items-center justify-center">
       {/* Full-screen gradient background */}
       <div
         className="absolute inset-0"
@@ -223,7 +223,7 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
         <div className="relative w-full h-[calc(100svh-8rem)] sm:h-svh mt-12 sm:mt-0">
           <motion.ul
             ref={ref}
-            className="h-full list-none overflow-y-scroll space-y-4 scrollbar-hide px-2 sm:px-0"
+            className="h-full list-none overflow-y-scroll scrollbar-hide px-2 sm:px-0"
             style={{
               maskImage,
               WebkitMaskImage: maskImage,

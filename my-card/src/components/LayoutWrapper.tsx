@@ -121,7 +121,7 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
   );
 
   return (
-    <div className="relative w-full h-full overflow-hidden flex items-center justify-center">
+    <div className="relative w-full min-h-screen overflow-hidden flex items-center justify-center">
       {/* Full-screen gradient background */}
       <div
         className="absolute inset-0"
@@ -220,7 +220,7 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
         </div>
 
         {/* Scrollable content area */}
-        <div className="relative w-full h-[calc(100svh-8rem)] sm:h-svh mt-12 sm:mt-0">
+        <div className="relative w-full h-[calc(100svh-8rem)] sm:h-svh mt-0">
           <motion.ul
             ref={ref}
             className="h-full list-none overflow-y-scroll scrollbar-hide px-2 sm:px-0"

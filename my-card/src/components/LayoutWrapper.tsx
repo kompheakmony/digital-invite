@@ -121,7 +121,7 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
   );
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden flex items-center justify-center">
+    <div className="relative w-full h-auto overflow-hidden flex items-center justify-center">
       {/* Full-screen gradient background */}
       <div
         className="absolute inset-0"

@@ -55,9 +55,9 @@ const Layout: FC = () => (
   <Router>
     <ErrorBoundary>
       <ThemeProvider>
-        <LayoutWrapper>
+        <LayoutWrapperOld>
           <AppRoutes />
-        </LayoutWrapper>
+        </LayoutWrapperOld>
       </ThemeProvider>
     </ErrorBoundary>
   </Router>

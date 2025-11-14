@@ -220,7 +220,7 @@ const LayoutWrapper: FC<LayoutWrapperProps> = ({ children }) => {
         </div>
 
         {/* Scrollable content area */}
-        <div className="relative w-full h-[calc(100svh-8rem)] sm:h-svh mt-0">
+        <div className="relative w-full h-[calc(100svh-8rem)] sm:h-svh mt-auto">
           <motion.ul
             ref={ref}
             className="h-full list-none overflow-y-scroll scrollbar-hide px-2 sm:px-0"
